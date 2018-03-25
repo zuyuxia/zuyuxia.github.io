@@ -79,20 +79,22 @@
 
 
 
-<meta name="description" content="注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT TCP的流量控制  流量控制就是让发送方发送的速度不要太快，让接收方有时间接收数据；TCP的流量控制是利用滑动窗口实现的；这里仍然以客户端向服务器发送数据为例，客户端为A，服务器为B">
+<meta name="description" content="注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT TCP的可靠传输  以客户端(client)向服务器(server)发送数据为例，TCP采用以下措施来保证可靠传输  确认和超时重传：服务器在接收到客户端发来的数据之后都要给出确认；而客户端在发送数据之后，就会设置一个定时器，超过这个时间还没收到相应的确认，就要重传数据  数据校验：在TCP的头部存在一个校验和字段，用来检验数据是否出错">
 <meta name="keywords" content="TCP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP的流量控制">
-<meta property="og:url" content="http://yoursite.com/2018/03/25/TCP的流量控制/index.html">
+<meta property="og:title" content="TCP的可靠传输">
+<meta property="og:url" content="http://yoursite.com/2018/03/25/TCP的可靠传输/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT TCP的流量控制  流量控制就是让发送方发送的速度不要太快，让接收方有时间接收数据；TCP的流量控制是利用滑动窗口实现的；这里仍然以客户端向服务器发送数据为例，客户端为A，服务器为B">
+<meta property="og:description" content="注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT TCP的可靠传输  以客户端(client)向服务器(server)发送数据为例，TCP采用以下措施来保证可靠传输  确认和超时重传：服务器在接收到客户端发来的数据之后都要给出确认；而客户端在发送数据之后，就会设置一个定时器，超过这个时间还没收到相应的确认，就要重传数据  数据校验：在TCP的头部存在一个校验和字段，用来检验数据是否出错">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/流量控制.png">
-<meta property="og:updated_time" content="2018-03-25T12:30:44.481Z">
+<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的可靠传输/img/发送窗口与发送缓存.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的可靠传输/img/接收窗口与接收缓存.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的可靠传输/img/确认.png">
+<meta property="og:updated_time" content="2018-03-25T12:30:25.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP的流量控制">
-<meta name="twitter:description" content="注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT TCP的流量控制  流量控制就是让发送方发送的速度不要太快，让接收方有时间接收数据；TCP的流量控制是利用滑动窗口实现的；这里仍然以客户端向服务器发送数据为例，客户端为A，服务器为B">
-<meta name="twitter:image" content="http://yoursite.com/img/流量控制.png">
+<meta name="twitter:title" content="TCP的可靠传输">
+<meta name="twitter:description" content="注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT TCP的可靠传输  以客户端(client)向服务器(server)发送数据为例，TCP采用以下措施来保证可靠传输  确认和超时重传：服务器在接收到客户端发来的数据之后都要给出确认；而客户端在发送数据之后，就会设置一个定时器，超过这个时间还没收到相应的确认，就要重传数据  数据校验：在TCP的头部存在一个校验和字段，用来检验数据是否出错">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/25/TCP的可靠传输/img/发送窗口与发送缓存.png">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/25/TCP的流量控制/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/25/TCP的可靠传输/"/>
 
 
 
 
 
-  <title>TCP的流量控制 | Write Code</title>
+  <title>TCP的可靠传输 | Write Code</title>
   
 
 
@@ -255,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/TCP的流量控制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/TCP的可靠传输/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zuyuxia">
@@ -272,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">TCP的流量控制</h1>
+          <h1 class="post-title" itemprop="name headline">TCP的可靠传输</h1>
         
 
         <div class="post-meta">
@@ -284,7 +286,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T11:08:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T11:08:27+08:00">
                 2018-03-25
               </time>
             
@@ -345,28 +347,86 @@
 
       
         <p><strong>注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT</strong></p>
-<h1 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h1><p>  流量控制就是让发送方发送的速度不要太快，让接收方有时间接收数据；TCP的流量控制是利用滑动窗口实现的；这里仍然以客户端向服务器发送数据为例，客户端为A，服务器为B<br>  <img src="/img/流量控制.png" alt="流量控制"></p>
-<a id="more"></a>
-<ol>
-<li><p>基本过程和零窗口</p>
+<h1 id="TCP的可靠传输"><a href="#TCP的可靠传输" class="headerlink" title="TCP的可靠传输"></a>TCP的可靠传输</h1><p>  以客户端(client)向服务器(server)发送数据为例，TCP采用以下措施来保证可靠传输</p>
 <ul>
-<li><p>图中的过程已经很明显了，A、B在动态的调节发送窗口和接收窗口，最后B将接收窗口设置为0，不允许A在发送数据了</p>
+<li><p>确认和超时重传：服务器在接收到客户端发来的数据之后都要给出确认；而客户端在发送数据之后，就会设置一个定时器，超过这个时间还没收到相应的确认，就要重传数据</p>
 </li>
-<li><p>在最后设置为零窗口后，可能会导致死锁的现象，如：B接收窗口置为200，然后发送确认报文给A，但是报文在传送过程中丢失了，造成了A等待B非零窗口的通知，B等待A发送数据。针对这个问题，TCP为每一个连接设置一个<strong>持续计时器</strong>，只要有一方收到零窗口通知，就启动计时器，计时器时间到达仍然未收到非零窗口的通知，就向对等端发送一个<strong>零窗口探测报文</strong>，对方在确认这个报文时给出现在的窗口值，若未0，重置计时器，若不为0，死锁就解开了</p>
+<li><p>数据校验：在TCP的头部存在一个校验和字段，用来检验数据是否出错</p>
+</li>
+<li><p>分片和排序：客户端TCP会根据MTU对数据进行合理的分片，并编号；服务器会缓存未按序到达的数据，重新排序好后再上交给应用层</p>
+</li>
+<li><p>流量控制：在服务器来不及处理客户端发送来的数据时，通过滑动窗口机制让客户端发送数据的速度降低</p>
+</li>
+<li><p>拥塞控制：在探寻到网络状况较差时，减少数据发送，避免网络状况进一步恶化</p>
+</li>
+</ul>
+<h2 id="发送窗口和发送缓存（接收窗口与接收缓存）"><a href="#发送窗口和发送缓存（接收窗口与接收缓存）" class="headerlink" title="发送窗口和发送缓存（接收窗口与接收缓存）"></a>发送窗口和发送缓存（接收窗口与接收缓存）</h2><p>在介绍确认和超时重传之前，先来说清楚发送窗口和发送缓存（接收窗口和接收缓存）的关系</p>
+<ol>
+<li><p>发送窗口和发送缓存</p>
+<ul>
+<li><p>如下图所示：<br><img src="img/发送窗口与发送缓存.png" alt="发送窗口与发送缓存"></p>
+</li>
+<li><p>发送缓存用来暂时存放：准备发送的数据；已发送但还没收到确认的数据</p>
 </li>
 </ul>
 </li>
-<li><p>传输效率的问题<br>TCP传输过程中，必须考虑传输效率的问题，采用以下几种机制控制数据的发送时机：</p>
+<li><p>接收窗口和接收缓存</p>
 <ul>
-<li><p>TCP维持一个变量，等于MSS，只要发送缓冲区中的数据达到MSS就组装成一个TCP报文段发送</p>
+<li><p>如下图所示：<br><img src="img/接收窗口与接收缓存.png" alt="接收窗口与接收缓存">      </p>
 </li>
-<li><p>由发送方的应用进程指明要求发送报文段，即PUSH操作</p>
-</li>
-<li><p>设置一个计时器，到达时间后，就把缓存的数据组装成一个TCP报文（小于等于MSS）发送出去</p>
+<li><p>接收缓存用来暂时存放：按序到达但还没被应用程序读取的数据；未按序到达的数据</p>
 </li>
 </ul>
 </li>
 </ol>
+<h2 id="确认和超时重传"><a href="#确认和超时重传" class="headerlink" title="确认和超时重传"></a>确认和超时重传</h2><ol>
+<li><p>客户端为A，服务器为B，如下图所示<br><img src="img/确认.png" alt="确认">  </p>
+<ul>
+<li><p>A在向B发送了41号数据，并且收到了33号数据的确认；B则按序接收到了26~33号数据，还接收了部分的未按序到达数据，等待到缺失字节到达后再上交给应用层  </p>
+</li>
+<li><p>累积确认的好处在于不用发送那么的确认号，坏处在于可能需要重传已经接收了的数据</p>
+</li>
+</ul>
+</li>
+<li><p>超时重传<br>在一定时间内没有收到相应报文的确认，会进行重传数据；对于这个时间的设定，十分复杂，这里介绍一下《计算机网络》书中的方法：</p>
+<blockquote>
+<ul>
+<li>TCP采用一种自适应的算法，记录一个报文段的发出时间，以及收到相应确认的时间，两者之差就是报文段的往返时间RTT。TCP保留了RTT的一个加权平均往返时间RTTS。  </li>
+<li>RTTS的计算：第一次测量到RTT样本时，RTTS值就取为所测量到的RTT样本值，之后的RTTS按照下式进行计算：（a的推荐值为0.125）  <pre><code>新的RTTS=(1-a)\*旧的RTTS + a\*新的RTT样本  
+</code></pre></li>
+<li>超时重传时间RTO按照下式计算：  <pre><code>RTO=RTTS + 4*RTTD
+</code></pre></li>
+<li>RTT的偏差加权平均值RTTD的计算：第一次测量时，取为RTT样本值的一半，以后的测量中，按下式进行计算：  <pre><code>新的RTTD=(1-b)\*旧的RTTD + b\*| RTTS - 新的RTT样本 |  
+</code></pre></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Karn算法：在计算加权平均RTTS时，只要报文段重传了，就不采用其往返时间样本。但是这种算法会导致超时重传时间无法更新</li>
+<li>修正的Karn算法：报文每重传一次，就把超时重传时间RTO增大一些，典型做法是取为旧的重传时间的2倍。当不再发送报文重传时，再根据上述的公式进行计算RTTS和RTO</li>
+</ul>
+</blockquote>
+</li>
+<li><p>选择确认SACK<br>未按序到达的数据一般都被接收方存下来了，如果能够只传输缺少的数据不重传已经接收的数据可以提高效率，选择确认SACK就是这种方法</p>
+<ul>
+<li><p>选择确认SACK工作原理：TCP的接收方在接收对方发过来的数据字节流的序号不连续，形成一些不连续的字节快，前后字节不连续的每一个字节块都有两个边界。使用SACK能够描述这些字节块的边界信息。</p>
+</li>
+<li><p>如果需要使用SACK，那么在建立TCP时，就要在首部的选项中加入允许SACK的选项，并且双方必须事先商定好。由于选项的长度最多只有40字节，指明一个边界需要4字节，最多只能指明4个字节块的边界信息。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><ul>
+<li><a href="https://zuyuxia.github.io/2018/03/25/TCP%E7%9A%84%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/" target="_blank" rel="noopener">TCP的流量控制</a></li>
+</ul>
+<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><ul>
+<li><a href="https://zuyuxia.github.io/2018/03/25/TCP%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" target="_blank" rel="noopener">TCP的拥塞控制</a></li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://www.cnblogs.com/deliver/p/5471231.html" target="_blank" rel="noopener">TCP 协议如何保证可靠传输</a></li>
+<li><a href="https://hit-alibaba.github.io/interview/basic/network/TCP.html#tcp-%E7%9A%84%E7%89%B9%E6%80%A7" target="_blank" rel="noopener">https://hit-alibaba.github.io/interview/basic/network/TCP.html#tcp-%E7%9A%84%E7%89%B9%E6%80%A7</a></li>
+<li>《计算机网络》，第六版，谢希仁</li>
+</ul>
 
       
     </div>
@@ -397,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/25/TCP的可靠传输/" rel="next" title="TCP的可靠传输">
-                <i class="fa fa-chevron-left"></i> TCP的可靠传输
+              <a href="/2018/03/21/排序/" rel="next" title="排序">
+                <i class="fa fa-chevron-left"></i> 排序
               </a>
             
           </div>
@@ -407,8 +467,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/25/TCP的拥塞控制/" rel="prev" title="TCP的拥塞控制">
-                TCP的拥塞控制 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/25/TCP的流量控制/" rel="prev" title="TCP的流量控制">
+                TCP的流量控制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -555,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP的流量控制"><span class="nav-number">1.</span> <span class="nav-text">TCP的流量控制</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP的可靠传输"><span class="nav-number">1.</span> <span class="nav-text">TCP的可靠传输</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#发送窗口和发送缓存（接收窗口与接收缓存）"><span class="nav-number">1.1.</span> <span class="nav-text">发送窗口和发送缓存（接收窗口与接收缓存）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确认和超时重传"><span class="nav-number">1.2.</span> <span class="nav-text">确认和超时重传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流量控制"><span class="nav-number">1.3.</span> <span class="nav-text">流量控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拥塞控制"><span class="nav-number">1.4.</span> <span class="nav-text">拥塞控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>

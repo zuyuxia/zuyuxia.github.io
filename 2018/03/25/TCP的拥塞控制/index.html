@@ -79,23 +79,23 @@
 
 
 
-<meta name="description" content="TCP的拥塞控制* 拥塞：在某段时间内，对网络中的某资源的需求超过了其最多能提供的部分；拥塞问题往往是整个系统各个部分不匹配  * 拥塞控制：防止过多的数据注入到网络中，整个全局  * 流量控制：点对点的通信量控制，是个端到端问题  * 几种拥塞控制方法：慢开始和拥塞避免、快重传和快恢复">
+<meta name="description" content="TCP的拥塞控制 拥塞：在某段时间内，对网络中的某资源的需求超过了其最多能提供的部分；拥塞问题往往是整个系统各个部分不匹配  拥塞控制：防止过多的数据注入到网络中，整个全局  流量控制：点对点的通信量控制，是个端到端问题  几种拥塞控制方法：慢开始和拥塞避免、快重传和快恢复">
 <meta name="keywords" content="TCP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP的拥塞控制">
 <meta property="og:url" content="http://yoursite.com/2018/03/25/TCP的拥塞控制/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="TCP的拥塞控制* 拥塞：在某段时间内，对网络中的某资源的需求超过了其最多能提供的部分；拥塞问题往往是整个系统各个部分不匹配  * 拥塞控制：防止过多的数据注入到网络中，整个全局  * 流量控制：点对点的通信量控制，是个端到端问题  * 几种拥塞控制方法：慢开始和拥塞避免、快重传和快恢复">
+<meta property="og:description" content="TCP的拥塞控制 拥塞：在某段时间内，对网络中的某资源的需求超过了其最多能提供的部分；拥塞问题往往是整个系统各个部分不匹配  拥塞控制：防止过多的数据注入到网络中，整个全局  流量控制：点对点的通信量控制，是个端到端问题  几种拥塞控制方法：慢开始和拥塞避免、快重传和快恢复">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的拥塞控制/img/慢开始.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的拥塞控制/img/慢开始和拥塞避免.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的拥塞控制/img/快重传.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的拥塞控制/img/快重传和快恢复.png">
-<meta property="og:updated_time" content="2018-03-25T12:12:14.494Z">
+<meta property="og:image" content="http://yoursite.com/img/慢开始.png">
+<meta property="og:image" content="http://yoursite.com/img/慢开始和拥塞避免.png">
+<meta property="og:image" content="http://yoursite.com/img/快重传.png">
+<meta property="og:image" content="http://yoursite.com/img/快重传和快恢复.png">
+<meta property="og:updated_time" content="2018-03-25T12:21:58.018Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP的拥塞控制">
-<meta name="twitter:description" content="TCP的拥塞控制* 拥塞：在某段时间内，对网络中的某资源的需求超过了其最多能提供的部分；拥塞问题往往是整个系统各个部分不匹配  * 拥塞控制：防止过多的数据注入到网络中，整个全局  * 流量控制：点对点的通信量控制，是个端到端问题  * 几种拥塞控制方法：慢开始和拥塞避免、快重传和快恢复">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/25/TCP的拥塞控制/img/慢开始.png">
+<meta name="twitter:description" content="TCP的拥塞控制 拥塞：在某段时间内，对网络中的某资源的需求超过了其最多能提供的部分；拥塞问题往往是整个系统各个部分不匹配  拥塞控制：防止过多的数据注入到网络中，整个全局  流量控制：点对点的通信量控制，是个端到端问题  几种拥塞控制方法：慢开始和拥塞避免、快重传和快恢复">
+<meta name="twitter:image" content="http://yoursite.com/img/慢开始.png">
 
 
 
@@ -347,17 +347,20 @@
       
 
       
-        <h1 id="TCP的拥塞控制"><a href="#TCP的拥塞控制" class="headerlink" title="TCP的拥塞控制"></a>TCP的拥塞控制</h1><pre><code>* 拥塞：在某段时间内，对网络中的某资源的需求超过了其最多能提供的部分；拥塞问题往往是整个系统各个部分不匹配
-
-* 拥塞控制：防止过多的数据注入到网络中，整个全局
-
-* 流量控制：点对点的通信量控制，是个端到端问题
-
-* 几种拥塞控制方法：慢开始和拥塞避免、快重传和快恢复
-</code></pre><a id="more"></a>
+        <h1 id="TCP的拥塞控制"><a href="#TCP的拥塞控制" class="headerlink" title="TCP的拥塞控制"></a>TCP的拥塞控制</h1><ul>
+<li><p>拥塞：在某段时间内，对网络中的某资源的需求超过了其最多能提供的部分；拥塞问题往往是整个系统各个部分不匹配</p>
+</li>
+<li><p>拥塞控制：防止过多的数据注入到网络中，整个全局</p>
+</li>
+<li><p>流量控制：点对点的通信量控制，是个端到端问题</p>
+</li>
+<li><p>几种拥塞控制方法：慢开始和拥塞避免、快重传和快恢复</p>
+</li>
+</ul>
+<a id="more"></a>
 <h2 id="慢开始和拥塞避免"><a href="#慢开始和拥塞避免" class="headerlink" title="慢开始和拥塞避免"></a>慢开始和拥塞避免</h2><p>  发送方维持一个叫做<strong>拥塞窗口cwnd</strong>的状态变量，cwnd的大小取决于网络的拥塞状况；cwnd的变化原则：只要网络没有出现拥塞，那么cwnd就增大一些，如果网络出现拥塞，cwnd就要较小一些</p>
 <ol>
-<li><p>慢开始算法的原理<br><img src="img/慢开始.png" alt="慢开始">  </p>
+<li><p>慢开始算法的原理<br><img src="/img/慢开始.png" alt="慢开始">  </p>
 <ul>
 <li><p>刚开始时，cwnd设置为1，即一个最大报文段MSS的数值；每收到一个新的报文段的确认，cwnd+1，即每一个轮次之后，cwnd翻倍</p>
 </li>
@@ -377,7 +380,7 @@
 </li>
 <li><p>拥塞算法的原理<br>拥塞算法的思想：让cwnd缓慢增大，即经过一个轮次只增加1，而不是翻倍，呈线性增长</p>
 </li>
-<li><p>慢开始和拥塞避免算法配合使用<br><img src="img/慢开始和拥塞避免.png" alt="慢开始和拥塞避免">  </p>
+<li><p>慢开始和拥塞避免算法配合使用<br><img src="/img/慢开始和拥塞避免.png" alt="慢开始和拥塞避免">  </p>
 <ul>
 <li><p>不论是慢开始算法阶段，还是拥塞避免算法阶段，在碰到网络拥塞时，都应当将ssthresh设置为此时发送方cwnd的一半（ssthresh &gt; 2），并且将cwnd置为1，重新开始执行慢开始算法</p>
 </li>
@@ -391,7 +394,7 @@
 </li>
 </ol>
 <h2 id="快重传和快恢复"><a href="#快重传和快恢复" class="headerlink" title="快重传和快恢复"></a>快重传和快恢复</h2><ol>
-<li><p>快重传算法<br><img src="img/快重传.png" alt="快重传">  </p>
+<li><p>快重传算法<br><img src="/img/快重传.png" alt="快重传">  </p>
 <ul>
 <li><p>接收方在接收到无序报文时，就立即发出重复确认，让发送方知道有报文丢失</p>
 </li>
@@ -407,7 +410,7 @@
 </li>
 </ul>
 </li>
-<li><p>快重传算法和快恢复算法配合使用<br><img src="img/快重传和快恢复.png" alt="快重传和快恢复"></p>
+<li><p>快重传算法和快恢复算法配合使用<br><img src="/img/快重传和快恢复.png" alt="快重传和快恢复"></p>
 <ul>
 <li>发送窗口的上限值 = Min{rwnd , cwnd};</li>
 </ul>

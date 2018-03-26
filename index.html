@@ -249,6 +249,550 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/单例模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/26/单例模式/" itemprop="url">单例模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T20:25:51+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul>
+<li><p>单例模式又称为单子模式，是一种常见的设计模式。在使用这个模式时，单例对象的类必须只有一个实例存在。</p>
+</li>
+<li><p>C++中单例模式分为懒汉和饿汉实现：懒汉意味着第一次用到类实例的时候才会实例化，饿汉指单例类在定义的时候就进行了实例化</p>
+</li>
+<li><p>线程同步，访问量比较大的时候，采用饿汉实现可以实现更好的性能；访问量较小时，采用懒汉实现</p>
+</li>
+</ul>
+<h2 id="懒汉实现"><a href="#懒汉实现" class="headerlink" title="懒汉实现"></a>懒汉实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//懒汉模式，线程不安全</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton* <span class="title">instance</span><span class="params">()</span></span>;</span><br><span class="line">	~Singleton();</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton *m_pointer;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Singleton();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::m_pointer = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">Singleton::Singleton()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::instance()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!m_pointer)&#123;</span><br><span class="line">		m_pointer = <span class="keyword">new</span> Singleton();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> m_pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton::~Singleton()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!m_pointer)&#123;</span><br><span class="line">		<span class="keyword">delete</span> m_pointer;</span><br><span class="line">		m_pointer = <span class="literal">nullptr</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程安全的懒汉模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton* <span class="title">instance</span><span class="params">()</span></span>;</span><br><span class="line">	~Singleton();</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton *m_pointer;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Singleton();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::m_pointer = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">Singleton::Singleton()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::instance()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!m_pointer)&#123;				<span class="comment">//此处加判断，避免多线程加锁的开销</span></span><br><span class="line">		lock();			<span class="comment">//加锁</span></span><br><span class="line">		<span class="keyword">if</span>(!m_pointer)&#123;</span><br><span class="line">			m_pointer = <span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		unlock();		<span class="comment">//释放锁</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> m_pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton::~Singleton()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!m_pointer)&#123;</span><br><span class="line">		<span class="keyword">delete</span> m_pointer;</span><br><span class="line">		m_pointer = <span class="literal">nullptr</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="饿汉实现"><a href="#饿汉实现" class="headerlink" title="饿汉实现"></a>饿汉实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//饿汉模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton* <span class="title">instance</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton *m_pointer;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Singleton();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::m_pointer = <span class="keyword">new</span> Singleton();</span><br><span class="line"></span><br><span class="line">Singleton::Singleton()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::instance()&#123;</span><br><span class="line">	<span class="keyword">return</span> m_pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a href="https://www.cnblogs.com/qiaoconglovelife/p/5851163.html" target="_blank" rel="noopener">C++的单例模式与线程安全单例模式（懒汉/饿汉）</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/liang19890820/article/details/61615495" target="_blank" rel="noopener">C++单例模式</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/ccdev/archive/2012/12/19/2825355.html" target="_blank" rel="noopener">C++ 线程安全的单例模式</a></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/死锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/26/死锁/" itemprop="url">死锁</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T13:18:21+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>  死锁的定义：如果一组进程中的每一个进程都在等待仅由该组进程中的其它进程才能引发的事件，那么该组进程就是死锁的</p>
+<h2 id="产生死锁的必要条件"><a href="#产生死锁的必要条件" class="headerlink" title="产生死锁的必要条件"></a>产生死锁的必要条件</h2><ol>
+<li><p>互斥条件</p>
+<ul>
+<li>进程对所分配到的资源进行排他性使用，在一段时间内，资源只能被一个进程使用，如果有其他进程请求该资源，则请求进程进入等待状态，直到资源被释放</li>
+</ul>
+</li>
+<li><p>请求和保持条件</p>
+<ul>
+<li>进程已经获得了一个资源，但是又申请了一个新的资源，该资源被另一个进程占用，于是进程进入等待状态，但是进程并不释放已经获得的资源</li>
+</ul>
+</li>
+<li><p>不可抢占条件</p>
+<ul>
+<li>进程已获得的资源在未使用完之前不能被其他进程抢占，除非进程自己释放资源</li>
+</ul>
+</li>
+<li><p>循环等待条件</p>
+<ul>
+<li>发生死锁时，存在一个进程-资源的循环链。{P0，P1，P2……PN}，P0等待P1，P1等待P2……PN等待P0</li>
+</ul>
+</li>
+<li><p>处理死锁的办法</p>
+<ul>
+<li><p>预防死锁：通过设置某些限制条件，破坏产生死锁的四个必要条件中的一个或者多个来预防产生死锁</p>
+</li>
+<li><p>避免死锁：在资源的动态分配过程中，用某种方法防止系统进入不安全的状态，从而避免产生死锁</p>
+</li>
+<li><p>检测死锁：无需事先采取措施，允许进程进入死锁状态，通过检测机构检测出死锁的发生，采取适当的措施，解除死锁状态</p>
+</li>
+<li><p>解除死锁：与检测死锁想配合，检测出死锁状态后采取相应措施解除死锁状态。常用的方法是撤销一些进程，回收资源，分配资源给已经阻塞的进程</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="避免死锁：银行家算法"><a href="#避免死锁：银行家算法" class="headerlink" title="避免死锁：银行家算法"></a>避免死锁：银行家算法</h2><ol>
+<li><p>银行家算法思路</p>
+<ul>
+<li><p>银行家算法就是在进程获得资源之前确认系统是否有足够的资源分配给进程，若有足够的资源就接纳进程，此外还要看分配资源给进程之后是否会导致死锁。如果会死锁那么就不分配资源</p>
+</li>
+<li><p>进程可以分次请求资源，但是请求总量不能超过最大需求量</p>
+</li>
+<li><p>当系统现有的资源不能满足进程所需资源时，可以推迟分配，但是总应该在一定的时间内为进程分配到所需资源，避免饥饿现象</p>
+</li>
+</ul>
+</li>
+<li><p>银行家算法中的数据结构</p>
+<ul>
+<li><p>可利用资源Available：Available[i] = K，表示系统中现有K个i资源</p>
+</li>
+<li><p>最大需求矩阵Max：Max[i,j] = K，表示进程i需要K个j资源</p>
+</li>
+<li><p>分配矩阵Allocation：Allocation[i,j] = K，表示进程i已经分到K个j资源</p>
+</li>
+<li><p>需求矩阵Need：Need[i,j] = K，表示进程I还需要K个j资源才能完成任务</p>
+</li>
+</ul>
+</li>
+<li><p>银行家算法<br>Request是进程i请求的资源量，假设Request[j] = K，在进程i发出请求后，系统按照以下步骤进行检查</p>
+<ul>
+<li><p>如果Request[j] &lt;= Need[i,j]，进入下一个步骤；否则认为出错</p>
+</li>
+<li><p>如果Request[j] &lt;= Available[i,j]，进入下一步骤；否则系统没有那么多j资源，进程i必须等待</p>
+</li>
+<li><p>系统尝试将资源j分配给进程i，并修改上面的四个数据结构的数值</p>
+</li>
+<li><p>系统执行安全性算法，检测此次分配资源后，系统是否仍处于安全状态。若安全则分配，否则，恢复资源分配状态，进程i进入等待状态</p>
+</li>
+</ul>
+</li>
+<li><p>安全性算法</p>
+<ul>
+<li><p>设置两个变量：工作变量Work，表示系统可提供给进程继续运行所需各种资源的数目，在安全算法的开始，Work = Available；Finish，表示系统是否有足够的资源完成任务，开始时Finish[i] = false，当有足够的资源分配给进程时，再置为true</p>
+</li>
+<li><p>第一步，从进程中找到一个满足下面条件的进程，找到执行第二步，否则进入第三部</p>
+<ul>
+<li>Finish[i] = false;</li>
+<li>Need[i,j] &lt;= Work[j]; </li>
+</ul>
+</li>
+<li><p>第二步，当进程i得到资源后，顺利执行，释放所占用的资源，返回第一步</p>
+<ul>
+<li>Work[j] = Work[j] + Allocation[i,j];</li>
+<li>Finish[i] = true;</li>
+</ul>
+</li>
+<li><p>第三步，如果所有进程的Finish[i] = true，则系统处于安全状态，否则不安全</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>《计算机操作系统》，第四版，汤子瀛</li>
+<li><a href="http://www.cnblogs.com/wuchanming/p/4345243.html" target="_blank" rel="noopener">死锁原因及解决、避免办法</a></li>
+<li><a href="https://www.nowcoder.com/questionTerminal/09b51b00891543d6b08ace80c0704b01" target="_blank" rel="noopener">https://www.nowcoder.com/questionTerminal/09b51b00891543d6b08ace80c0704b01</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/操作系统内存管理：页式、段式、段页式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/26/操作系统内存管理：页式、段式、段页式/" itemprop="url">操作系统内存管理：页式、段式、段页式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T13:17:50+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>注：文中图片均来源于汤子瀛《计算机操作系统》第四版</strong></p>
+<h1 id="操作系统内存管理：页式、段式、段页式"><a href="#操作系统内存管理：页式、段式、段页式" class="headerlink" title="操作系统内存管理：页式、段式、段页式"></a>操作系统内存管理：页式、段式、段页式</h1><p>  连续分配的方式会形成许多碎片，虽然可以通过<strong>紧凑</strong>的方式将许多碎片拼接成可用的大块空间，但需要很大的开销。如果能够将一个进程分散的装入到许多不相邻的分区中，那么可以充分利用内存空间，也不需要采用紧凑的方法去拼接碎片。基于这种<strong>离散分配</strong>的思想，根据分配地址空间的基本单位不同的，可以将离散分配分为：<strong>分页、分段和段页式</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/26/操作系统内存管理：页式、段式、段页式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/TCP的拥塞控制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -644,8 +1188,7 @@
 
       
         
-          
-            <p><strong>注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT</strong></p>
+          <p><strong>注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT</strong></p>
 <h1 id="TCP的可靠传输"><a href="#TCP的可靠传输" class="headerlink" title="TCP的可靠传输"></a>TCP的可靠传输</h1><p>  以客户端(client)向服务器(server)发送数据为例，TCP采用以下措施来保证可靠传输</p>
 <ul>
 <li><p>确认和超时重传：服务器在接收到客户端发来的数据之后都要给出确认；而客户端在发送数据之后，就会设置一个定时器，超过这个时间还没收到相应的确认，就要重传数据</p>
@@ -659,75 +1202,13 @@
 <li><p>拥塞控制：在探寻到网络状况较差时，减少数据发送，避免网络状况进一步恶化</p>
 </li>
 </ul>
-<h2 id="发送窗口和发送缓存（接收窗口与接收缓存）"><a href="#发送窗口和发送缓存（接收窗口与接收缓存）" class="headerlink" title="发送窗口和发送缓存（接收窗口与接收缓存）"></a>发送窗口和发送缓存（接收窗口与接收缓存）</h2><p>在介绍确认和超时重传之前，先来说清楚发送窗口和发送缓存（接收窗口和接收缓存）的关系</p>
-<ol>
-<li><p>发送窗口和发送缓存</p>
-<ul>
-<li><p>如下图所示：<br><img src="img/发送窗口与发送缓存.png" alt="发送窗口与发送缓存"></p>
-</li>
-<li><p>发送缓存用来暂时存放：准备发送的数据；已发送但还没收到确认的数据</p>
-</li>
-</ul>
-</li>
-<li><p>接收窗口和接收缓存</p>
-<ul>
-<li><p>如下图所示：<br><img src="img/接收窗口与接收缓存.png" alt="接收窗口与接收缓存">      </p>
-</li>
-<li><p>接收缓存用来暂时存放：按序到达但还没被应用程序读取的数据；未按序到达的数据</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="确认和超时重传"><a href="#确认和超时重传" class="headerlink" title="确认和超时重传"></a>确认和超时重传</h2><ol>
-<li><p>客户端为A，服务器为B，如下图所示<br><img src="img/确认.png" alt="确认">  </p>
-<ul>
-<li><p>A在向B发送了41号数据，并且收到了33号数据的确认；B则按序接收到了26~33号数据，还接收了部分的未按序到达数据，等待到缺失字节到达后再上交给应用层  </p>
-</li>
-<li><p>累积确认的好处在于不用发送那么的确认号，坏处在于可能需要重传已经接收了的数据</p>
-</li>
-</ul>
-</li>
-<li><p>超时重传<br>在一定时间内没有收到相应报文的确认，会进行重传数据；对于这个时间的设定，十分复杂，这里介绍一下《计算机网络》书中的方法：</p>
-<blockquote>
-<ul>
-<li>TCP采用一种自适应的算法，记录一个报文段的发出时间，以及收到相应确认的时间，两者之差就是报文段的往返时间RTT。TCP保留了RTT的一个加权平均往返时间RTTS。  </li>
-<li>RTTS的计算：第一次测量到RTT样本时，RTTS值就取为所测量到的RTT样本值，之后的RTTS按照下式进行计算：（a的推荐值为0.125）  <pre><code>新的RTTS=(1-a)\*旧的RTTS + a\*新的RTT样本  
-</code></pre></li>
-<li>超时重传时间RTO按照下式计算：  <pre><code>RTO=RTTS + 4*RTTD
-</code></pre></li>
-<li>RTT的偏差加权平均值RTTD的计算：第一次测量时，取为RTT样本值的一半，以后的测量中，按下式进行计算：  <pre><code>新的RTTD=(1-b)\*旧的RTTD + b\*| RTTS - 新的RTT样本 |  
-</code></pre></li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>Karn算法：在计算加权平均RTTS时，只要报文段重传了，就不采用其往返时间样本。但是这种算法会导致超时重传时间无法更新</li>
-<li>修正的Karn算法：报文每重传一次，就把超时重传时间RTO增大一些，典型做法是取为旧的重传时间的2倍。当不再发送报文重传时，再根据上述的公式进行计算RTTS和RTO</li>
-</ul>
-</blockquote>
-</li>
-<li><p>选择确认SACK<br>未按序到达的数据一般都被接收方存下来了，如果能够只传输缺少的数据不重传已经接收的数据可以提高效率，选择确认SACK就是这种方法</p>
-<ul>
-<li><p>选择确认SACK工作原理：TCP的接收方在接收对方发过来的数据字节流的序号不连续，形成一些不连续的字节快，前后字节不连续的每一个字节块都有两个边界。使用SACK能够描述这些字节块的边界信息。</p>
-</li>
-<li><p>如果需要使用SACK，那么在建立TCP时，就要在首部的选项中加入允许SACK的选项，并且双方必须事先商定好。由于选项的长度最多只有40字节，指明一个边界需要4字节，最多只能指明4个字节块的边界信息。</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><ul>
-<li><a href="https://zuyuxia.github.io/2018/03/25/TCP%E7%9A%84%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/" target="_blank" rel="noopener">TCP的流量控制</a></li>
-</ul>
-<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><ul>
-<li><a href="https://zuyuxia.github.io/2018/03/25/TCP%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" target="_blank" rel="noopener">TCP的拥塞控制</a></li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://www.cnblogs.com/deliver/p/5471231.html" target="_blank" rel="noopener">TCP 协议如何保证可靠传输</a></li>
-<li><a href="https://hit-alibaba.github.io/interview/basic/network/TCP.html#tcp-%E7%9A%84%E7%89%B9%E6%80%A7" target="_blank" rel="noopener">https://hit-alibaba.github.io/interview/basic/network/TCP.html#tcp-%E7%9A%84%E7%89%B9%E6%80%A7</a></li>
-<li>《计算机网络》，第六版，谢希仁</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/25/TCP的可靠传输/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -965,7 +1446,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -976,7 +1457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -987,7 +1468,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

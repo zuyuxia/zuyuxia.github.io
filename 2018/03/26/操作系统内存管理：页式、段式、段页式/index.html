@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="内存管理," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="注：文中图片均来源于汤子瀛《计算机操作系统》第四版 操作系统内存管理：页式、段式、段页式  连续分配的方式会形成许多碎片，虽然可以通过紧凑的方式将许多碎片拼接成可用的大块空间，但需要很大的开销。如果能够将一个进程分散的装入到许多不相邻的分区中，那么可以充分利用内存空间，也不需要采用紧凑的方法去拼接碎片。基于这种离散分配的思想，根据分配地址空间的基本单位不同的，可以将离散分配分为：分页、分段和段页式">
+<meta name="keywords" content="内存管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统内存管理：页式、段式、段页式">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/操作系统内存管理：页式、段式、段页式/index.html">
+<meta property="og:site_name" content="Write Code">
+<meta property="og:description" content="注：文中图片均来源于汤子瀛《计算机操作系统》第四版 操作系统内存管理：页式、段式、段页式  连续分配的方式会形成许多碎片，虽然可以通过紧凑的方式将许多碎片拼接成可用的大块空间，但需要很大的开销。如果能够将一个进程分散的装入到许多不相邻的分区中，那么可以充分利用内存空间，也不需要采用紧凑的方法去拼接碎片。基于这种离散分配的思想，根据分配地址空间的基本单位不同的，可以将离散分配分为：分页、分段和段页式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/页面地址结构.png">
+<meta property="og:image" content="http://yoursite.com/img/页表.png">
+<meta property="og:image" content="http://yoursite.com/img/基本的地址变换机构.png">
+<meta property="og:image" content="http://yoursite.com/img/具有快表的地址变换机构.png">
+<meta property="og:image" content="http://yoursite.com/img/分段地址结构.png">
+<meta property="og:image" content="http://yoursite.com/img/段表.png">
+<meta property="og:image" content="http://yoursite.com/img/分段地址变换机构.png">
+<meta property="og:image" content="http://yoursite.com/img/作业地址空间和地址结构.png">
+<meta property="og:image" content="http://yoursite.com/img/段表和页表.png">
+<meta property="og:image" content="http://yoursite.com/img/段页式的地址变换机构.png">
+<meta property="og:updated_time" content="2018-03-26T08:14:22.599Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统内存管理：页式、段式、段页式">
+<meta name="twitter:description" content="注：文中图片均来源于汤子瀛《计算机操作系统》第四版 操作系统内存管理：页式、段式、段页式  连续分配的方式会形成许多碎片，虽然可以通过紧凑的方式将许多碎片拼接成可用的大块空间，但需要很大的开销。如果能够将一个进程分散的装入到许多不相邻的分区中，那么可以充分利用内存空间，也不需要采用紧凑的方法去拼接碎片。基于这种离散分配的思想，根据分配地址空间的基本单位不同的，可以将离散分配分为：分页、分段和段页式">
+<meta name="twitter:image" content="http://yoursite.com/img/页面地址结构.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/26/操作系统内存管理：页式、段式、段页式/"/>
+
+
+
+
+
+  <title>操作系统内存管理：页式、段式、段页式 | Write Code</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Write Code</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Talk is cheap , show me the code</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/操作系统内存管理：页式、段式、段页式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统内存管理：页式、段式、段页式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T13:17:50+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>注：文中图片均来源于汤子瀛《计算机操作系统》第四版</strong></p>
+<h1 id="操作系统内存管理：页式、段式、段页式"><a href="#操作系统内存管理：页式、段式、段页式" class="headerlink" title="操作系统内存管理：页式、段式、段页式"></a>操作系统内存管理：页式、段式、段页式</h1><p>  连续分配的方式会形成许多碎片，虽然可以通过<strong>紧凑</strong>的方式将许多碎片拼接成可用的大块空间，但需要很大的开销。如果能够将一个进程分散的装入到许多不相邻的分区中，那么可以充分利用内存空间，也不需要采用紧凑的方法去拼接碎片。基于这种<strong>离散分配</strong>的思想，根据分配地址空间的基本单位不同的，可以将离散分配分为：<strong>分页、分段和段页式</strong></p>
+<a id="more"></a>
+<h2 id="分页存储管理方式"><a href="#分页存储管理方式" class="headerlink" title="分页存储管理方式"></a>分页存储管理方式</h2><p>  在分页存储管理方式中，将用户程序的地址空间分为若干个固定大小区域（即页），<strong>典型的页面大小为1KB</strong>。同时，也需要将内存空间分为若干个物理块或页框，块和页的大小相同，这样就可以将用户程序的任何页装入任一物理块中，实现离散分配</p>
+<ol>
+<li><p>页面和物理块</p>
+<ul>
+<li><p>分页存储管理将进程的逻辑地址空间分为若干个页，并为各个页面加以编号。同时将内存的物理地址空间分为若干个块，并编号</p>
+</li>
+<li><p>在为进程分配内存时，以块为单位，将进程中的若干页装入物理内存中的不连续块</p>
+</li>
+<li><p>由于进程的最后一页经常装不满一个物理块，形成不可利用的碎片，称为<strong>页内碎片</strong></p>
+</li>
+<li><p>页面大小：页面大小的选择应当适中，应是2^n，<strong>通常为1KB ~ 8KB</strong>；页面过小，虽然会减少内存碎片，但会导致页表过大，占用大量内存，降低页面换进换出的效率；页面过大，虽然使页表变小，但是又会增加内存碎片</p>
+</li>
+</ul>
+</li>
+<li><p>地址结构<br><img src="/img/页面地址结构.png" alt="页面地址结构"><br>分页地址结构如图所示，分为页号和位移量</p>
+</li>
+<li><p>页表  </p>
+<ul>
+<li><p>为了保证进程能够在内存中找到页面所对应的物理块，系统为每个进程创建了一张页表。页表中的每一个页表项都记录了相应页在内存中对应的物理块号，即页面号到物理块号的映射<br><img src="/img/页表.png" alt="页表">  </p>
+<ul>
+<li>在页表项中，常常会设置一个存取控制字段，用来对存储块中的内容进行保护；存储控制字段为一位时，仅仅能控制该存储块中的内容是允许读/写还是只读；存储字段为两位时，可控制读/写，只读和只执行方式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>基本地址变化机构<br>实现用户地址空间中的逻辑地址转换为内存空间中的物理地址，称为地址变化机构，借助于页表实现<br><img src="/img/基本的地址变换机构.png" alt="基本的地址变换机构"></p>
+<ul>
+<li><p>在系统中设置一个页表寄存器（PTR），在其中存放页表在内存的起始地址和页表的长度；进程未执行时，页表的起始地址和页表的长度保存在进程的PCB中，进程运行后，将这两个数据装入PTR中</p>
+</li>
+<li><p>当进程要访问某个逻辑地址中的数据时，分页地址变换机构会自动将有效地址分为页号和页内地址两个部分。以页号去检索页表，首先将页号和页表长度进行比较，看是否越界；然后将页号乘以页表项长度，加上页表起始地址，得到在页表中的位置，查找物理块号，装入物理地址寄存器中；最后页内地址送入物理地址寄存器中，完成地址的转换</p>
+</li>
+</ul>
+</li>
+<li><p>具有快表的地址变换机构<br>在上面的基本地址变化机构中，访问一次逻辑地址中的数据需要对内存进行两次访问：第一次是对内存中的页表进行访问，得到对应的物理地址；第二次是根据物理地址在内存中读入数据。这样效率太低，改进的方法是在地址变换机构中增加一个具有并行查询能力的特殊高速缓冲寄存器，即快表（TLB）<br><img src="/img/具有快表的地址变换机构.png" alt="具有快表的地址变换机构">  </p>
+<ul>
+<li><p>TLB用来存放当前访问的那些页表项</p>
+</li>
+<li><p>当进程要访问逻辑地址的数据时，地址变换机构自动将页号送入高速缓冲寄存器中，查询是否存在相应的页号-物理块号，若存在，则直接从快表中读取物理块号，送入物理地址寄存器。若不存在，则如之前所讲，访问内存中的页表，找到后将物理块号送到物理地址寄存器，同时将页号-物理块号也送入快表之中。如果快表满了还需要相应的置换算法</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="分段存储管理方式"><a href="#分段存储管理方式" class="headerlink" title="分段存储管理方式"></a>分段存储管理方式</h2><p>  引入分段存储管理方式，是为了满足程序员在编程和使用上的要求，而这些要求其他几种管理方式往往难以满足。分段存储管理方式符合用户或程序员以下几种需要：方便编程、信息共享、信息保护、动态增长和动态链接</p>
+<ol>
+<li><p>分段</p>
+<ul>
+<li>在分段存储管理方式中，作业的地址空间被划分成若干段，每个段定义了一组逻辑信息，地址结构如下图所示<br><img src="/img/分段地址结构.png" alt="分段地址结构">  </li>
+</ul>
+</li>
+<li><p>段表</p>
+<ul>
+<li><p>在分段存储管理方式中，系统为每个分段分配一个连续的分区，进程中的各个分段可以离散的装入内存的不同分区中</p>
+</li>
+<li><p>类似于分页系统，分段存储管理方式为每个进程建立一张段表，每个段表项中记录了段在内存中的起始地址和段的长度<br><img src="/img/段表.png" alt="段表"></p>
+</li>
+<li><p>段表可以放在一组寄存器中，但是更常见的做法是将段表放在内存中</p>
+</li>
+</ul>
+</li>
+<li><p>地址变换机构<br>同分页系统一样，为了实现从逻辑地址到物理地址的变换，需要在系统之中设置段表寄存器，用于存放段表始址和段表长度<br><img src="/img/分段地址变换机构.png" alt="分段地址变换机构">  </p>
+<ul>
+<li><p>在进程地址转换时，系统将逻辑地址的段号和段表长度进行比较，若越界则产生越界中断信号，否则将段号和段表始址相加得到段表中的相应项，读出段表中的基址。然后再检查段内地址是否超过该段的段长，超过则发出越界终端信号，否则将基址和段内地址相加得到要访问的物理地址</p>
+</li>
+<li><p>与分页系统一样，可以增设一个联想存储器，即快表，减少存取数据的时间</p>
+</li>
+</ul>
+</li>
+<li><p>分页和分段的区别</p>
+<ul>
+<li><p>页是信息单位，仅仅是系统管理的需要；段式信息的逻辑单位，更好的满足用户的需要</p>
+</li>
+<li><p>页的大小固定，由系统决定；段的大小不固定，由程序员决定</p>
+</li>
+<li><p>分页的用户程序地址空间是一维的；分段系统中，用户程序地址空间是二维的</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="段页式存储管理方式"><a href="#段页式存储管理方式" class="headerlink" title="段页式存储管理方式"></a>段页式存储管理方式</h2><p>  分页系统以页面为内存分配的基本单位，能够有效的提高内存利用率。而分段系统以段为内存分配的基本单位，能够很好的满足用户的需求。结合这两者的优点，形成一种新的管理方式，即段页式存储管理方式</p>
+<ol>
+<li><p>基本原理<br><img src="/img/作业地址空间和地址结构.png" alt="作业地址空间和地址结构">  </p>
+<ul>
+<li><p>段页式系统先将用户程序分成若干段，再将每个段分成若干个页</p>
+</li>
+<li><p>段页式系统中，地址结构由段号、段内页号、页内地址构成</p>
+</li>
+<li><p>为了实现逻辑地址到物理地址的变换，需要同时设置段表和页表，段表的内容是页表始址和页表大小，与分段存储管理方式中的段表内容不同<br><img src="/img/段表和页表.png" alt="段表和页表"></p>
+</li>
+</ul>
+</li>
+<li><p>地址变换过程<br>在段页式系统中，为了实现地址的转换，也需要设置一个段表寄存器<br><img src="/img/段页式的地址变换机构.png" alt="段页式的地址变换机构"></p>
+<ul>
+<li><p>进行地址变换时，先将段号与段表长度进行比较，若未越界，则与段表始址相加，得到段表中的页表始址。将页表始址与页号相加，得到页表中的物理块号。最后利用物理块号和页内地址获得物理地址</p>
+</li>
+<li><p>在段页式的系统中，获得一条数据或者指令需要访问内存三次。第一次访问内存中的段表，得到页表始址。第二次访问相应段的页表项，得到物理地址。第三次才是访问物理内存中的数据或者指令</p>
+</li>
+<li><p>为了提高执行速度，可以在地址变换机构中增加一个高速缓冲寄存器</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p>《计算机操作系统》，第四版，汤子瀛</p>
+</li>
+<li><p><a href="https://blog.csdn.net/guoweimelon/article/details/50853719" target="_blank" rel="noopener">操作系统内存管理–简单、页式、段式、段页式</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/内存管理/" rel="tag"># 内存管理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/25/TCP的拥塞控制/" rel="next" title="TCP的拥塞控制">
+                <i class="fa fa-chevron-left"></i> TCP的拥塞控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/26/死锁/" rel="prev" title="死锁">
+                死锁 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/code.jpg"
+                alt="zuyuxia" />
+            
+              <p class="site-author-name" itemprop="name">zuyuxia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zuyuxia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统内存管理：页式、段式、段页式"><span class="nav-number">1.</span> <span class="nav-text">操作系统内存管理：页式、段式、段页式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分页存储管理方式"><span class="nav-number">1.1.</span> <span class="nav-text">分页存储管理方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分段存储管理方式"><span class="nav-number">1.2.</span> <span class="nav-text">分段存储管理方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段页式存储管理方式"><span class="nav-number">1.3.</span> <span class="nav-text">段页式存储管理方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zuyuxia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="Write Code">
 <meta property="og:description" content="注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT TCP的可靠传输  以客户端(client)向服务器(server)发送数据为例，TCP采用以下措施来保证可靠传输  确认和超时重传：服务器在接收到客户端发来的数据之后都要给出确认；而客户端在发送数据之后，就会设置一个定时器，超过这个时间还没收到相应的确认，就要重传数据  数据校验：在TCP的头部存在一个校验和字段，用来检验数据是否出错">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的可靠传输/img/发送窗口与发送缓存.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的可靠传输/img/接收窗口与接收缓存.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/25/TCP的可靠传输/img/确认.png">
-<meta property="og:updated_time" content="2018-03-25T12:30:25.845Z">
+<meta property="og:image" content="http://yoursite.com/img/发送窗口与发送缓存.png">
+<meta property="og:image" content="http://yoursite.com/img/接收窗口与接收缓存.png">
+<meta property="og:image" content="http://yoursite.com/img/确认.png">
+<meta property="og:updated_time" content="2018-03-26T08:11:43.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP的可靠传输">
 <meta name="twitter:description" content="注：文中图片均来源于谢希仁《计算机网络》第六版的课件PPT TCP的可靠传输  以客户端(client)向服务器(server)发送数据为例，TCP采用以下措施来保证可靠传输  确认和超时重传：服务器在接收到客户端发来的数据之后都要给出确认；而客户端在发送数据之后，就会设置一个定时器，超过这个时间还没收到相应的确认，就要重传数据  数据校验：在TCP的头部存在一个校验和字段，用来检验数据是否出错">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/25/TCP的可靠传输/img/发送窗口与发送缓存.png">
+<meta name="twitter:image" content="http://yoursite.com/img/发送窗口与发送缓存.png">
 
 
 
@@ -360,11 +360,12 @@
 <li><p>拥塞控制：在探寻到网络状况较差时，减少数据发送，避免网络状况进一步恶化</p>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="发送窗口和发送缓存（接收窗口与接收缓存）"><a href="#发送窗口和发送缓存（接收窗口与接收缓存）" class="headerlink" title="发送窗口和发送缓存（接收窗口与接收缓存）"></a>发送窗口和发送缓存（接收窗口与接收缓存）</h2><p>在介绍确认和超时重传之前，先来说清楚发送窗口和发送缓存（接收窗口和接收缓存）的关系</p>
 <ol>
 <li><p>发送窗口和发送缓存</p>
 <ul>
-<li><p>如下图所示：<br><img src="img/发送窗口与发送缓存.png" alt="发送窗口与发送缓存"></p>
+<li><p>如下图所示：<br><img src="/img/发送窗口与发送缓存.png" alt="发送窗口与发送缓存"></p>
 </li>
 <li><p>发送缓存用来暂时存放：准备发送的数据；已发送但还没收到确认的数据</p>
 </li>
@@ -372,7 +373,7 @@
 </li>
 <li><p>接收窗口和接收缓存</p>
 <ul>
-<li><p>如下图所示：<br><img src="img/接收窗口与接收缓存.png" alt="接收窗口与接收缓存">      </p>
+<li><p>如下图所示：<br><img src="/img/接收窗口与接收缓存.png" alt="接收窗口与接收缓存">      </p>
 </li>
 <li><p>接收缓存用来暂时存放：按序到达但还没被应用程序读取的数据；未按序到达的数据</p>
 </li>
@@ -380,7 +381,7 @@
 </li>
 </ol>
 <h2 id="确认和超时重传"><a href="#确认和超时重传" class="headerlink" title="确认和超时重传"></a>确认和超时重传</h2><ol>
-<li><p>客户端为A，服务器为B，如下图所示<br><img src="img/确认.png" alt="确认">  </p>
+<li><p>客户端为A，服务器为B，如下图所示<br><img src="/img/确认.png" alt="确认">  </p>
 <ul>
 <li><p>A在向B发送了41号数据，并且收到了33号数据的确认；B则按序接收到了26~33号数据，还接收了部分的未按序到达数据，等待到缺失字节到达后再上交给应用层  </p>
 </li>
@@ -550,7 +551,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -561,7 +562,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -572,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

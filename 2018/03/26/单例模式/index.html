@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="单例模式 单例模式又称为单子模式，是一种常见的设计模式。在使用这个模式时，单例对象的类必须只有一个实例存在。  C++中单例模式分为懒汉和饿汉实现：懒汉意味着第一次用到类实例的时候才会实例化，饿汉指单例类在定义的时候就进行了实例化  线程同步，访问量比较大的时候，采用饿汉实现可以实现更好的性能；访问量较小时，采用懒汉实现   懒汉实现12345678910111213141516171819202">
+<meta name="description" content="单例模式 单例模式又称为单子模式，是一种常见的设计模式。在使用这个模式时，单例对象的类必须只有一个实例存在。  C++中单例模式分为懒汉和饿汉实现：懒汉意味着第一次用到类实例的时候才会实例化，饿汉指单例类在定义的时候就进行了实例化  线程同步，访问量比较大的时候，采用饿汉实现可以实现更好的性能；访问量较小时，采用懒汉实现">
 <meta name="keywords" content="单例模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单例模式">
 <meta property="og:url" content="http://yoursite.com/2018/03/26/单例模式/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="单例模式 单例模式又称为单子模式，是一种常见的设计模式。在使用这个模式时，单例对象的类必须只有一个实例存在。  C++中单例模式分为懒汉和饿汉实现：懒汉意味着第一次用到类实例的时候才会实例化，饿汉指单例类在定义的时候就进行了实例化  线程同步，访问量比较大的时候，采用饿汉实现可以实现更好的性能；访问量较小时，采用懒汉实现   懒汉实现12345678910111213141516171819202">
+<meta property="og:description" content="单例模式 单例模式又称为单子模式，是一种常见的设计模式。在使用这个模式时，单例对象的类必须只有一个实例存在。  C++中单例模式分为懒汉和饿汉实现：懒汉意味着第一次用到类实例的时候才会实例化，饿汉指单例类在定义的时候就进行了实例化  线程同步，访问量比较大的时候，采用饿汉实现可以实现更好的性能；访问量较小时，采用懒汉实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-26T13:02:18.426Z">
+<meta property="og:updated_time" content="2018-03-27T03:35:49.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例模式">
-<meta name="twitter:description" content="单例模式 单例模式又称为单子模式，是一种常见的设计模式。在使用这个模式时，单例对象的类必须只有一个实例存在。  C++中单例模式分为懒汉和饿汉实现：懒汉意味着第一次用到类实例的时候才会实例化，饿汉指单例类在定义的时候就进行了实例化  线程同步，访问量比较大的时候，采用饿汉实现可以实现更好的性能；访问量较小时，采用懒汉实现   懒汉实现12345678910111213141516171819202">
+<meta name="twitter:description" content="单例模式 单例模式又称为单子模式，是一种常见的设计模式。在使用这个模式时，单例对象的类必须只有一个实例存在。  C++中单例模式分为懒汉和饿汉实现：懒汉意味着第一次用到类实例的时候才会实例化，饿汉指单例类在定义的时候就进行了实例化  线程同步，访问量比较大的时候，采用饿汉实现可以实现更好的性能；访问量较小时，采用懒汉实现">
 
 
 
@@ -350,6 +350,7 @@
 <li><p>线程同步，访问量比较大的时候，采用饿汉实现可以实现更好的性能；访问量较小时，采用懒汉实现</p>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="懒汉实现"><a href="#懒汉实现" class="headerlink" title="懒汉实现"></a>懒汉实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//懒汉模式，线程不安全</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton* <span class="title">instance</span><span class="params">()</span></span>;</span><br><span class="line">	~Singleton();</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton *m_pointer;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Singleton();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::m_pointer = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">Singleton::Singleton()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::instance()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!m_pointer)&#123;</span><br><span class="line">		m_pointer = <span class="keyword">new</span> Singleton();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> m_pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton::~Singleton()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!m_pointer)&#123;</span><br><span class="line">		<span class="keyword">delete</span> m_pointer;</span><br><span class="line">		m_pointer = <span class="literal">nullptr</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程安全的懒汉模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton* <span class="title">instance</span><span class="params">()</span></span>;</span><br><span class="line">	~Singleton();</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton *m_pointer;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Singleton();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::m_pointer = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">Singleton::Singleton()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::instance()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!m_pointer)&#123;				<span class="comment">//此处加判断，避免多线程加锁的开销</span></span><br><span class="line">		lock();			<span class="comment">//加锁</span></span><br><span class="line">		<span class="keyword">if</span>(!m_pointer)&#123;</span><br><span class="line">			m_pointer = <span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		unlock();		<span class="comment">//释放锁</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> m_pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton::~Singleton()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!m_pointer)&#123;</span><br><span class="line">		<span class="keyword">delete</span> m_pointer;</span><br><span class="line">		m_pointer = <span class="literal">nullptr</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="饿汉实现"><a href="#饿汉实现" class="headerlink" title="饿汉实现"></a>饿汉实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//饿汉模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton* <span class="title">instance</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton *m_pointer;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Singleton();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::m_pointer = <span class="keyword">new</span> Singleton();</span><br><span class="line"></span><br><span class="line">Singleton::Singleton()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::instance()&#123;</span><br><span class="line">	<span class="keyword">return</span> m_pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -400,6 +401,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/28/页面置换算法/" rel="prev" title="页面置换算法">
+                页面置换算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -480,7 +485,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -491,7 +496,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -502,7 +507,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

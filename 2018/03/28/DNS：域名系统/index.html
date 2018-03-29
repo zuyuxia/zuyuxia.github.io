@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="进程与线程," />
+  <meta name="keywords" content="DNS," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="#进程间通信 * 管道，消息队列，共享内存，信号量，套接字  * 管道：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系  * 信号量：信号量用于实现进程间的互斥与同步，而不是用于存储进程间通信数据  * 消息队列：消息队列是由消息的链表，存放在内核中并由消息队列标识符标识  * 共享内存：共享内存是最快的IPC。共享内存就是映射">
-<meta name="keywords" content="进程与线程">
+<meta name="description" content="DNS：域名系统 主机的一种标识方法就是使用主机名，主机名也就是我们通常所说的域名。虽然主机名便于记忆，但是对于机器而言，主机名不是定长，也没有任何提示主机在网络中的位置。因此对于主机，也可用使用IP地址标识出主机的位置。于是，我们需要一种域名和IP地址之间的转换服务—DNS域名系统  DNS：一个由分层的DNS服务器实现的分布式的数据库，一个使得主机能够查询分布式数据库的应用层协议  DNS协议">
+<meta name="keywords" content="DNS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="进程间通信">
-<meta property="og:url" content="http://yoursite.com/2018/03/16/进程间通信/index.html">
+<meta property="og:title" content="DNS：域名系统">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/DNS：域名系统/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="#进程间通信 * 管道，消息队列，共享内存，信号量，套接字  * 管道：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系  * 信号量：信号量用于实现进程间的互斥与同步，而不是用于存储进程间通信数据  * 消息队列：消息队列是由消息的链表，存放在内核中并由消息队列标识符标识  * 共享内存：共享内存是最快的IPC。共享内存就是映射">
+<meta property="og:description" content="DNS：域名系统 主机的一种标识方法就是使用主机名，主机名也就是我们通常所说的域名。虽然主机名便于记忆，但是对于机器而言，主机名不是定长，也没有任何提示主机在网络中的位置。因此对于主机，也可用使用IP地址标识出主机的位置。于是，我们需要一种域名和IP地址之间的转换服务—DNS域名系统  DNS：一个由分层的DNS服务器实现的分布式的数据库，一个使得主机能够查询分布式数据库的应用层协议  DNS协议">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T14:01:45.180Z">
+<meta property="og:updated_time" content="2018-03-29T12:28:59.607Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="进程间通信">
-<meta name="twitter:description" content="#进程间通信 * 管道，消息队列，共享内存，信号量，套接字  * 管道：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系  * 信号量：信号量用于实现进程间的互斥与同步，而不是用于存储进程间通信数据  * 消息队列：消息队列是由消息的链表，存放在内核中并由消息队列标识符标识  * 共享内存：共享内存是最快的IPC。共享内存就是映射">
+<meta name="twitter:title" content="DNS：域名系统">
+<meta name="twitter:description" content="DNS：域名系统 主机的一种标识方法就是使用主机名，主机名也就是我们通常所说的域名。虽然主机名便于记忆，但是对于机器而言，主机名不是定长，也没有任何提示主机在网络中的位置。因此对于主机，也可用使用IP地址标识出主机的位置。于是，我们需要一种域名和IP地址之间的转换服务—DNS域名系统  DNS：一个由分层的DNS服务器实现的分布式的数据库，一个使得主机能够查询分布式数据库的应用层协议  DNS协议">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/16/进程间通信/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/28/DNS：域名系统/"/>
 
 
 
 
 
-  <title>进程间通信 | Write Code</title>
+  <title>DNS：域名系统 | Write Code</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/16/进程间通信/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/DNS：域名系统/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zuyuxia">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">进程间通信</h1>
+          <h1 class="post-title" itemprop="name headline">DNS：域名系统</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T16:55:31+08:00">
-                2018-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T22:03:27+08:00">
+                2018-03-28
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
                   </a>
                 </span>
 
@@ -342,47 +342,56 @@
       
 
       
-        <p>#进程间通信</p>
-<pre><code>* 管道，消息队列，共享内存，信号量，套接字
-
-* 管道：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系
-
-* 信号量：信号量用于实现进程间的互斥与同步，而不是用于存储进程间通信数据
-
-* 消息队列：消息队列是由消息的链表，存放在内核中并由消息队列标识符标识
-
-* 共享内存：共享内存是最快的IPC。共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问
-
-* 信号：信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生
-</code></pre><p>##共享内存的实现原理</p>
-<ul>
-<li><p>共享内存实现分为两种方式：一种采用mmap，一种采用system V机制的共享内存的方法</p>
+        <h1 id="DNS：域名系统"><a href="#DNS：域名系统" class="headerlink" title="DNS：域名系统"></a>DNS：域名系统</h1><ul>
+<li><p>主机的一种标识方法就是使用<strong>主机名</strong>，主机名也就是我们通常所说的<strong>域名</strong>。虽然主机名便于记忆，但是对于机器而言，主机名不是定长，也没有任何提示主机在网络中的位置。因此对于主机，也可用使用IP地址标识出主机的位置。于是，我们需要一种域名和IP地址之间的转换服务—DNS域名系统</p>
 </li>
-<li><p>mmap是内存文件映射，将一个文件映射到两个不同进程的地址空间，可实现任意进程间的通信。mmap也可以采用匿名映射，不指定映射的文件，此时只能用于父子进程间通信</p>
+<li><p>DNS：一个由分层的DNS服务器实现的分布式的数据库，一个使得主机能够查询分布式数据库的应用层协议</p>
 </li>
-<li><p>system V的共享内存实际上也是映射文件实现的，但是映射的是特殊的文件系统shm下的文件，文件系统shm安装点在交换分区上，系统重新引导后，所有的内容都丢失，该文件不能通过read或write访问</p>
-</li>
-<li><p>区别：</p>
-<ul>
-<li>system V共享内存中的数据，从不写入到实际磁盘中；通过mmap映射文件实现的共享内存可以指定什么时候将数据写入到磁盘文件中</li>
-<li>system V共享内存是随内核持续的，即使访问共享内存的进程终止，共享内存区也存在（除非显式删除），在系统重新引导之前，对共享内存区的操作都将保留</li>
-<li>通过调用mmap映射文件进行的通信，要注意考虑进程何时终止对通信产生的影响</li>
-</ul>
+<li><p>DNS协议运行在UDP之上，使用53号端口</p>
 </li>
 </ul>
-<h2 id="常见的信号"><a href="#常见的信号" class="headerlink" title="常见的信号"></a>常见的信号</h2><ul>
-<li><p>SIGINT：程序终止信号</p>
+<a id="more"></a>
+<h2 id="DNS提供的服务"><a href="#DNS提供的服务" class="headerlink" title="DNS提供的服务"></a>DNS提供的服务</h2><ul>
+<li><p>当用户浏览器请求一个URL时发送的事件：  </p>
+<ul>
+<li><p>主机上运行着DNS应用的客户端</p>
 </li>
-<li><p>SIGKILL：用来立即结束程序运行，不能被阻塞、处理和忽略</p>
+<li><p>浏览器从URL中得到主机名，并将主机名传给DNS应用的客户端</p>
 </li>
-<li><p>SIGTERM：程序结束信号, 与SIGKILL不同的是该信号可以被阻塞和处理</p>
+<li><p>DNS客户向DNS服务器发送一个包含主机名的请求</p>
 </li>
-<li><p>SIGSEGV：试图访问未分配给自己的内存或向没有写权限的内存地址写数据</p>
+<li><p>DNS客户会收到一份应答报文，其中包含对应于主机名的IP地址</p>
 </li>
-<li><p>SIGCHLD：子进程结束时, 父进程会收到这个信号</p>
+<li><p>浏览器在得到IP地址后，便可向IP地址所在的服务器发起一个TCP连接</p>
 </li>
-<li><p>SIGALRM：时钟定时信号</p>
+</ul>
 </li>
+<li><p>DNS提供的其他服务：主机别名，邮件服务器别名，负载分配</p>
+</li>
+</ul>
+<h2 id="DNS工作机理概述"><a href="#DNS工作机理概述" class="headerlink" title="DNS工作机理概述"></a>DNS工作机理概述</h2><p>  DNS服务器的类型：根DNS服务器、顶级域DNS服务器、权威DNS服务器、本地DNS服务器</p>
+<ol>
+<li><p>以主机A想知道主机B的IP地址为例：</p>
+<ul>
+<li>主机A先向本地DNS服务器发送DNS查询报文，若有记录则直接返回，否则执行下一步骤</li>
+<li>本地DNS服务器将报文转发到根DNS服务器，根服务器向本地DNS服务器返回相应的TLD服务器的IP地址列表</li>
+<li>本地DNS服务器再次向这些TLD服务器之一发送查询报文，TLD将响应的权威服务器IP地址发送给本地DNS服务器</li>
+<li>最后，本地服务器直接向权威服务器发送查询报文</li>
+<li>主机到本地DNS服务器是<strong>递归查询</strong>，其余的都是<strong>迭代查询</strong></li>
+</ul>
+</li>
+<li><p>DNS缓存</p>
+<ul>
+<li>DNS缓存目的：减少网络中的查询流量</li>
+<li>原理：在一个请求链中，当某DNS服务器接收到一个DNS回答时，将回答信息缓存在本地存储器中</li>
+<li>本地DNS服务器能够缓存TLD服务器的IP地址，允许本地DNS绕过查询链中的根DNS服务器</li>
+<li>DNS服务器在一段时间（两天）将丢弃缓存信息</li>
+</ul>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>《计算机网络-自顶向下方法》，第六版</li>
+<li><a href="https://www.cnblogs.com/smilesundream/p/6701294.html" target="_blank" rel="noopener">DNS协议</a></li>
 </ul>
 
       
@@ -401,7 +410,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/进程与线程/" rel="tag"># 进程与线程</a>
+            <a href="/tags/DNS/" rel="tag"># DNS</a>
           
         </div>
       
@@ -414,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/16/进程与线程/" rel="next" title="进程与线程">
-                <i class="fa fa-chevron-left"></i> 进程与线程
+              <a href="/2018/03/28/ARP和RARP协议/" rel="next" title="ARP和RARP协议">
+                <i class="fa fa-chevron-left"></i> ARP和RARP协议
               </a>
             
           </div>
@@ -424,8 +433,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/16/select-poll-epoll/" rel="prev" title="I/O多路复用">
-                I/O多路复用 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/29/二叉树/" rel="prev" title="二叉树的遍历">
+                二叉树的遍历 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -507,7 +516,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -518,7 +527,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -529,7 +538,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -572,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的信号"><span class="nav-number">1.</span> <span class="nav-text">常见的信号</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS：域名系统"><span class="nav-number">1.</span> <span class="nav-text">DNS：域名系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS提供的服务"><span class="nav-number">1.1.</span> <span class="nav-text">DNS提供的服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS工作机理概述"><span class="nav-number">1.2.</span> <span class="nav-text">DNS工作机理概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>

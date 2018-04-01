@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="select/poll/epoll," />
+  <meta name="keywords" content="内存管理," />
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="select详解 select函数允许进程指示内核等待多个事件中的任何一个发生，并只在一个、多个时间发生或经历一段时间后才唤醒它">
-<meta name="keywords" content="select&#x2F;poll&#x2F;epoll">
+<meta name="description" content="注：文中图片均来源于汤子瀛《计算机操作系统》第四版 页面置换算法  在进程运行过程中，其要访问的页面不在内存之中，那么就需要将页面调入内存，如果此时内存已满，则需要将内存中的某一页调到交换区。这种确定将哪一页调出的算法称为页面置换算法。   页面置换算法如果不合适会造成进程的抖动。所谓的进程抖动，就是刚刚被换出的页面很快又会被访问，而下一次被换出的页面也会很快被访问，如此频繁的更换页面，使得进程在">
+<meta name="keywords" content="内存管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="select详解">
-<meta property="og:url" content="http://yoursite.com/2018/03/18/select详解/index.html">
+<meta property="og:title" content="页面置换算法">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/页面置换算法/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="select详解 select函数允许进程指示内核等待多个事件中的任何一个发生，并只在一个、多个时间发生或经历一段时间后才唤醒它">
+<meta property="og:description" content="注：文中图片均来源于汤子瀛《计算机操作系统》第四版 页面置换算法  在进程运行过程中，其要访问的页面不在内存之中，那么就需要将页面调入内存，如果此时内存已满，则需要将内存中的某一页调到交换区。这种确定将哪一页调出的算法称为页面置换算法。   页面置换算法如果不合适会造成进程的抖动。所谓的进程抖动，就是刚刚被换出的页面很快又会被访问，而下一次被换出的页面也会很快被访问，如此频繁的更换页面，使得进程在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-30T12:15:48.850Z">
+<meta property="og:image" content="http://yoursite.com/img/LRU.png">
+<meta property="og:image" content="http://yoursite.com/img/Clock.png">
+<meta property="og:updated_time" content="2018-04-01T13:22:14.943Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="select详解">
-<meta name="twitter:description" content="select详解 select函数允许进程指示内核等待多个事件中的任何一个发生，并只在一个、多个时间发生或经历一段时间后才唤醒它">
+<meta name="twitter:title" content="页面置换算法">
+<meta name="twitter:description" content="注：文中图片均来源于汤子瀛《计算机操作系统》第四版 页面置换算法  在进程运行过程中，其要访问的页面不在内存之中，那么就需要将页面调入内存，如果此时内存已满，则需要将内存中的某一页调到交换区。这种确定将哪一页调出的算法称为页面置换算法。   页面置换算法如果不合适会造成进程的抖动。所谓的进程抖动，就是刚刚被换出的页面很快又会被访问，而下一次被换出的页面也会很快被访问，如此频繁的更换页面，使得进程在">
+<meta name="twitter:image" content="http://yoursite.com/img/LRU.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/18/select详解/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/28/页面置换算法/"/>
 
 
 
 
 
-  <title>select详解 | Write Code</title>
+  <title>页面置换算法 | Write Code</title>
   
 
 
@@ -253,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/select详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/页面置换算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zuyuxia">
@@ -270,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">select详解</h1>
+          <h1 class="post-title" itemprop="name headline">页面置换算法</h1>
         
 
         <div class="post-meta">
@@ -282,8 +285,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T21:19:22+08:00">
-                2018-03-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T08:06:37+08:00">
+                2018-03-28
               </time>
             
 
@@ -305,8 +308,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/select-poll-epoll/" itemprop="url" rel="index">
-                    <span itemprop="name">select/poll/epoll</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
                   </a>
                 </span>
 
@@ -342,80 +345,59 @@
       
 
       
-        <h1 id="select详解"><a href="#select详解" class="headerlink" title="select详解"></a>select详解</h1><blockquote>
-<p>select函数允许进程指示内核等待多个事件中的任何一个发生，并只在一个、多个时间发生或经历一段时间后才唤醒它</p>
-</blockquote>
+        <p><strong>注：文中图片均来源于汤子瀛《计算机操作系统》第四版</strong></p>
+<h1 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h1><p>  在进程运行过程中，其要访问的页面不在内存之中，那么就需要将页面调入内存，如果此时内存已满，则需要将内存中的某一页调到交换区。这种确定将哪一页调出的算法称为页面置换算法。</p>
+<p>  页面置换算法如果不合适会造成<strong>进程的抖动</strong>。所谓的进程抖动，就是刚刚被换出的页面很快又会被访问，而下一次被换出的页面也会很快被访问，如此频繁的更换页面，使得进程在运行过程中把大部分时间浪费在页面置换上。</p>
 <a id="more"></a>
-<ol>
-<li><p>select函数  </p>
-<pre><code>int select( int nfds , fd_set *readfds , fd_set *writefds , fd_set *exceptfds ,struct timeval *timeout );  
-参数：
-    nfds：读、写、异常集合中文件描述符的最大值+1  
-    readfds：读集合  
-    writefds：写集合  
-    exceptfds：异常集合  
-    timeout：超时结构体
-返回值：
-    -1：出错，errno被设置成相应值
-    0：超时，没有任何描述符就绪
-    正值：所有描述符集的已就绪的描述符的个数
-
-四种操作fd_set的宏
-void FD_CLR(int fd, fd_set *set);
-int  FD_ISSET(int fd, fd_set *set);
-void FD_SET(int fd, fd_set *set);
-void FD_ZERO(fd_set *set);
-</code></pre><ul>
-<li><p>参数timeout：告知内核等待所指定描述符中的任何一个就绪可花多长时间，有三种取值可能</p>
-<ul>
-<li>NULL：永远等，直到有一个描述符准备好I/O才返回</li>
-<li>0：根本不等待，检查描述符后立即返回，称为轮询（timeval结构体中的值为0）</li>
-<li><p>等待一段时间：在有一个描述符准备好I/O时返回，但是不超过设定时间  </p>
-<pre><code>timeval结构体：
-struct timeval{    
-    long tv_sec;  
-    long tv_usec;  
-};
-</code></pre></li>
-</ul>
+<h2 id="最佳置换算法（OPT）"><a href="#最佳置换算法（OPT）" class="headerlink" title="最佳置换算法（OPT）"></a>最佳置换算法（OPT）</h2><ul>
+<li><p>最佳置换算法是一种理想化的算法，具有最好的性能，但是由于无法预测未来，所以无法实现。通常用来作为标准，衡量其他算法的优劣</p>
 </li>
-<li><p>readfds,writefds,exceptfds</p>
-<ul>
-<li>fd_set的数据类型的可能实现之一：通常是一个整数数组，每个整数的每一位对应一个描述符</li>
-<li>描述符集必须初始化</li>
-<li>若对某一个不感兴趣，设为NULL</li>
-</ul>
+<li><p>OPT每次发生缺页中断时，选择被淘汰的页将是以后不使用或者很长时间内不会被使用的页面</p>
 </li>
-<li><p>nfds：待测试描述符的最大值+1</p>
+</ul>
+<h2 id="先进先出置换算法（FIFO）"><a href="#先进先出置换算法（FIFO）" class="headerlink" title="先进先出置换算法（FIFO）"></a>先进先出置换算法（FIFO）</h2><ul>
+<li><p>先进先出置换算法是最直观的算法，实现简单，但通常与页面的使用规律不符合，性能较差</p>
+</li>
+<li><p>FIFO每次在发生缺页中断时，选择最先进入内存的页面进行淘汰，即<strong>先进入内存，先退出内存</strong>。实现起来较为容易，采用队列即可实现</p>
+</li>
+</ul>
+<h2 id="最近最久未使用置换算法（LRU）"><a href="#最近最久未使用置换算法（LRU）" class="headerlink" title="最近最久未使用置换算法（LRU）"></a>最近最久未使用置换算法（LRU）</h2><ul>
+<li><p>最近最久未使用置换算法是根据页面调入内存后的使用情况作出决策的，由于无法预测页面未来的使用情况，采用最近的过去来作为最近的将来的近似</p>
+</li>
+<li><p>LRU置换算法是选择最近最久未使用的页面淘汰，该算法赋予每一个页面一个访问字段，用来记录该页面从上次被访问到目前所经历的时间t。当发生缺页中断时，选择t值最大的页面予以淘汰</p>
+</li>
+<li><p>LRU算法是向前看，根据各页以前的使用情况来判断；最佳置换算法是向后看，依据各页以后的使用情况判断<br><img src="/img/LRU.png" alt="LRU"></p>
+</li>
+<li><p>LRU算法的硬件支持：寄存器和栈</p>
+<ul>
+<li><p>寄存器：为了记录某进程在内存中各页的使用情况，必须为每个在内存中的页面配置一个移位寄存器；进程访问某物理块时，相应的寄存器要置为1，定时信号定时将寄存器右移一位；如果把n位寄存器的数看作是一个整数，那么具有最小数值的寄存器所对应的页面就是最近最久未使用的页面</p>
+</li>
+<li><p>栈：利用一个特殊的栈保存当前使用的各个页面的页面号。每当进程访问某页面时，将页面号从栈中移出，压入栈顶；因此栈顶始终是最新的被访问的页面的编号，栈底则是最近最久未使用页面的页面号</p>
 </li>
 </ul>
 </li>
-<li><p>FD_SETSIZE</p>
+</ul>
+<h2 id="最少使用置换算法（LFU）"><a href="#最少使用置换算法（LFU）" class="headerlink" title="最少使用置换算法（LFU）"></a>最少使用置换算法（LFU）</h2><ul>
+<li><p>采用LFU算法时，应该在内存中为每一个页面设置一个移位寄存器，用来记录该页面被访问的频率</p>
+</li>
+<li><p>LFU选择在最近时期使用最少的页面作为淘汰页。每次访问某页时，将该页的移位寄存器最高位置为1，然后再定期向右移位。在发送缺页中断时，寄存器每一位上1的和最小的页将被换出</p>
+</li>
+</ul>
+<h2 id="Clock置换算法"><a href="#Clock置换算法" class="headerlink" title="Clock置换算法"></a>Clock置换算法</h2><p>  LRU算法是一种比较好的算法，但是需要较多的硬件支持，实现起来成本比较高，在实际应用中，大多采用LRU的近似算法。Clock算法就是用的较多的一种LRU近似算法</p>
 <ul>
-<li>是fd_set中的描述符总数，通常是1024</li>
-<li>通过改变FD_SETSIZE再重新编译内核，能够增大FD_SETSIZE</li>
+<li><p>简单的Clock置换算法：为每一页设置一个访问位，然后将页面通过链接指针链接成一个循环队列。当某一页被访问时，访问位就置为1。在发生缺页中断时，检查访问位，若为0，就换出；若为1，则置为0，暂不换出，将指针移到下一页。该算法又被称为<strong>最近未用算法（NRU）</strong><br><img src="/img/Clock.png" alt="Clock"></p>
+</li>
+<li><p>改进型Clock置换算法：在简单Clock算法基础上，增加一个修改位，即不仅考虑页面使用情况，还考虑置换代价。选择页面时，既要是未使用过的页面，又要是未被修改过的页面</p>
+<ul>
+<li><p>页面可分为四种类型：1类（A=0，M=0）;2类（A=0，M=1）;3类（A=1，M=0）;4类（A=1，M=1）</p>
+</li>
+<li><p>缺页中断时的置换过程：第一轮扫描，寻找1类页面；如果第一轮扫描未找到1类页面，执行第二轮扫描，寻找2类页面，在扫描中将每一页的访问位A置为0；若第二轮扫描也失败，重复寻找1类页面，重复寻找2类页面，则一定能找到要被淘汰的页</p>
+</li>
 </ul>
 </li>
-<li><p>描述符就绪条件</p>
-<blockquote>
-<ul>
-<li>套接字可读<br>（1）该套接字的接收缓冲区中的数据字节数大于等于套接字接收缓冲区低水位标记的当前大小，对这样的套接字执行读操作不会阻塞并返回一个大于0的值（也就是返回准备好读入的数据）<br>（2）该连接的读半部关闭（也就是接收了FIN包的TCP连接）；对这样的套接字的读操作将不阻塞并返回0（即EOF）<br>（3）该套接字是监听套接字且已完成连接数不为0；对这样的套接字，accept通常不会阻塞<br>（4）其上有一个套接字错误待处理；对这样的套接字的读操作将不阻塞，直接返回-1并将errno设置成确切的错误条件  </li>
 </ul>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<ul>
-<li>套接字可写<br>   （1）该套接字的发送缓冲区中的可用空间字节数大于等于套接字发送缓冲区低水位标记的当前大小，并且或者该套接字已连接，或者该套接字不需要连接；如果把这样的套接字设置为非阻塞的，写操作将不阻塞并返回一个正值<br>   （2）该连接的写半部关闭；对这样的套接字进行写操作将产生SIGPIPE信号<br>   （3）其上有一个套接字错误待处理；对这样的套接字的读操作将不阻塞，直接返回-1并将errno设置成确切的错误条件  </li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>异常<br>   套接字存在带外数据</li>
-</ul>
-</blockquote>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>《UNIX网络编程 卷1：套接字联网API》</li>
+<li>《计算操作系统》，第四版，汤子瀛</li>
 </ul>
 
       
@@ -434,7 +416,7 @@ struct timeval{
       
         <div class="post-tags">
           
-            <a href="/tags/select-poll-epoll/" rel="tag"># select/poll/epoll</a>
+            <a href="/tags/内存管理/" rel="tag"># 内存管理</a>
           
         </div>
       
@@ -447,8 +429,8 @@ struct timeval{
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/17/虚函数/" rel="next" title="虚函数">
-                <i class="fa fa-chevron-left"></i> 虚函数
+              <a href="/2018/03/26/单例模式/" rel="next" title="单例模式">
+                <i class="fa fa-chevron-left"></i> 单例模式
               </a>
             
           </div>
@@ -457,8 +439,8 @@ struct timeval{
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/18/poll详解/" rel="prev" title="poll详解">
-                poll详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/28/哈夫曼树和哈夫曼编码/" rel="prev" title="哈夫曼树和哈夫曼编码">
+                哈夫曼树和哈夫曼编码 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -605,7 +587,7 @@ struct timeval{
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#select详解"><span class="nav-number">1.</span> <span class="nav-text">select详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#页面置换算法"><span class="nav-number">1.</span> <span class="nav-text">页面置换算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳置换算法（OPT）"><span class="nav-number">1.1.</span> <span class="nav-text">最佳置换算法（OPT）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先进先出置换算法（FIFO）"><span class="nav-number">1.2.</span> <span class="nav-text">先进先出置换算法（FIFO）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最近最久未使用置换算法（LRU）"><span class="nav-number">1.3.</span> <span class="nav-text">最近最久未使用置换算法（LRU）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最少使用置换算法（LFU）"><span class="nav-number">1.4.</span> <span class="nav-text">最少使用置换算法（LFU）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clock置换算法"><span class="nav-number">1.5.</span> <span class="nav-text">Clock置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="进程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="进程间通信  进程间通信方式有：管道、信号量、消息队列、共享内存">
+<meta name="keywords" content="进程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程间通信">
+<meta property="og:url" content="http://yoursite.com/2018/03/16/进程间通信/index.html">
+<meta property="og:site_name" content="Write Code">
+<meta property="og:description" content="进程间通信  进程间通信方式有：管道、信号量、消息队列、共享内存">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-01T09:30:11.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程间通信">
+<meta name="twitter:description" content="进程间通信  进程间通信方式有：管道、信号量、消息队列、共享内存">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/16/进程间通信/"/>
+
+
+
+
+
+  <title>进程间通信 | Write Code</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Write Code</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Talk is cheap , show me the code</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/16/进程间通信/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程间通信</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T16:55:31+08:00">
+                2018-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><p>  进程间通信方式有：管道、信号量、消息队列、共享内存</p>
+<a id="more"></a>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>  管道是最初的Unix IPC形式，目前的管道可分为：无名管道和有名管道（FIFO）</p>
+<ul>
+<li><p>无名管道：无名管道是一种半双工通信方式，信息只能从一端流向另一端；只能用于父子或兄弟等具有亲缘关系的进程间通信  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> fd[<span class="number">2</span>])</span></span>;</span><br><span class="line">fd[<span class="number">0</span>]:读端</span><br><span class="line">fd[<span class="number">1</span>]:写端</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有名管道（FIFO）：有名管道是一种半双工的通信方式；允许无亲缘关系的进程间通信；每一个FIFO都有一个路径名和它关联  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkfifo</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line">pathname:路径名，也是FIFO的名字</span><br><span class="line">mode:指定文件权限位</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>  信号量是一个计数器，用来控制多个进程对共享资源的访问，常常作为一种锁机制，防止多个进程访问同一个共享资源。信号量分为：System V信号量和Posix信号量。</p>
+<ul>
+<li><p>System V信号量接口：  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//semget函数（用来创建或访问一个信号量集）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semget</span><span class="params">(<span class="keyword">key_t</span> key, <span class="keyword">int</span> nsems, <span class="keyword">int</span> semflg)</span></span>;</span><br><span class="line">           key：信号集的名字</span><br><span class="line">           nsems：信号集中信号量的个数</span><br><span class="line">           semflg：由九个权限标志构成</span><br><span class="line"><span class="comment">//返回值：成功返回一个非负整数，即该信号集的标识码，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//semctl函数（用于控制信号量集）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semctl</span><span class="params">( <span class="keyword">int</span> semid, <span class="keyword">int</span> semnum, <span class="keyword">int</span> cmd, ... )</span></span>;</span><br><span class="line">           semid：由semget返回的信号集标识码</span><br><span class="line">           semnum：信号集中信号量的序号</span><br><span class="line">           cmd：将要采取的动作</span><br><span class="line">           最后一个参数根据命令的不同而不同</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//semop函数（对一个或多个信号量的操作）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semop</span><span class="params">( <span class="keyword">int</span> semid, struct sembuf *sops, <span class="keyword">unsigned</span> nsops )</span></span>;</span><br><span class="line">           semid：该信号量的标识码，也就是semget函数的返回值</span><br><span class="line">           sops：是个指向一个结构数值的指针</span><br><span class="line">           nsops：信号量的个数</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sembuf</span>&#123;</span></span><br><span class="line">    <span class="keyword">short</span> sem\_num;         <span class="comment">//信号量的编号  </span></span><br><span class="line">    <span class="keyword">short</span> sem\_op;          <span class="comment">//信号量一次PV操作时加减的数值</span></span><br><span class="line">    <span class="keyword">short</span> sem\_flg;         <span class="comment">//两个取值是IPC\_NOWAIT和SEM\_UNDO</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Posix信号量接口：  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sem_t</span> *sem_open(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag);</span><br><span class="line"><span class="keyword">int</span> sem\_close(<span class="keyword">sem_t</span> *sem);</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> sem\_init(<span class="keyword">sem_t</span> *sem, <span class="keyword">int</span> pshared, <span class="keyword">unsigned</span> <span class="keyword">int</span> value);</span><br><span class="line"><span class="keyword">int</span> sem\_destroy(<span class="keyword">sem_t</span> *sem);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> sem\_wait(sem\<span class="keyword">_t</span> *sem);</span><br><span class="line"><span class="keyword">int</span> sem\_post(sem\<span class="keyword">_t</span> *sem);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>  消息队列是由消息组成的链表，存放在<strong>内核</strong>中并由消息队列标识符来标识。消息队列也分为：System V消息队列和Posix消息队列。</p>
+<ul>
+<li><p>System V消息队列的接口：消息最大长度MSGMAX，消息队列的总的字节数最大MSGMNB，消息队列的总数的上限MSGMNI</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//内核为每一个IPC对象维护一个数据结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ipc_perm</span>&#123;</span></span><br><span class="line">    <span class="keyword">key_t</span> key;</span><br><span class="line">    <span class="keyword">uid_t</span> uid;</span><br><span class="line">    <span class="keyword">gid_t</span> gid;</span><br><span class="line">    <span class="keyword">uid_t</span> cuid;</span><br><span class="line">    <span class="keyword">gid_t</span> cgid;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> mode;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> seq;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//消息队列结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">msqid_ds</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ipc_perm</span> <span class="title">msg_perm</span>;</span></span><br><span class="line">    <span class="keyword">time_t</span> msg_stime;</span><br><span class="line">    <span class="keyword">time_t</span> msg_rtime;</span><br><span class="line">    <span class="keyword">time_t</span> msg_ctime;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> __msg_cbytes;</span><br><span class="line">    <span class="keyword">msgqnum_t</span> msg_qnum;</span><br><span class="line">    <span class="keyword">msglen_t</span> msg_qbytes;</span><br><span class="line">    <span class="keyword">pid_t</span> msg_lspid;</span><br><span class="line">    <span class="keyword">pid_t</span> msg_lrpid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//msgget函数：用来创建和访问一个消息队列</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgget</span><span class="params">( <span class="keyword">key_t</span> key , <span class="keyword">int</span> msgflg )</span></span>;</span><br><span class="line">         key：某个消息队列的名字</span><br><span class="line">         msgflg：由九个权限标志构成，它们的用法和创建文件时使用的mode模式标志是一样的</span><br><span class="line"><span class="comment">//返回值：成功返回一个非负整数，即该消息队列的标识码；失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//msgsnd函数：把一条消息添加到消息队列中</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgsnd</span><span class="params">( <span class="keyword">int</span> msqid , <span class="keyword">const</span> <span class="keyword">void</span> *msgp , <span class="keyword">size_t</span> msgsz , <span class="keyword">int</span> msgflg )</span></span>;</span><br><span class="line">            msqid：由msgget函数返回的消息队列标识码</span><br><span class="line">            msgp：是一个指针，指向准备发送的消息</span><br><span class="line">            msgsz：是msgp指向的消息长度，这个长度不包含保存消息类型的那个<span class="keyword">long</span> <span class="keyword">int</span> 长整型</span><br><span class="line">            msgflg：控制着当前消息队列满或到达系统上限时将要发生的事情</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">msgbuf</span>&#123;</span></span><br><span class="line">    <span class="keyword">long</span> mtype;</span><br><span class="line">    <span class="keyword">char</span> mtext[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//msgrcv函数：从一个消息队列接收消息</span></span><br><span class="line"><span class="keyword">ssize_t</span> msgrcv( <span class="keyword">int</span> msqid , <span class="keyword">void</span> *msgp , <span class="keyword">size_t</span> msgsz , <span class="keyword">long</span> msgtyp , <span class="keyword">int</span> msgflg );</span><br><span class="line">            msqid：由msgget函数返回的消息队列标识码</span><br><span class="line">            msgp：是一个指针，指针指向准备接收的消息</span><br><span class="line">            msgsz：是msgp指向的消息长度，不包含保存消息类型的那个<span class="keyword">long</span> <span class="keyword">int</span>长整型</span><br><span class="line">            msgtype：它可以实现接收优先级的简单形式</span><br><span class="line">            msgflg：控制着队列中没有相应类型的消息可供接收时将要发生的事</span><br><span class="line"><span class="comment">//返回值：成功返回实际放到接收缓冲区里去的字符个数，失败返回-1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Posix消息队列的的接口：  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mq_open函数（用来创建和访问一个消息队列）</span></span><br><span class="line"><span class="keyword">mqd_t</span> mq_open( <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag );</span><br><span class="line">          <span class="keyword">mqd_t</span> mq_open( <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag, <span class="keyword">mode_t</span> mode, struct mq_attr *attr );</span><br><span class="line">          name：某个消息队列的名字</span><br><span class="line">          oflag：与open函数类似</span><br><span class="line">          mode：如果oflag指定了O_CREAT，需要设置mode</span><br><span class="line"><span class="comment">//返回值：成功返回消息队列文件描述符，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//mq_close函数（关闭消息队列）不代表删除一个消息队列</span></span><br><span class="line"><span class="keyword">mqd_t</span> mq_close( <span class="keyword">mqd_t</span> mqdes );</span><br><span class="line">          mqdes：消息队列描述符</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//mq_unlink函数（删除消息队列）</span></span><br><span class="line"><span class="keyword">mqd_t</span> mq_unlink( <span class="keyword">const</span> <span class="keyword">char</span> *name );</span><br><span class="line">          name：消息队列的名字</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//mq_getattr/mq_setattr（获取/设置消息队列属性）</span></span><br><span class="line"><span class="keyword">mqd_t</span> mq_getattr( <span class="keyword">mqd_t</span> mqdes, struct mq_attr *attr );</span><br><span class="line">          <span class="keyword">mqd_t</span> mq_setattr( <span class="keyword">mqd_t</span> mqdes, struct mq_attr *newattr, struct mq_attr *oldattr );</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mq_attr</span>&#123;</span></span><br><span class="line">    <span class="keyword">long</span> mq_flags;</span><br><span class="line">    <span class="keyword">long</span> mq_maxmsg;</span><br><span class="line">    <span class="keyword">long</span> mq_msgsize;</span><br><span class="line">    <span class="keyword">long</span> mq_curmsgs;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//mq_send函数（发送消息）</span></span><br><span class="line"><span class="keyword">mqd_t</span> mq_send( <span class="keyword">mqd_t</span> mqdes, <span class="keyword">const</span> <span class="keyword">char</span> *msg_ptr, <span class="keyword">size_t</span> msg_len,<span class="keyword">unsigned</span> msg_prio );</span><br><span class="line">          mqdes：消息队列描述符</span><br><span class="line">          msg_ptr：指向消息的指针</span><br><span class="line">          msg_len：消息长度</span><br><span class="line">          msg_prio：消息优先级</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//mq_receive函数（接收消息）</span></span><br><span class="line"><span class="keyword">ssize_t</span> mq_receive( <span class="keyword">mqd_t</span> mqdes, <span class="keyword">char</span> *msg_ptr, <span class="keyword">size_t</span> msg_len, <span class="keyword">unsigned</span> *msg_prio );</span><br><span class="line">          mqdes：消息队列描述符</span><br><span class="line">          msg_ptr：接收消息的指针</span><br><span class="line">          msg_len：消息长度（每条消息的最大值）</span><br><span class="line">          msg_prio：接收到消息的优先级</span><br><span class="line"><span class="comment">//返回值：成功返回接收到的消息字节数，失败返回-1</span></span><br><span class="line"><span class="comment">//注意：返回指定消息队列中最高优先级的最早消息</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//mq_notify函数（建立或者删除消息到达通知事件）</span></span><br><span class="line"><span class="keyword">mqd_t</span> mq_notify( <span class="keyword">mqd_t</span> mqdes, <span class="keyword">const</span> struct sigevent *notification );</span><br><span class="line">          mqdes：消息队列描述符</span><br><span class="line">          notification：非空表示当消息到达且消息队列先前为空，那么将得到通知；<span class="literal">NULL</span>表示撤销已注册的通知</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"><span class="comment">//通知方式：产生一个信号；创建一个线程执行一个指定的函数</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sigevent</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> sigev_notify;</span><br><span class="line">    <span class="keyword">int</span> sigev_signo;</span><br><span class="line">    <span class="keyword">union</span> sigval sigev_value;</span><br><span class="line">    <span class="keyword">void</span> (*sigev_notify_function)(<span class="keyword">union</span> sigval);</span><br><span class="line">    <span class="keyword">void</span> *sigev_notify_attributes;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">union</span> sigval&#123;</span><br><span class="line">    <span class="keyword">int</span> sival_int;</span><br><span class="line">    <span class="keyword">void</span> *sival_ptr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="共享内存的实现原理"><a href="#共享内存的实现原理" class="headerlink" title="共享内存的实现原理"></a>共享内存的实现原理</h2><ul>
+<li><p>共享内存实现分为两种方式：一种采用mmap，一种采用system V机制的共享内存的方法</p>
+</li>
+<li><p>mmap是内存文件映射，将一个文件映射到两个不同进程的地址空间，可实现任意进程间的通信。mmap也可以采用匿名映射，不指定映射的文件，此时只能用于父子进程间通信</p>
+</li>
+<li><p>system V的共享内存实际上也是映射文件实现的，但是映射的是特殊的文件系统shm下的文件，文件系统shm安装点在交换分区上，系统重新引导后，所有的内容都丢失，该文件不能通过read或write访问</p>
+</li>
+<li><p>区别：</p>
+<ul>
+<li>system V共享内存中的数据，从不写入到实际磁盘中；通过mmap映射文件实现的共享内存可以指定什么时候将数据写入到磁盘文件中</li>
+<li>system V共享内存是随内核持续的，即使访问共享内存的进程终止，共享内存区也存在（除非显式删除），在系统重新引导之前，对共享内存区的操作都将保留</li>
+<li>通过调用mmap映射文件进行的通信，要注意考虑进程何时终止对通信产生的影响</li>
+</ul>
+</li>
+<li><p>mmap相关函数：  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mmap函数（将文件或者设备空间映射到共享内存区）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length, <span class="keyword">int</span> prot, <span class="keyword">int</span> flags, <span class="keyword">int</span> fd, <span class="keyword">off_t</span> offset)</span></span>;</span><br><span class="line">          addr：要映射的起始地址，通常指定为<span class="literal">NULL</span>，让内核自动选择</span><br><span class="line">          len：映射到进程地址空间的字节数</span><br><span class="line">          prot：映射区保护方式</span><br><span class="line">          flags：标志</span><br><span class="line">          fd：文件描述符</span><br><span class="line">          offset：从文件头开始的偏移量</span><br><span class="line"><span class="comment">//返回值：成功返回映射到的内存区的起始地址，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//munmap函数（取消mmap函数建立的映射）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> len)</span></span>;</span><br><span class="line">          addr：映射的内存起始地址</span><br><span class="line">          len：映射到进程地址空间的字节数</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//msync函数（对映射的共享内存执行同步操作）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msync</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line">          addr：内存起始地址</span><br><span class="line">          len：长度</span><br><span class="line">          flags：选项</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>System V共享内存接口：  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//共享内存数据结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">shmid_ds</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ipc</span>\_<span class="title">perm</span> <span class="title">shm</span>\_<span class="title">perm</span>;</span></span><br><span class="line">    <span class="keyword">size_t</span> shm\_segsz;</span><br><span class="line">    <span class="keyword">time_t</span> shm\_atime;</span><br><span class="line">    <span class="keyword">time_t</span> shm\_dtime;</span><br><span class="line">    <span class="keyword">time_t</span> shm\_ctime;</span><br><span class="line">    <span class="keyword">pid_t</span> shm\_cpid;</span><br><span class="line">    <span class="keyword">pid_t</span> shm\_lpid;</span><br><span class="line">    <span class="keyword">shmatt_t</span> shm\_nattch;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//shmget函数（用来创建共享内存）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmget</span><span class="params">(key\<span class="keyword">_t</span> key, size\<span class="keyword">_t</span> size, <span class="keyword">int</span> shmflg)</span></span>;</span><br><span class="line">           key：这个共享内存段名字</span><br><span class="line">           size：共享内存大小</span><br><span class="line">           shmflg：由九个权限标志构成，它们的用法和创建文件时使用的mode模式标志是一样的</span><br><span class="line"><span class="comment">//返回值：成功返回一个非负整数，即该共享内存段的标识码，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//shmat函数（将共享内存段连接到进程地址空间）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">shmat</span><span class="params">(<span class="keyword">int</span> shmid, <span class="keyword">const</span> <span class="keyword">void</span> *shmaddr, <span class="keyword">int</span> shmflg)</span></span>;</span><br><span class="line">           shmid：共享内存标识</span><br><span class="line">           shmaddr：指定连接的地址</span><br><span class="line">           shmflg：它的两个可能取值是SHM_RND和SHM_RDONLY</span><br><span class="line"><span class="comment">//返回值：成功返回一个指针，指向共享内存第一个节，失败返回-1</span></span><br><span class="line">shmaddr为<span class="literal">NULL</span>时，核心自动选择一个地址;shmaddr不为<span class="literal">NULL</span>且shmflg无SHM\_RND标记，则以shmaddr为连接地址;shmaddr不为<span class="literal">NULL</span>且shmflg设置了SHM\_RND标记，则连接的地址会自动向下调整为SHMLBA的整数倍。公式：shmaddr - ( shmaddr % SHMLBA )</span><br><span class="line">shmflg = SHM\_RDONLY，表示连接操作用来只读共享内存</span><br><span class="line"></span><br><span class="line"><span class="comment">//shmdt函数（将共享内存段与当前进程脱离）</span></span><br><span class="line"><span class="keyword">int</span> shmdt(<span class="keyword">const</span> <span class="keyword">void</span> *shmaddr);</span><br><span class="line">            shmaddr：由shmat所返回的指针</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"><span class="comment">//将共享内存段与当前进程脱离不等于删除共享内存段</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//shmctl函数（提供了对一个共享内存区的多种操作）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmctl</span><span class="params">(<span class="keyword">int</span> shmid, <span class="keyword">int</span> cmd, struct shmid_ds *buf)</span></span>;</span><br><span class="line">           shmid：有shmget返回的共享内存标识码</span><br><span class="line">           cmd：将要采取的动作（三个可取值）</span><br><span class="line">           buf：指向一个保存着共享内存的模式状态和访问权限的数据结构</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Posix共享内存接口：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//shm_open函数（用来创建或打开一个共享内存对象）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shm_open</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag, <span class="keyword">mode_t</span> mode )</span></span>;</span><br><span class="line">          name：共享内存对象的名字</span><br><span class="line">          oflag：与open函数类似</span><br><span class="line">          mode：此参数总是需要设置，如果oflag没有指定O_CREAT，可以指定为<span class="number">0</span></span><br><span class="line"><span class="comment">//返回值：成功返回非负整数文件描述符，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//ftruncate函数（修改共享内存对象大小）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">( <span class="keyword">int</span> fd, <span class="keyword">off_t</span> length )</span></span>;</span><br><span class="line">          fd：文件描述符</span><br><span class="line">          length：长度</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//fstat函数（获取共享内存对象信息）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fstat</span><span class="params">( <span class="keyword">int</span> fd, struct stat *buf )</span></span>;</span><br><span class="line">          fd：文件描述符</span><br><span class="line">          buf：返回共享内存状态</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//shm_unlink函数（删除一个共享内存对象）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shm_unlink</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *name )</span></span>;</span><br><span class="line">          name：共享内存对象的名字</span><br><span class="line"><span class="comment">//返回值：成功返回0，失败返回-1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>《UNIX网络编程 卷2：进程间通信》，第二版</li>
+<li><a href="https://blog.csdn.net/gatieme/article/details/50908749" target="_blank" rel="noopener">Linux进程间通信的几种方式总结–linux内核剖析（七）</a></li>
+<li><a href="https://www.nowcoder.com/discuss/62723" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/62723</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/进程/" rel="tag"># 进程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/16/select-poll-epoll/" rel="prev" title="I/O多路复用">
+                I/O多路复用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/code.jpg"
+                alt="zuyuxia" />
+            
+              <p class="site-author-name" itemprop="name">zuyuxia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zuyuxia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间通信"><span class="nav-number">1.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">1.1.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量"><span class="nav-number">1.2.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息队列"><span class="nav-number">1.3.</span> <span class="nav-text">消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享内存的实现原理"><span class="nav-number">1.4.</span> <span class="nav-text">共享内存的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zuyuxia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

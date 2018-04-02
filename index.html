@@ -249,6 +249,207 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/for循环的优化问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/02/for循环的优化问题/" itemprop="url">多层for循环的优化问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T20:17:13+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="多层for循环的效率优化问题"><a href="#多层for循环的效率优化问题" class="headerlink" title="多层for循环的效率优化问题"></a>多层for循环的效率优化问题</h1><p>  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例</p>
+<h2 id="无二维数组的操作的情况"><a href="#无二维数组的操作的情况" class="headerlink" title="无二维数组的操作的情况"></a>无二维数组的操作的情况</h2><p>  以下面三份代码为例，讨论优化问题<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">100</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码3</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>首先，理论上比较代码1、代码2和代码3</p>
+<ul>
+<li>代码1中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>|:——:|:——:|:——:|:——:|<br>| i | 1 | 100 | 100 |<br>| j | 100 | 100*1000 | 100*1000 |<br>| k | 100*1000 | 100*1000*10000 | 100*1000*10000 |  </li>
+</ul>
+<ul>
+<li><p>代码2中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>|:——:|:——:|:——:|:——:|<br>| i | 1 | 10000 | 10000 |<br>| j | 10000 | 10000*1000 | 10000*1000 |<br>| k | 10000*1000 | 10000*1000*100 | 10000*1000*100 |   </p>
+<ul>
+<li>代码3中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>|:——:|:——:|:——:|:——:|<br>| i | 1 | 100 | 100 |<br>| j | 1 | 100*1000 | 100*1000 |<br>| k | 1 | 100*1000*10000 | 100*1000*10000 | </li>
+</ul>
+</li>
+<li><p>可以很明显的看到，代码1的三个变量的初始化次数、比较次数以及自增次数的和较之代码2的要小；代码3中变量的初始化次数也较之代码1的较小</p>
+</li>
+</ul>
+</li>
+<li><p>实验测试：</p>
+<ul>
+<li><p>测试结果<br>| 代码块 | 第一次/ms | 第二次/ms | 第三次/ms | 平均值/ms |<br>|:——:|:——:|:——:|:——:|<br>| 1 | 2390 | 2422 | 2390 | 2400.66 |<br>| 2 | 2453 | 2422 | 2406 | 2427.00 |<br>| 3 | 2391 | 2375 | 2375 | 2380.33 |</p>
+</li>
+<li><p>测试代码         </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"windows.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">double</span> start = GetTickCount();</span><br><span class="line">	<span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//不同的代码块(1、2、3)</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">				temp = (temp + <span class="number">1</span>) * <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> end = GetTickCount();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; end - start &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"end"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>结论：不涉及到多维数组时，循环次数应当<strong>内大外小</strong>。并且有必要的话，<strong>循环变量的初始化</strong>也可用提到循环外面</p>
+</li>
+</ul>
+<h2 id="有二维数组的操作的情况"><a href="#有二维数组的操作的情况" class="headerlink" title="有二维数组的操作的情况"></a>有二维数组的操作的情况</h2><p>  首先必须明确的是C++中是没有多维数组的，所谓的多维数组其实是<strong>数组的数组</strong>，之所以称作是多维数组时便于理解。在下面的数组操作之中，以对二维数组进行赋值的操作为例</p>
+<ul>
+<li><p>二维数组在内存中的存储方式  </p>
+<ul>
+<li>可以看到二维数组在内存中是<strong>连续存储</strong>，<strong>按行排列</strong>，即arr[0][0]-&gt;arr[0][1]-&gt;arr[0][2]-&gt;arr[1][0]-&gt;……<br><img src="/img/二维数组在内存中的存储方式.png" alt="二维数组在内存中的存储方式">  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; ++j) &#123;</span><br><span class="line">			arr[i][j] = temp;</span><br><span class="line">			++temp;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; (&amp;arr[i][j]) &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>以下面两份代码为例，讨论优化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		arr[i][j] = temp;</span><br><span class="line">		++temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		arr[j][i] = temp;</span><br><span class="line">		++temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实验测试<ul>
+<li>测试结果<br>| 代码块 | 第一次/ms | 第二次/ms | 第三次/ms | 平均值/ms |<br>|:——:|:——:|:——:|:——:|<br>| 1 | 281 | 265 | 265 | 270.33 |<br>| 2 | 922 | 844 | 844 | 870.00 |   </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"windows.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span>(*arr)[<span class="number">10000</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10000</span>][<span class="number">10000</span>];</span><br><span class="line">	<span class="keyword">double</span> start = GetTickCount();</span><br><span class="line">	<span class="comment">//代码1</span></span><br><span class="line">	<span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10000</span>; ++j) &#123;</span><br><span class="line">			arr[i][j] = temp;</span><br><span class="line">			++temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> end = GetTickCount();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; end - start &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">delete</span>[]arr;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"end"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结论：对于二维数组的操作中，<strong>按行操作</strong>要比按列操作效率高。原因在于，CPU对于内存的访问是通过缓存来进行的，对于按行操作，每一次都能顺序读到最后，也即进入缓存中的数据都会被读到；对于按列操作，每一次只读一个数据，即进入缓存的数据只读了一个就被换出。按行操作是顺序对数据进行读取，因此按行操作的效率较高</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://blog.csdn.net/Swimmy_GY/article/details/50953131" target="_blank" rel="noopener">for循环嵌套 简单优化</a></li>
+<li><a href="https://blog.csdn.net/caimagic/article/details/50696609" target="_blank" rel="noopener">c++ 在windows下获取时间和计算时间差的几种方法总结</a> </li>
+<li><a href="https://blog.csdn.net/ppf19159/article/details/54913485" target="_blank" rel="noopener">C++多维数组：存储方式、访问方式和作为函数参数</a></li>
+<li><a href="https://blog.csdn.net/hotpots/article/details/78761332" target="_blank" rel="noopener">关于for循环的执行效率问题</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/30/ping/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1585,152 +1786,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/死锁/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zuyuxia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/code.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Write Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/26/死锁/" itemprop="url">死锁</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T13:18:21+08:00">
-                2018-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>  死锁的定义：如果一组进程中的每一个进程都在等待仅由该组进程中的其它进程才能引发的事件，那么该组进程就是死锁的</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/26/死锁/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1785,7 +1840,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1807,7 +1862,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

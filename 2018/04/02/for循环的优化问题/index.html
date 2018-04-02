@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Tables Are Cool     co right-aligned $1600   col 2 is centered $12   zebra stripes are neat $1    多层for循环的效率优化问题  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例 无二维数组的操作的情况  以下面三份代码为例，讨论优化问题123456">
+<meta name="description" content="多层for循环的效率优化问题  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例 无二维数组的操作的情况  以下面三份代码为例，讨论优化问题123456789101112131415161718192021222324//代码1for(int i = 0; i &amp;lt; 100; ++i)&amp;#123;	for(int j = 0; j &amp;lt; 100">
 <meta name="keywords" content="优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多层for循环的优化问题">
 <meta property="og:url" content="http://yoursite.com/2018/04/02/for循环的优化问题/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="Tables Are Cool     co right-aligned $1600   col 2 is centered $12   zebra stripes are neat $1    多层for循环的效率优化问题  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例 无二维数组的操作的情况  以下面三份代码为例，讨论优化问题123456">
+<meta property="og:description" content="多层for循环的效率优化问题  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例 无二维数组的操作的情况  以下面三份代码为例，讨论优化问题123456789101112131415161718192021222324//代码1for(int i = 0; i &amp;lt; 100; ++i)&amp;#123;	for(int j = 0; j &amp;lt; 100">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/二维数组在内存中的存储方式.png">
-<meta property="og:updated_time" content="2018-04-02T14:21:59.992Z">
+<meta property="og:updated_time" content="2018-04-02T14:25:36.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多层for循环的优化问题">
-<meta name="twitter:description" content="Tables Are Cool     co right-aligned $1600   col 2 is centered $12   zebra stripes are neat $1    多层for循环的效率优化问题  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例 无二维数组的操作的情况  以下面三份代码为例，讨论优化问题123456">
+<meta name="twitter:description" content="多层for循环的效率优化问题  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例 无二维数组的操作的情况  以下面三份代码为例，讨论优化问题123456789101112131415161718192021222324//代码1for(int i = 0; i &amp;lt; 100; ++i)&amp;#123;	for(int j = 0; j &amp;lt; 100">
 <meta name="twitter:image" content="http://yoursite.com/img/二维数组在内存中的存储方式.png">
 
 
@@ -344,39 +344,13 @@
       
 
       
-        <table>
-<thead>
-<tr>
-<th>Tables</th>
-<th style="text-align:center">Are</th>
-<th style="text-align:right">Cool</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>co</td>
-<td style="text-align:center">right-aligned</td>
-<td style="text-align:right">$1600</td>
-</tr>
-<tr>
-<td>col 2 is</td>
-<td style="text-align:center">centered</td>
-<td style="text-align:right">$12</td>
-</tr>
-<tr>
-<td>zebra stripes</td>
-<td style="text-align:center">are neat</td>
-<td style="text-align:right">$1</td>
-</tr>
-</tbody>
-</table>
-<h1 id="多层for循环的效率优化问题"><a href="#多层for循环的效率优化问题" class="headerlink" title="多层for循环的效率优化问题"></a>多层for循环的效率优化问题</h1><p>  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例</p>
+        <h1 id="多层for循环的效率优化问题"><a href="#多层for循环的效率优化问题" class="headerlink" title="多层for循环的效率优化问题"></a>多层for循环的效率优化问题</h1><p>  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例</p>
 <h2 id="无二维数组的操作的情况"><a href="#无二维数组的操作的情况" class="headerlink" title="无二维数组的操作的情况"></a>无二维数组的操作的情况</h2><p>  以下面三份代码为例，讨论优化问题<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">100</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代码3</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <ul>
 <li><p>首先，理论上比较代码1、代码2和代码3</p>
 <ul>
-<li>代码1中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>|:-:|:-:|:-:|:-:|<br>| i              | 1              | 100               | 100            |<br>| j                 | 100               | 100*1000       | 100*1000        |<br>| k              | 100*1000      |100*1000*10000|100*1000*10000|  </li>
+<li>代码1中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>|:-:|:-:|:-:|:-:|<br>| i              | 1              | 100               | 100            |<br>| j                 | 100               | 100*1000       | 100*1000        |<br>| k              | 100*1000      |100*1000*10000|100*1000*10000|</li>
 </ul>
 <ul>
 <li><p>代码2中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>|:——:|:——:|:——:|:——:|<br>| i | 1 | 10000 | 10000 |<br>| j | 10000 | 10000*1000 | 10000*1000 |<br>| k | 10000*1000 | 10000*1000*100 | 10000*1000*100 |   </p>

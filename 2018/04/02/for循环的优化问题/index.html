@@ -88,7 +88,7 @@
 <meta property="og:description" content="多层for循环的效率优化问题  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例 无二维数组的操作的情况  以下面三份代码为例，讨论优化问题123456789101112131415161718192021222324//代码1for(int i = 0; i &amp;lt; 100; ++i)&amp;#123;	for(int j = 0; j &amp;lt; 100">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/二维数组在内存中的存储方式.png">
-<meta property="og:updated_time" content="2018-04-02T14:43:12.417Z">
+<meta property="og:updated_time" content="2018-04-02T14:48:36.617Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多层for循环的优化问题">
 <meta name="twitter:description" content="多层for循环的效率优化问题  多层for循环中可分为：有多维数组的操作的情况，无多维数组的操作的情况。多维数组以二维数组为例 无二维数组的操作的情况  以下面三份代码为例，讨论优化问题123456789101112131415161718192021222324//代码1for(int i = 0; i &amp;lt; 100; ++i)&amp;#123;	for(int j = 0; j &amp;lt; 100">
@@ -348,106 +348,16 @@
 <h2 id="无二维数组的操作的情况"><a href="#无二维数组的操作的情况" class="headerlink" title="无二维数组的操作的情况"></a>无二维数组的操作的情况</h2><p>  以下面三份代码为例，讨论优化问题<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">100</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代码3</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <ul>
-<li>首先，理论上比较代码1、代码2和代码3<ul>
-<li>代码1中</li>
+<li>首先，理论上比较代码1、代码2和代码3</li>
 </ul>
+<p>代码1中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>| — | — | — | — |<br>| i   | 1       | 100        | 100        |<br>| j      | 100    | 100000     | 100000     |<br>| k   | 100000 | 1000000000 | 1000000000 |</p>
+<p>代码2中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>|:——:|:——:|:——:|:——:|<br>| i | 1 | 10000 | 10000 |<br>| j | 10000 | 10000000 | 10000000 |<br>| k | 100001000 | 1000000000 | 1000000000 |   </p>
+<p>代码3中<br>| 变量 | 初始化/次数 | 比较/次数 | 自增/次数 |<br>|:——:|:——:|:——:|:——:|<br>| i | 1 | 100 | 100 |<br>| j | 1 | 100000 | 100000 |<br>| k | 1 | 1000000000 | 1000000000 | </p>
+<ul>
+<li><p>可以很明显的看到，代码1的三个变量的初始化次数、比较次数以及自增次数的和较之代码2的要小；代码3中变量的初始化次数也较之代码1的较小</p>
 </li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>变量</th>
-<th>初始化/次数</th>
-<th>比较/次数</th>
-<th>自增/次数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>i</td>
-<td>1</td>
-<td>100</td>
-<td>100</td>
-</tr>
-<tr>
-<td>j</td>
-<td>100</td>
-<td>100000</td>
-<td>100000</td>
-</tr>
-<tr>
-<td>k</td>
-<td>100000</td>
-<td>1000000000</td>
-<td>1000000000</td>
-</tr>
-</tbody>
-</table>
-<pre><code>* 代码2中
-</code></pre><table>
-<thead>
-<tr>
-<th style="text-align:center">变量</th>
-<th style="text-align:center">初始化/次数</th>
-<th style="text-align:center">比较/次数</th>
-<th style="text-align:center">自增/次数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">i</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">10000</td>
-<td style="text-align:center">10000</td>
-</tr>
-<tr>
-<td style="text-align:center">j</td>
-<td style="text-align:center">10000</td>
-<td style="text-align:center">10000000</td>
-<td style="text-align:center">10000000</td>
-</tr>
-<tr>
-<td style="text-align:center">k</td>
-<td style="text-align:center">100001000</td>
-<td style="text-align:center">1000000000</td>
-<td style="text-align:center">1000000000</td>
-</tr>
-</tbody>
-</table>
-<pre><code>* 代码3中
-</code></pre><table>
-<thead>
-<tr>
-<th style="text-align:center">变量</th>
-<th style="text-align:center">初始化/次数</th>
-<th style="text-align:center">比较/次数</th>
-<th style="text-align:center">自增/次数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">i</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">100</td>
-<td style="text-align:center">100</td>
-</tr>
-<tr>
-<td style="text-align:center">j</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">100000</td>
-<td style="text-align:center">100000</td>
-</tr>
-<tr>
-<td style="text-align:center">k</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1000000000</td>
-<td style="text-align:center">1000000000</td>
-</tr>
-</tbody>
-</table>
-<pre><code>* 可以很明显的看到，代码1的三个变量的初始化次数、比较次数以及自增次数的和较之代码2的要小；代码3中变量的初始化次数也较之代码1的较小
-</code></pre><ul>
-<li>实验测试：<ul>
+<li><p>实验测试：</p>
+<ul>
 <li>测试结果 </li>
 </ul>
 </li>
@@ -486,18 +396,21 @@
 </tr>
 </tbody>
 </table>
-<pre><code>* 测试代码 
-</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"windows.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">double</span> start = GetTickCount();</span><br><span class="line">	<span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//不同的代码块(1、2、3)</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">				temp = (temp + <span class="number">1</span>) * <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> end = GetTickCount();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; end - start &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"end"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>测试代码 </li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"windows.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">double</span> start = GetTickCount();</span><br><span class="line">	<span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//不同的代码块(1、2、3)</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">				temp = (temp + <span class="number">1</span>) * <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> end = GetTickCount();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; end - start &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"end"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>结论：不涉及到多维数组时，循环次数应当<strong>内大外小</strong>。并且有必要的话，<strong>循环变量的初始化</strong>也可用提到循环外面</li>
 </ul>
 <h2 id="有二维数组的操作的情况"><a href="#有二维数组的操作的情况" class="headerlink" title="有二维数组的操作的情况"></a>有二维数组的操作的情况</h2><p>  首先必须明确的是C++中是没有多维数组的，所谓的多维数组其实是<strong>数组的数组</strong>，之所以称作是多维数组时便于理解。在下面的数组操作之中，以对二维数组进行赋值的操作为例</p>
 <ul>
 <li>二维数组在内存中的存储方式  <ul>
-<li>可以看到二维数组在内存中是<strong>连续存储</strong>，<strong>按行排列</strong>，即arr[0][0]-&gt;arr[0][1]-&gt;arr[0][2]-&gt;arr[1][0]-&gt;……<br><img src="/img/二维数组在内存中的存储方式.png" alt="二维数组在内存中的存储方式"></li>
+<li>可以看到二维数组在内存中是<strong>连续存储</strong>，<strong>按行排列</strong>，即arr[0][0]-&gt;arr[0][1]-&gt;arr[0][2]-&gt;arr[1][0]-&gt;……</li>
 </ul>
 </li>
 </ul>
+<p><img src="/img/二维数组在内存中的存储方式.png" alt="二维数组在内存中的存储方式"></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; ++j) &#123;</span><br><span class="line">			arr[i][j] = temp;</span><br><span class="line">			++temp;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; (&amp;arr[i][j]) &lt;&lt; <span class="string">"\t"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>以下面两份代码为例，讨论优化</li>

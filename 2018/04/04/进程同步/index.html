@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="TCP/IP," />
+  <meta name="keywords" content="进程同步," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="ARP协议和RARP协议  ARP协议：地址转换协议  RARP协议：反向地址转换协议">
-<meta name="keywords" content="TCP&#x2F;IP">
+<meta name="description" content="进程同步  为了能够保证多个进程能够有条不紊的进行作业，在多道程序系统中，必须引入进程同步机制。进程同步机制是对多个相关进程在执行次序上进行协调，使并发的进程之间能够按照一定的规则共享系统资源，能够相互合作，程序的执行具有可再现性。单处理机系统中的进程同步机制有：硬件同步机制、信号量机制、管程机制">
+<meta name="keywords" content="进程同步">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ARP和RARP协议">
-<meta property="og:url" content="http://yoursite.com/2018/03/28/ARP和RARP协议/index.html">
+<meta property="og:title" content="进程同步">
+<meta property="og:url" content="http://yoursite.com/2018/04/04/进程同步/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="ARP协议和RARP协议  ARP协议：地址转换协议  RARP协议：反向地址转换协议">
+<meta property="og:description" content="进程同步  为了能够保证多个进程能够有条不紊的进行作业，在多道程序系统中，必须引入进程同步机制。进程同步机制是对多个相关进程在执行次序上进行协调，使并发的进程之间能够按照一定的规则共享系统资源，能够相互合作，程序的执行具有可再现性。单处理机系统中的进程同步机制有：硬件同步机制、信号量机制、管程机制">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-29T12:29:15.576Z">
+<meta property="og:updated_time" content="2018-04-07T12:12:33.930Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ARP和RARP协议">
-<meta name="twitter:description" content="ARP协议和RARP协议  ARP协议：地址转换协议  RARP协议：反向地址转换协议">
+<meta name="twitter:title" content="进程同步">
+<meta name="twitter:description" content="进程同步  为了能够保证多个进程能够有条不紊的进行作业，在多道程序系统中，必须引入进程同步机制。进程同步机制是对多个相关进程在执行次序上进行协调，使并发的进程之间能够按照一定的规则共享系统资源，能够相互合作，程序的执行具有可再现性。单处理机系统中的进程同步机制有：硬件同步机制、信号量机制、管程机制">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/28/ARP和RARP协议/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/04/进程同步/"/>
 
 
 
 
 
-  <title>ARP和RARP协议 | Write Code</title>
+  <title>进程同步 | Write Code</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/ARP和RARP协议/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/进程同步/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zuyuxia">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ARP和RARP协议</h1>
+          <h1 class="post-title" itemprop="name headline">进程同步</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T19:29:39+08:00">
-                2018-03-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T20:29:49+08:00">
+                2018-04-04
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
                   </a>
                 </span>
 
@@ -342,38 +342,92 @@
       
 
       
-        <h1 id="ARP协议和RARP协议"><a href="#ARP协议和RARP协议" class="headerlink" title="ARP协议和RARP协议"></a>ARP协议和RARP协议</h1><p>  ARP协议：地址转换协议<br>  RARP协议：反向地址转换协议</p>
+        <h1 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h1><p>  为了能够保证多个进程能够有条不紊的进行作业，在多道程序系统中，必须引入进程同步机制。进程同步机制是对多个相关进程在执行次序上进行协调，使并发的进程之间能够按照一定的规则共享系统资源，能够相互合作，程序的执行具有可再现性。单处理机系统中的进程同步机制有：硬件同步机制、信号量机制、管程机制</p>
 <a id="more"></a>
-<h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2><p>  ARP协议来解决IP地址与物理地址之间转换的问题。IP地址与物理地址不存在简单的映射关系，同时网络之中的主机可能加入也有可能退出，还有可能更换了网卡，因此需要ARP协议来解决IP地址与物理地址之间的转换。每一个主机之中都有一个ARP缓存，里面存放着<strong>本局域网</strong>上的各主机物理地址与IP地址之间的映射表。以主机A向同一个局域网中的B发送消息为例</p>
+<h2 id="进程同步的基本概念"><a href="#进程同步的基本概念" class="headerlink" title="进程同步的基本概念"></a>进程同步的基本概念</h2><ol>
+<li><p>两种形式的制约关系</p>
 <ul>
-<li><p>首先，A在本机的ARP缓存之中查找B的物理地址，若找到，即可写入MAC帧中并发送出去，如果不在，则转到下一步骤</p>
+<li><p>间接相互制约关系：对于临界资源，必须保证进程之间对其进行互斥访问</p>
 </li>
-<li><p>A向局域网广播发送一个ARP请求分组，里面包括源IP地址，源MAC地址，目的IP地址</p>
-</li>
-<li><p>局域网中的所有主机运行的ARP进程都会接收到这一ARP请求分组，但是只有主机B的IP地址与目的IP地址相同，因此只有B会收下这个请求分组。于是，B针对这个请求分组发送一个ARP的响应分组，里面包括B的IP地址和B的物理地址，同时将A的IP的地址和物理地址保存到本机的ARP缓存之中</p>
-</li>
-<li><p>最后，A收到这个响应分组，将B的IP地址和物理地址存入本机的ARP缓存之中</p>
-<p>另外，每一个主机的ARP缓存还需要设置一个生存时间，用来更新局域网中的IP地址和物理地址的映射</p>
-<p>如果B和A不在同一个局域网，那又应当如何处理呢？答案是A将寻找本局域网上的相应路由器，将数据报发送给路由器，由路由器来寻找下一个结点，直到数据报传到目的主机B</p>
+<li><p>直接相互制约关系：进程之间的相互合作关系，如只有A作业完后，B才能开始作业，这就决定了A一定在B之前完成作业</p>
 </li>
 </ul>
-<h2 id="RARP协议"><a href="#RARP协议" class="headerlink" title="RARP协议"></a>RARP协议</h2><p>  RARP协议与ARP协议刚好相反，是用来从物理MAC地址解析出IP地址，主要用在没有磁盘驱动器的系统中使用（无盘工作站）</p>
-<p>  工作流程如下：</p>
+</li>
+<li><p>临界资源：一次仅允许一个进程使用的资源</p>
+</li>
+<li><p>临界区：进程之中访问临界资源的代码称为<strong>临界区</strong>；临界区之前的代码称为<strong>进入区</strong>；临界区之后用于将正在访问标识改为未访问标识的代码称为<strong>退出区</strong></p>
+</li>
+<li><p>同步机制应该遵循的规则</p>
 <ul>
-<li><p>A向局域网中发送一个RARP广播，里面包括自己的MAC地址，请求任何收到此请求的RARP服务器分配一个IP地址</p>
+<li><p>空闲让进</p>
 </li>
-<li><p>局域网上的RARP服务器收到请求后，查找它的RARP列表，如果存在，则向A发送一个响应数据包，并将IP地址包含在其中，如果不存在，RARP不发出任何响应</p>
+<li><p>忙则等待</p>
 </li>
-<li><p>A收到RARP服务器的响应后就得到了IP地址，如果一直没有收到响应，说明初始化失败</p>
+<li><p>有限等待</p>
+</li>
+<li><p>让权等待</p>
 </li>
 </ul>
+</li>
+</ol>
+<h2 id="硬件同步机制"><a href="#硬件同步机制" class="headerlink" title="硬件同步机制"></a>硬件同步机制</h2><ol>
+<li><p>关中断：关中断是实现互斥的最简单的方法之一。进入锁测试之前关闭中断，完成锁测试后并上锁再打开中断。关中断存在很多缺点：</p>
+<ul>
+<li><p>滥用关中断权利可能会导致严重后果</p>
+</li>
+<li><p>关中断时间过长，影响系统效率</p>
+</li>
+<li><p>关中断方法不适用于多CPU系统</p>
+</li>
+</ul>
+</li>
+<li><p>利用Test-and-Set指令实现互斥<br>借助于硬件指令–TS指令实现互斥的方法  </p>
+</li>
+<li><p>利用Swap指令实现进程互斥  </p>
+</li>
+</ol>
+<h2 id="信号量机制"><a href="#信号量机制" class="headerlink" title="信号量机制"></a>信号量机制</h2><ol>
+<li><p>信号量是用于进程间传递信号的一个整数值</p>
+</li>
+<li><p>信号量只有三种操作：<strong>初始化、P操作和V操作</strong>，这三种操作的都是原子操作</p>
+<ul>
+<li><p>P操作是一个减少操作，用于阻塞一个进程</p>
+</li>
+<li><p>V操作是一个增加操作，用于解除一个进程的阻塞状态</p>
+</li>
+</ul>
+</li>
+<li><p>信号量的基本原理是多个进程通过信号进行合作，当某一个进程阻塞在某一位置时，只有接收到特定的信号才能继续执行，该信号即是信号量</p>
+</li>
+</ol>
+<h2 id="管程机制"><a href="#管程机制" class="headerlink" title="管程机制"></a>管程机制</h2><ol>
+<li><p>管程的定义：代表<strong>共享资源的数据结构</strong>以及由对该共享数据结构<strong>实施操作的一组过程</strong>所组成的资源管理程序共同构成的资源管理模块</p>
+</li>
+<li><p>管程的组成：管程的名称；局部于管程的共享数据结构；对共享数据结构的操作；设置共享数据的初始值的语句</p>
+</li>
+<li><p>管程被请求和释放资源的进程所调用，管程每次只准许一个进程进入管程，执行管程内的过程，实现了进程的互斥</p>
+</li>
+<li><p>管程与进程的不同点</p>
+<ul>
+<li><p>进程定义的是私有数据结构PCB，管程定义的是公共数据结构</p>
+</li>
+<li><p>进程的操作是与顺序程序执行的有关操作，管程主要是同步和初始化操作</p>
+</li>
+<li><p>设置进程是为了实现系统的并发性，管程则是用来解决共享资源的互斥使用</p>
+</li>
+<li><p>进程是主动工作，管程是被动工作</p>
+</li>
+<li><p>进程之间能够并发进行，管程不能被调用者并发</p>
+</li>
+<li><p>进程具有动态性，管程只是操作系统中的一个资源管理模块，供进程调用</p>
+</li>
+</ul>
+</li>
+</ol>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>《计算机网络》，第六版，谢希仁</li>
-<li><a href="https://www.cnblogs.com/songwenlong/p/6103406.html" target="_blank" rel="noopener">TCP/IP协议——ARP详解</a></li>
-<li><a href="https://blog.csdn.net/u011240016/article/details/52835128" target="_blank" rel="noopener">ARP协议的总结</a></li>
-<li><a href="https://blog.csdn.net/lyhdream/article/details/41146275" target="_blank" rel="noopener">ARP与RARP协议详解 （三）</a></li>
-<li><a href="https://www.cnblogs.com/zhousysu/p/5483900.html" target="_blank" rel="noopener">[TCP/IP]ARP与RARP的总结</a></li>
-<li><a href="https://www.cnblogs.com/luckyxiaoxuan/p/3395527.html" target="_blank" rel="noopener">TCP/IP协议详解笔记——ARP协议和RARP协议</a></li>
+<li>《计算机操作系统》，第四版，汤子瀛</li>
+<li><a href="https://www.cnblogs.com/CareySon/archive/2012/04/14/Process-SynAndmutex.html" target="_blank" rel="noopener">浅谈进程同步和互斥的概念</a></li>
+<li><a href="https://www.cnblogs.com/kiplove/p/6745335.html" target="_blank" rel="noopener">进程同步——经典的同步问题</a></li>
 </ul>
 
       
@@ -392,7 +446,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/TCP-IP/" rel="tag"># TCP/IP</a>
+            <a href="/tags/进程同步/" rel="tag"># 进程同步</a>
           
         </div>
       
@@ -405,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/28/哈夫曼树和哈夫曼编码/" rel="next" title="哈夫曼树和哈夫曼编码">
-                <i class="fa fa-chevron-left"></i> 哈夫曼树和哈夫曼编码
+              <a href="/2018/04/04/生产者与消费者/" rel="next" title="生产者与消费者">
+                <i class="fa fa-chevron-left"></i> 生产者与消费者
               </a>
             
           </div>
@@ -414,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/28/DNS：域名系统/" rel="prev" title="DNS：域名系统">
-                DNS：域名系统 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -563,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP协议和RARP协议"><span class="nav-number">1.</span> <span class="nav-text">ARP协议和RARP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP协议"><span class="nav-number">1.1.</span> <span class="nav-text">ARP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RARP协议"><span class="nav-number">1.2.</span> <span class="nav-text">RARP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程同步"><span class="nav-number">1.</span> <span class="nav-text">进程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程同步的基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">进程同步的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件同步机制"><span class="nav-number">1.2.</span> <span class="nav-text">硬件同步机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量机制"><span class="nav-number">1.3.</span> <span class="nav-text">信号量机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管程机制"><span class="nav-number">1.4.</span> <span class="nav-text">管程机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>

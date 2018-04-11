@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="进程调度," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="进程调度  在多道程序环境下，内存中存在着多个进程，数目往往多于处理机的数目，这就要求系统能够按照某种算法动态的将处理机分配给每一个就绪的进程   调度的目标：  资源利用率 公平性 平衡性 策略强制执行">
+<meta name="keywords" content="进程调度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程调度算法">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/进程调度算法/index.html">
+<meta property="og:site_name" content="Write Code">
+<meta property="og:description" content="进程调度  在多道程序环境下，内存中存在着多个进程，数目往往多于处理机的数目，这就要求系统能够按照某种算法动态的将处理机分配给每一个就绪的进程   调度的目标：  资源利用率 公平性 平衡性 策略强制执行">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-11T12:08:43.044Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程调度算法">
+<meta name="twitter:description" content="进程调度  在多道程序环境下，内存中存在着多个进程，数目往往多于处理机的数目，这就要求系统能够按照某种算法动态的将处理机分配给每一个就绪的进程   调度的目标：  资源利用率 公平性 平衡性 策略强制执行">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/进程调度算法/"/>
+
+
+
+
+
+  <title>进程调度算法 | Write Code</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Write Code</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Talk is cheap , show me the code</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/进程调度算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程调度算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T16:32:51+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1><p>  在多道程序环境下，内存中存在着多个进程，数目往往多于处理机的数目，这就要求系统能够按照某种算法动态的将处理机分配给每一个就绪的进程</p>
+<p>  调度的目标：</p>
+<ul>
+<li>资源利用率</li>
+<li>公平性</li>
+<li>平衡性</li>
+<li>策略强制执行</li>
+</ul>
+<a id="more"></a>
+<h2 id="先来先服务算法（FCFS）"><a href="#先来先服务算法（FCFS）" class="headerlink" title="先来先服务算法（FCFS）"></a>先来先服务算法（FCFS）</h2><p>  FCFS是最简单的调度算法，既可用于作业调度，也可用于进程调度。该算法的思想是优先考虑在系统中等待时间最长的作业，而不管该作业所需执行时间的长短，从后备作业队列中选择几个最先进入该队列的作业，将它们调入内存，分配资源和创建进程，放入就绪队列</p>
+<p>  进程调度中采用FCFS算法时，每次调度都从就绪的进程队列中选择一个最先进入队列的进程，分配处理机，该进程一直运行到完成或者发生某事件阻塞放弃处理机</p>
+<p>  公平，实现简单。不利于短作业</p>
+<h2 id="短作业优先算法（SJF）"><a href="#短作业优先算法（SJF）" class="headerlink" title="短作业优先算法（SJF）"></a>短作业优先算法（SJF）</h2><p>  为了能让短作业比长作业优先执行，产生了短作业优先算法</p>
+<p>  短作业优先算法是指以作业时间的长短来计算优先级，时间越短，优先级越高。SJF算法用于进程调度时，从后备队列中选择若干个估计运行时间最短的进程，调入内存中运行，直到完成或发生某事件放弃处理机</p>
+<h2 id="优先级调度算法"><a href="#优先级调度算法" class="headerlink" title="优先级调度算法"></a>优先级调度算法</h2><p>  优先级调度算法基于作业的紧迫程度，由外部赋予作业相应的优先级。进程调度时选择若干个优先级最高的进程装入内存中进行运行。根据能否被抢占分为以下两种：</p>
+<ul>
+<li><p>非抢占式优先级调度算法：这种算法一旦将目前优先级最高的进程装入内存中开始运行后，运行过程中有更高优先级的进程也必须等待，直到运行进程完成任务或者因为发生事件放弃处理机</p>
+</li>
+<li><p>抢占式优先级调度算法：这种算法将目前优先级最高的进程装入内存中运行，运行过程中，若有更高优先级的进程来了，则立即停止当前运行进程，将优先级更高的进程装入内存执行</p>
+</li>
+</ul>
+<h2 id="高响应比优先调度算法（HRRN）"><a href="#高响应比优先调度算法（HRRN）" class="headerlink" title="高响应比优先调度算法（HRRN）"></a>高响应比优先调度算法（HRRN）</h2><p>  FCFS考虑的是作业等待的时间，而SJF考虑的是作业运行的时间，都有优缺点。HRRN算法结合了这两者，既考虑等待时间，又考虑了运行时间。</p>
+<p>  HRRN算法为每一个作业引入了一个动态优先级，该优先级会随着时间而变化，优先级的变化可表示为：（优先级 = （响应时间/要求服务时间））</p>
+<ul>
+<li><p>如果等待时间相同，要求服务时间越短优先级越高</p>
+</li>
+<li><p>要求服务时间相同时，等待时间越长优先级越高</p>
+</li>
+</ul>
+<h2 id="时间片轮转调度算法（RR）"><a href="#时间片轮转调度算法（RR）" class="headerlink" title="时间片轮转调度算法（RR）"></a>时间片轮转调度算法（RR）</h2><p>  在RR算法中，系统根据FCFS策略，将所有的就绪进程排成一个就绪队列，并且设置每隔一段时间产生一次中断，激活系统中的进程调度程序，完成一次调度，将CPU分配给队首进程。当进程时间片用完或者进程提前运行结束时，系统再一次将CPU分配给新的队首进程</p>
+<p>  进程切换实际：正在运行的进程提前完成，立即激活调度程序；时间片用完，计时器中断处理程序被激活</p>
+<h2 id="多级反馈队列调度算法"><a href="#多级反馈队列调度算法" class="headerlink" title="多级反馈队列调度算法"></a>多级反馈队列调度算法</h2><p>  前面所说的各种调度算法都有一定的局限性。如果未指明进程长度，则基于短进程优先和基于进程长度的抢占式调度算法都无法使用。多级反馈队列调度算法不必事先知道各个进程所需的执行时间，还可以较好的满足各种类型进程的需要</p>
+<p>  调度机制：</p>
+<ul>
+<li><p>设置多个就绪队列，每个队列的优先级不同，第一个队列优先级最高，其余队列优先级依次降低。该算法为不同队列中的进程所赋予的执行时间片也不太同，优先级越高的队列中，时间片就越小</p>
+</li>
+<li><p>每个队列都采用FCFS算法。当新进程进入内存后，先放入第一队列末尾，按照FCFS原则等待调度。当轮到该进程执行时，如果在规定的时间片内任务未完成，则被调度程序加入第二队列末尾进行等待。在被加入到最后一个队列n中时，采取RR方式运行</p>
+</li>
+<li><p>按队列优先级调度。调度程序首先调度优先级最高的队列中的进程运行，随后依次调度各个队列中的进程。如果处理机正在i队列中为进程服务，此时来了更高优先级的进程，那么将当前进程放到i队列的队尾，处理机转去处理更高优先级的进程</p>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>《计算机操作系统》，第四版，汤子瀛</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/进程调度/" rel="tag"># 进程调度</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/11/内存池、进程池和线程池/" rel="next" title="内存池、进程池和线程池">
+                <i class="fa fa-chevron-left"></i> 内存池、进程池和线程池
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/11/静态链接（库）和动态链接（库）/" rel="prev" title="静态链接（库）和动态链接（库）">
+                静态链接（库）和动态链接（库） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/code.jpg"
+                alt="zuyuxia" />
+            
+              <p class="site-author-name" itemprop="name">zuyuxia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zuyuxia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程调度"><span class="nav-number">1.</span> <span class="nav-text">进程调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#先来先服务算法（FCFS）"><span class="nav-number">1.1.</span> <span class="nav-text">先来先服务算法（FCFS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#短作业优先算法（SJF）"><span class="nav-number">1.2.</span> <span class="nav-text">短作业优先算法（SJF）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优先级调度算法"><span class="nav-number">1.3.</span> <span class="nav-text">优先级调度算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高响应比优先调度算法（HRRN）"><span class="nav-number">1.4.</span> <span class="nav-text">高响应比优先调度算法（HRRN）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间片轮转调度算法（RR）"><span class="nav-number">1.5.</span> <span class="nav-text">时间片轮转调度算法（RR）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多级反馈队列调度算法"><span class="nav-number">1.6.</span> <span class="nav-text">多级反馈队列调度算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.7.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zuyuxia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

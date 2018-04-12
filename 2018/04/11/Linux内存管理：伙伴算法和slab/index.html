@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Write Code">
 <meta property="og:description" content="Linux内存管理 Linux内存管理：用户空间和内核空间  以4G进程地址空间为例，用户空间为0-3G，内核空间为3-4G；通常用户只能访问用户空间，进行系统调用时才能访问内核空间  用户空间对应进程，进程切换时用户空间也变化；内核空间由内核负责映射，并不会随进程变化而变化  用户空间：数据段，代码段，BSS端，堆，栈；内核空间：ZONE_DMA，ZONE_NORMAL，ZONE_HIGHMEM">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-11T12:46:01.108Z">
+<meta property="og:updated_time" content="2018-04-12T02:15:33.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内存管理：伙伴算法和slab">
 <meta name="twitter:description" content="Linux内存管理 Linux内存管理：用户空间和内核空间  以4G进程地址空间为例，用户空间为0-3G，内核空间为3-4G；通常用户只能访问用户空间，进行系统调用时才能访问内核空间  用户空间对应进程，进程切换时用户空间也变化；内核空间由内核负责映射，并不会随进程变化而变化  用户空间：数据段，代码段，BSS端，堆，栈；内核空间：ZONE_DMA，ZONE_NORMAL，ZONE_HIGHMEM">
@@ -372,7 +372,9 @@
 </li>
 <li><p>slab算法：slab分配算法采用cache存储内核对象，起初包括若干空闲的对象，当需要内核数据结构的对象时，可以直接从cache上直接获取，并将对象初始化为使用</p>
 </li>
-<li><p>伙伴算法通常对于内存块单位较大的内存作用比较好，对于小块内存的分配和回收则采用slab算法        </p>
+<li><p>伙伴算法通常对于内存块单位较大的内存作用比较好，对于小块内存的分配和回收则采用slab算法</p>
+</li>
+<li><p>伙伴算法，用于管理物理内存，避免内存碎片；高速缓存Slab层用于管理内核分配内存，避免碎片        </p>
 </li>
 </ul>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
@@ -422,6 +424,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/12/网络模型和网络设备/" rel="prev" title="网络模型和网络设备">
+                网络模型和网络设备 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -502,7 +508,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -524,7 +530,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

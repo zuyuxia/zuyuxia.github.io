@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="vector  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
+<meta name="description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
 <meta name="keywords" content="vector">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vector">
 <meta property="og:url" content="http://yoursite.com/2018/03/30/vector/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="vector  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
+<meta property="og:description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-30T11:22:57.934Z">
+<meta property="og:updated_time" content="2018-04-13T08:26:12.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vector">
-<meta name="twitter:description" content="vector  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
+<meta name="twitter:description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
 
 
 
@@ -342,7 +342,7 @@
       
 
       
-        <h1 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h1><p>  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：</p>
+        <h1 id="vector概述"><a href="#vector概述" class="headerlink" title="vector概述"></a>vector概述</h1><p>  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：</p>
 <ul>
 <li>随机访问元素效率很高</li>
 <li>在容器尾部插入元素效率也很高（push_back）</li>
@@ -370,6 +370,12 @@
 <li><p>vector扩容原理  </p>
 <ul>
 <li><p>在向vector中增加元素时，如果内存不够用，就用进行动态重新分配当前大小的1.5~2倍的内存，然后将原来vector中的数据copy到新的内存中，同时销毁旧的内存</p>
+</li>
+<li><p>windows下，VS里面的源码是增加的1.5倍</p>
+</li>
+<li><p>为什么是成倍增长而不是固定增长？两个方面分析（均摊分析）：增长到n所需的次数，元素一共需要移动多少次</p>
+</li>
+<li><p>增长因子是1.5还是2？增长因子没有规定，但是在1~2之间比较好。1.5比2更好，因为可以重用之前分配的空间</p>
 </li>
 <li><p>动态重新分配新内存时，原来指向旧内存空间的迭代器都会失效</p>
 </li>
@@ -414,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/30/map与unordered-map/" rel="next" title="map与unordered\_map">
-                <i class="fa fa-chevron-left"></i> map与unordered\_map
+              <a href="/2018/03/30/map与unordered-map/" rel="next" title="map与unordered_map">
+                <i class="fa fa-chevron-left"></i> map与unordered_map
               </a>
             
           </div>
@@ -507,7 +513,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -529,7 +535,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -572,7 +578,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vector"><span class="nav-number">1.</span> <span class="nav-text">vector</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vector概述"><span class="nav-number">1.</span> <span class="nav-text">vector概述</span></a></li></ol></div>
             
 
           </div>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Write Code">
 <meta property="og:description" content="排序 交换函数 void swap(int &amp;amp;a, int &amp;amp;b){     int temp = b;     b = a;     a = temp; }">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-29T12:55:22.338Z">
+<meta property="og:updated_time" content="2018-04-14T09:15:01.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序">
 <meta name="twitter:description" content="排序 交换函数 void swap(int &amp;amp;a, int &amp;amp;b){     int temp = b;     b = a;     a = temp; }">
@@ -515,11 +515,11 @@ void Merge(vector&lt;int&gt; &amp;nums, int begin, int middle, int end, vector&l
 void HeapAddjust(vector&lt;int&gt; &amp;nums, int parentIndex, int length){
     int temp = nums[parentIndex];
     int leftChild = parentIndex*2 + 1;
-    for(;leftChild &lt; length - 1;leftChild = leftChild*2 + 1){
-        if(leftChild + 1 &lt; length - 1 &amp;&amp; nums[leftChild] &lt; nums[leftChild+1])
+    for(;leftChild &lt;= length - 1;leftChild = leftChild*2 + 1){
+        if(leftChild + 1 &lt;= length - 1 &amp;&amp; nums[leftChild] &lt; nums[leftChild+1])
             ++leftChild;
 
-        if(temp == nums[leftChild])
+        if(temp &gt;= nums[leftChild])
             break;
 
         nums[parentIndex] = nums[leftChild];
@@ -796,7 +796,7 @@ void HeapAddjust(vector&lt;int&gt; &amp;nums, int parentIndex, int length){
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

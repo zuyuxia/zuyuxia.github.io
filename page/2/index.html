@@ -346,7 +346,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/生产者与消费者/#more" rel="contents">
+            <a class="btn" href="/2018/04/04/生产者与消费者/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -504,7 +504,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/03/图/#more" rel="contents">
+            <a class="btn" href="/2018/04/03/图/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -651,7 +651,7 @@
 <h2 id="无二维数组的操作的情况"><a href="#无二维数组的操作的情况" class="headerlink" title="无二维数组的操作的情况"></a>无二维数组的操作的情况</h2><p>  以下面三份代码为例，讨论优化问题<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">100</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代码3</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">1000</span>; ++j)&#123;</span><br><span class="line">		<span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; <span class="number">10000</span>; ++k)</span><br><span class="line">			doSomething(i,j,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/02/for循环的优化问题/#more" rel="contents">
+            <a class="btn" href="/2018/04/02/for循环的优化问题/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -952,7 +952,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/30/vector/#more" rel="contents">
+            <a class="btn" href="/2018/03/30/vector/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1105,7 +1105,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/30/map与unordered-map/#more" rel="contents">
+            <a class="btn" href="/2018/03/30/map与unordered-map/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1254,7 +1254,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//树结点的定义</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">lchild</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">rchild</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/29/二叉树的遍历/#more" rel="contents">
+            <a class="btn" href="/2018/03/29/二叉树的遍历/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1407,7 +1407,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/28/DNS：域名系统/#more" rel="contents">
+            <a class="btn" href="/2018/03/28/DNS：域名系统/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1553,7 +1553,7 @@
           <h1 id="ARP协议和RARP协议"><a href="#ARP协议和RARP协议" class="headerlink" title="ARP协议和RARP协议"></a>ARP协议和RARP协议</h1><p>  ARP协议：地址转换协议<br>  RARP协议：反向地址转换协议</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/28/ARP和RARP协议/#more" rel="contents">
+            <a class="btn" href="/2018/03/28/ARP和RARP协议/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1699,7 +1699,7 @@
           <h2 id="哈夫曼树和哈夫曼编码"><a href="#哈夫曼树和哈夫曼编码" class="headerlink" title="哈夫曼树和哈夫曼编码"></a>哈夫曼树和哈夫曼编码</h2><p>  首先，为什么会引入哈夫曼编码？对于数据和文件，最普通的压缩方式就是采用定长编码的方式来对数据进行压缩或者解压缩，这种方式所需要的二进制位数比较多，于是产生了哈夫曼编码这种<strong>变长编码</strong>的改进方法</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/28/哈夫曼树和哈夫曼编码/#more" rel="contents">
+            <a class="btn" href="/2018/03/28/哈夫曼树和哈夫曼编码/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1741,7 +1741,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1791,7 +1791,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

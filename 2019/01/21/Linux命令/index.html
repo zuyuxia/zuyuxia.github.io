@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、显示日期与时间的命令：date  date：直接显示日期和时间 date +%Y/%m/%d：显示格式，年/月/日 date +%H:%M：显示格式，小时:分钟  2、显示日历的命令：cal  cal的基本语法：cal [[month] year] cal：显示当前月份的月历 cal 2019：显示2019年的月历 cal 10 2019：显示2019年10月的日历  3、计算器：bc 4、数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Write Code">
+<meta property="og:url" content="http://yoursite.com/2019/01/21/Linux命令/index.html">
+<meta property="og:site_name" content="Write Code">
+<meta property="og:description" content="1、显示日期与时间的命令：date  date：直接显示日期和时间 date +%Y/%m/%d：显示格式，年/月/日 date +%H:%M：显示格式，小时:分钟  2、显示日历的命令：cal  cal的基本语法：cal [[month] year] cal：显示当前月份的月历 cal 2019：显示2019年的月历 cal 10 2019：显示2019年10月的日历  3、计算器：bc 4、数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-24T11:37:52.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Write Code">
+<meta name="twitter:description" content="1、显示日期与时间的命令：date  date：直接显示日期和时间 date +%Y/%m/%d：显示格式，年/月/日 date +%H:%M：显示格式，小时:分钟  2、显示日历的命令：cal  cal的基本语法：cal [[month] year] cal：显示当前月份的月历 cal 2019：显示2019年的月历 cal 10 2019：显示2019年10月的日历  3、计算器：bc 4、数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/21/Linux命令/"/>
+
+
+
+
+
+  <title> | Write Code</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Write Code</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Talk is cheap , show me the code</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/Linux命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-21T23:39:02+08:00">
+                2019-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1、显示日期与时间的命令：date</p>
+<ul>
+<li>date：直接显示日期和时间</li>
+<li>date +%Y/%m/%d：显示格式，年/月/日</li>
+<li>date +%H:%M：显示格式，小时:分钟</li>
+</ul>
+<p>2、显示日历的命令：cal</p>
+<ul>
+<li>cal的基本语法：cal [[month] year]</li>
+<li>cal：显示当前月份的月历</li>
+<li>cal 2019：显示2019年的月历</li>
+<li>cal 10 2019：显示2019年10月的日历</li>
+</ul>
+<p>3、计算器：bc</p>
+<p>4、数据同步写入磁盘：sync</p>
+<p>5、关机：shutdown</p>
+<ul>
+<li>shutdown -h now：立刻关机</li>
+<li>shutdown -h 20:25：在20:25分关机</li>
+<li>shutdown -r now：系统立刻重启</li>
+<li>shutdown -r +10 “The system will reboot”：过10分钟系统重启，并发出告警信息</li>
+</ul>
+<p>6、重启：reboot</p>
+<p>7、切换执行等级：init</p>
+<ul>
+<li>init 0：关机</li>
+</ul>
+<p>8、改变文件属性与权限：</p>
+<ul>
+<li>chgrp (-R) groupname dirname/filename：改变所属用户组</li>
+<li>chown (-R) ownername:groupname dirname/filename</li>
+<li>chmod (-R) xyz dirname/filename<ul>
+<li>r:4,w:2,x:1</li>
+</ul>
+</li>
+<li>chmod u/g/o/a +/-/= r/w/x</li>
+</ul>
+<p>9、目录的相关操作</p>
+<ul>
+<li>cd (绝对路径/相对路径)：切换目录</li>
+<li>pwd (-P)：显示当前目录（加上参数表示非使用连接的路径）</li>
+<li>mkdir (-mp) dirname：创建目录<ul>
+<li>m：配置文件夹的权限</li>
+<li>p：直接将所需目录递归创建（创建多层目录）</li>
+</ul>
+</li>
+<li>rmdir (-p) dirname：删除目录<ul>
+<li>p：连通上层空目录一起删除</li>
+</ul>
+</li>
+<li>rm -r dirname：将目录连同目录下的所有东西都删除</li>
+</ul>
+<p>10、查看文件与目录：ls</p>
+<ul>
+<li>ls (-aAdfFhilnrRSt) dirname</li>
+<li>ls (–color=(never,auto,always)) dirname</li>
+<li>ls (–full-time) dirname<ul>
+<li>a：全部文件，包括隐藏文件</li>
+<li>A：全部文件，包括隐藏文件，不包括（.和..两个目录）</li>
+<li>d：仅列出目录本身，不列出目录内的文件数据</li>
+<li>f：直接列出结果，不进行排序</li>
+<li>F：根据文件、目录等信息给与附加数据结构</li>
+<li>h：将文件容量以人类易读的方式列出来（human-readable）</li>
+<li>i：列出inode号码</li>
+<li>l：列出长数据串，包含文件的属性与权限</li>
+<li>n：列出UID,GID，而非用户与用户组名称</li>
+<li>r：将排序结构反向输出</li>
+<li>R：连同子目录内容一起列出来</li>
+<li>S：以文件容量大小排序</li>
+<li>t：以时间排序</li>
+<li>–color=never：不要依据文件特性显示颜色</li>
+<li>–color=auto：默认设置</li>
+<li>–color=always：显示颜色</li>
+<li>–full-time：显示完整时间</li>
+<li>–time=atime/ctime：输出访问时间或改变权限属性时间</li>
+</ul>
+</li>
+</ul>
+<p>11、复制命令：cp</p>
+<ul>
+<li>cp (-adfilprsu) source_file destination_file</li>
+<li>cp (options) source1 source2 source3… dirname<ul>
+<li>a：相当于-pdr的意思</li>
+<li>d：若源文件为连接文件的属性，则复制连接文件属性而非文件本身</li>
+<li>f：force，若已存在的目标文件无法打开，则删除后再尝试一次</li>
+<li>i：若目标文件已存在，则覆盖前会确认操作</li>
+<li>l：创建硬链接</li>
+<li>p：连同文件属性一起复制</li>
+<li>r：recursive，用于目录的复制行为</li>
+<li>s：创建符号链接文件</li>
+<li>u：当destination_file比source_file新的时候才覆盖更新</li>
+<li>如果source_file大于等于2，最后的目的文件必须是目录</li>
+</ul>
+</li>
+</ul>
+<p>12、移除文件或目录：rm</p>
+<ul>
+<li>rm (-fir) file/directory<ul>
+<li>f：force，忽略不存在的文件，不会发出警告信息</li>
+<li>i：interactive，询问是否进行删除</li>
+<li>r：recursive，删除目录以及目录下的文件</li>
+</ul>
+</li>
+</ul>
+<p>13、移动文件或目录，重命名：mv</p>
+<ul>
+<li>mv (-fiu) source destination</li>
+<li>mv (options) source1 source2 … directory<ul>
+<li>f：force，若目标已存在，直接覆盖不询问</li>
+<li>i：若目标存在，覆盖前进行询问</li>
+<li>u：若目标文件存在，source较新时才进行覆盖</li>
+</ul>
+</li>
+</ul>
+<p>14、直接查看文件内容：cat，tac，nl</p>
+<ul>
+<li>cat (-AbEnTv) filename<ul>
+<li>A：相当于-vET</li>
+<li>b：列出行号，空白行不列</li>
+<li>E：将结尾的断行字符$显示出来</li>
+<li>n：打印出行号，空白号也列出来</li>
+<li>T：将Tab键以^I显示出来</li>
+<li>v：列出一些看不出来的特殊字符</li>
+</ul>
+</li>
+<li>tac：反向显示</li>
+<li>nl （-bnw） filename<ul>
+<li>b：行号显示方式</li>
+<li>n：列出行号的方式</li>
+<li>w：行号字段占用的位数</li>
+</ul>
+</li>
+</ul>
+<p>15、可翻页查看：more，less</p>
+<ul>
+<li>more filename<ul>
+<li>空格键（space）：向下翻一页</li>
+<li>Enter键：向下滚动一行</li>
+<li>/字符串：向下查询字符串</li>
+<li>:f：显示文件名以及目前显示的行数</li>
+<li>q：退出</li>
+<li>b：向回翻页</li>
+</ul>
+</li>
+<li>less filename<ul>
+<li>空格键：向下翻一页</li>
+<li>PageDown：向下翻一页</li>
+<li>PageUp：向上翻一页</li>
+<li>/字符串：向下查询字符串</li>
+<li>?字符串：向上查询字符串</li>
+<li>n：重复前一个查询</li>
+<li>N：反复重复前一个查询</li>
+<li>q：退出</li>
+</ul>
+</li>
+</ul>
+<p>16、数据选取：head，tail</p>
+<ul>
+<li>head (-n number) filename<ul>
+<li>number：从头部显示几行</li>
+</ul>
+</li>
+<li>tail (-n number) filename<ul>
+<li>number：从尾部开始显示几行</li>
+</ul>
+</li>
+</ul>
+<p>17、读取非文本文件：od</p>
+<ul>
+<li>od (-t type) filename<ul>
+<li>a：使用默认字符输出</li>
+<li>c：使用ASCII字符输出</li>
+<li>d：使用十进制输出</li>
+<li>f：使用浮点数输出</li>
+<li>o：使用八进制输出</li>
+<li>x：使用十六进制输出</li>
+</ul>
+</li>
+</ul>
+<p>18、修改文件时间或创建新文件：touch</p>
+<ul>
+<li>touch (-acdmt) file<ul>
+<li>a：仅修改访问时间</li>
+<li>c：仅修改文件的时间，若文件不存在则创建该文件</li>
+<li>d：后接修改的日期</li>
+<li>m：修改mtime</li>
+<li>t：接修改后的时间</li>
+</ul>
+</li>
+</ul>
+<p>19、文件默认权限：umask</p>
+<ul>
+<li>umask n：设置默认文件权限需要减掉的权限</li>
+</ul>
+<p>20、修改、显示文件隐藏属性：chattr，lsattr</p>
+<ul>
+<li>chattr (+-=)(ASacdistu) filename/dirname<ul>
+<li>i：使得文件不能被删除、改名，写入数据</li>
+</ul>
+</li>
+<li>lsattr (-adR) filename/dirname</li>
+</ul>
+<p>21、查看文件类型：file</p>
+<ul>
+<li>file filename</li>
+</ul>
+<p>22、脚本文件名的查询：which</p>
+<ul>
+<li>which (-a) command<ul>
+<li>a：将所有由PATH目录中找到的命令列出</li>
+</ul>
+</li>
+</ul>
+<p>23、文件名的查找：whereis，locate，find</p>
+<ul>
+<li>whereis (-bmsu) file/dir<ul>
+<li>b：只查找二进制文件</li>
+<li>m：只找在说明路径下的文件</li>
+<li>s：只找source源文件</li>
+<li>u：查找不同以上三个选项的其他文件</li>
+</ul>
+</li>
+<li>locate (-ir) keyword<ul>
+<li>i：忽略大小写的差异</li>
+<li>r：后面可接正则表达式的显示方式</li>
+</ul>
+</li>
+<li>find (path) (option) (action)</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/21/Linux/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/code.jpg"
+                alt="zuyuxia" />
+            
+              <p class="site-author-name" itemprop="name">zuyuxia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zuyuxia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zuyuxia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

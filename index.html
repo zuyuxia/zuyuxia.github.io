@@ -249,6 +249,1115 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/Linux命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/21/Linux命令/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-21T23:39:02+08:00">
+                2019-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1、显示日期与时间的命令：date</p>
+<ul>
+<li>date：直接显示日期和时间</li>
+<li>date +%Y/%m/%d：显示格式，年/月/日</li>
+<li>date +%H:%M：显示格式，小时:分钟</li>
+</ul>
+<p>2、显示日历的命令：cal</p>
+<ul>
+<li>cal的基本语法：cal [[month] year]</li>
+<li>cal：显示当前月份的月历</li>
+<li>cal 2019：显示2019年的月历</li>
+<li>cal 10 2019：显示2019年10月的日历</li>
+</ul>
+<p>3、计算器：bc</p>
+<p>4、数据同步写入磁盘：sync</p>
+<p>5、关机：shutdown</p>
+<ul>
+<li>shutdown -h now：立刻关机</li>
+<li>shutdown -h 20:25：在20:25分关机</li>
+<li>shutdown -r now：系统立刻重启</li>
+<li>shutdown -r +10 “The system will reboot”：过10分钟系统重启，并发出告警信息</li>
+</ul>
+<p>6、重启：reboot</p>
+<p>7、切换执行等级：init</p>
+<ul>
+<li>init 0：关机</li>
+</ul>
+<p>8、改变文件属性与权限：</p>
+<ul>
+<li>chgrp (-R) groupname dirname/filename：改变所属用户组</li>
+<li>chown (-R) ownername:groupname dirname/filename</li>
+<li>chmod (-R) xyz dirname/filename<ul>
+<li>r:4,w:2,x:1</li>
+</ul>
+</li>
+<li>chmod u/g/o/a +/-/= r/w/x</li>
+</ul>
+<p>9、目录的相关操作</p>
+<ul>
+<li>cd (绝对路径/相对路径)：切换目录</li>
+<li>pwd (-P)：显示当前目录（加上参数表示非使用连接的路径）</li>
+<li>mkdir (-mp) dirname：创建目录<ul>
+<li>m：配置文件夹的权限</li>
+<li>p：直接将所需目录递归创建（创建多层目录）</li>
+</ul>
+</li>
+<li>rmdir (-p) dirname：删除目录<ul>
+<li>p：连通上层空目录一起删除</li>
+</ul>
+</li>
+<li>rm -r dirname：将目录连同目录下的所有东西都删除</li>
+</ul>
+<p>10、查看文件与目录：ls</p>
+<ul>
+<li>ls (-aAdfFhilnrRSt) dirname</li>
+<li>ls (–color=(never,auto,always)) dirname</li>
+<li>ls (–full-time) dirname<ul>
+<li>a：全部文件，包括隐藏文件</li>
+<li>A：全部文件，包括隐藏文件，不包括（.和..两个目录）</li>
+<li>d：仅列出目录本身，不列出目录内的文件数据</li>
+<li>f：直接列出结果，不进行排序</li>
+<li>F：根据文件、目录等信息给与附加数据结构</li>
+<li>h：将文件容量以人类易读的方式列出来（human-readable）</li>
+<li>i：列出inode号码</li>
+<li>l：列出长数据串，包含文件的属性与权限</li>
+<li>n：列出UID,GID，而非用户与用户组名称</li>
+<li>r：将排序结构反向输出</li>
+<li>R：连同子目录内容一起列出来</li>
+<li>S：以文件容量大小排序</li>
+<li>t：以时间排序</li>
+<li>–color=never：不要依据文件特性显示颜色</li>
+<li>–color=auto：默认设置</li>
+<li>–color=always：显示颜色</li>
+<li>–full-time：显示完整时间</li>
+<li>–time=atime/ctime：输出访问时间或改变权限属性时间</li>
+</ul>
+</li>
+</ul>
+<p>11、复制命令：cp</p>
+<ul>
+<li>cp (-adfilprsu) source_file destination_file</li>
+<li>cp (options) source1 source2 source3… dirname<ul>
+<li>a：相当于-pdr的意思</li>
+<li>d：若源文件为连接文件的属性，则复制连接文件属性而非文件本身</li>
+<li>f：force，若已存在的目标文件无法打开，则删除后再尝试一次</li>
+<li>i：若目标文件已存在，则覆盖前会确认操作</li>
+<li>l：创建硬链接</li>
+<li>p：连同文件属性一起复制</li>
+<li>r：recursive，用于目录的复制行为</li>
+<li>s：创建符号链接文件</li>
+<li>u：当destination_file比source_file新的时候才覆盖更新</li>
+<li>如果source_file大于等于2，最后的目的文件必须是目录</li>
+</ul>
+</li>
+</ul>
+<p>12、移除文件或目录：rm</p>
+<ul>
+<li>rm (-fir) file/directory<ul>
+<li>f：force，忽略不存在的文件，不会发出警告信息</li>
+<li>i：interactive，询问是否进行删除</li>
+<li>r：recursive，删除目录以及目录下的文件</li>
+</ul>
+</li>
+</ul>
+<p>13、移动文件或目录，重命名：mv</p>
+<ul>
+<li>mv (-fiu) source destination</li>
+<li>mv (options) source1 source2 … directory<ul>
+<li>f：force，若目标已存在，直接覆盖不询问</li>
+<li>i：若目标存在，覆盖前进行询问</li>
+<li>u：若目标文件存在，source较新时才进行覆盖</li>
+</ul>
+</li>
+</ul>
+<p>14、直接查看文件内容：cat，tac，nl</p>
+<ul>
+<li>cat (-AbEnTv) filename<ul>
+<li>A：相当于-vET</li>
+<li>b：列出行号，空白行不列</li>
+<li>E：将结尾的断行字符$显示出来</li>
+<li>n：打印出行号，空白号也列出来</li>
+<li>T：将Tab键以^I显示出来</li>
+<li>v：列出一些看不出来的特殊字符</li>
+</ul>
+</li>
+<li>tac：反向显示</li>
+<li>nl （-bnw） filename<ul>
+<li>b：行号显示方式</li>
+<li>n：列出行号的方式</li>
+<li>w：行号字段占用的位数</li>
+</ul>
+</li>
+</ul>
+<p>15、可翻页查看：more，less</p>
+<ul>
+<li>more filename<ul>
+<li>空格键（space）：向下翻一页</li>
+<li>Enter键：向下滚动一行</li>
+<li>/字符串：向下查询字符串</li>
+<li>:f：显示文件名以及目前显示的行数</li>
+<li>q：退出</li>
+<li>b：向回翻页</li>
+</ul>
+</li>
+<li>less filename<ul>
+<li>空格键：向下翻一页</li>
+<li>PageDown：向下翻一页</li>
+<li>PageUp：向上翻一页</li>
+<li>/字符串：向下查询字符串</li>
+<li>?字符串：向上查询字符串</li>
+<li>n：重复前一个查询</li>
+<li>N：反复重复前一个查询</li>
+<li>q：退出</li>
+</ul>
+</li>
+</ul>
+<p>16、数据选取：head，tail</p>
+<ul>
+<li>head (-n number) filename<ul>
+<li>number：从头部显示几行</li>
+</ul>
+</li>
+<li>tail (-n number) filename<ul>
+<li>number：从尾部开始显示几行</li>
+</ul>
+</li>
+</ul>
+<p>17、读取非文本文件：od</p>
+<ul>
+<li>od (-t type) filename<ul>
+<li>a：使用默认字符输出</li>
+<li>c：使用ASCII字符输出</li>
+<li>d：使用十进制输出</li>
+<li>f：使用浮点数输出</li>
+<li>o：使用八进制输出</li>
+<li>x：使用十六进制输出</li>
+</ul>
+</li>
+</ul>
+<p>18、修改文件时间或创建新文件：touch</p>
+<ul>
+<li>touch (-acdmt) file<ul>
+<li>a：仅修改访问时间</li>
+<li>c：仅修改文件的时间，若文件不存在则创建该文件</li>
+<li>d：后接修改的日期</li>
+<li>m：修改mtime</li>
+<li>t：接修改后的时间</li>
+</ul>
+</li>
+</ul>
+<p>19、文件默认权限：umask</p>
+<ul>
+<li>umask n：设置默认文件权限需要减掉的权限</li>
+</ul>
+<p>20、修改、显示文件隐藏属性：chattr，lsattr</p>
+<ul>
+<li>chattr (+-=)(ASacdistu) filename/dirname<ul>
+<li>i：使得文件不能被删除、改名，写入数据</li>
+</ul>
+</li>
+<li>lsattr (-adR) filename/dirname</li>
+</ul>
+<p>21、查看文件类型：file</p>
+<ul>
+<li>file filename</li>
+</ul>
+<p>22、脚本文件名的查询：which</p>
+<ul>
+<li>which (-a) command<ul>
+<li>a：将所有由PATH目录中找到的命令列出</li>
+</ul>
+</li>
+</ul>
+<p>23、文件名的查找：whereis，locate，find</p>
+<ul>
+<li>whereis (-bmsu) file/dir<ul>
+<li>b：只查找二进制文件</li>
+<li>m：只找在说明路径下的文件</li>
+<li>s：只找source源文件</li>
+<li>u：查找不同以上三个选项的其他文件</li>
+</ul>
+</li>
+<li>locate (-ir) keyword<ul>
+<li>i：忽略大小写的差异</li>
+<li>r：后面可接正则表达式的显示方式</li>
+</ul>
+</li>
+<li>find (path) (option) (action)</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/21/Linux/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-21T23:14:19+08:00">
+                2019-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1、开机流程</p>
+<ul>
+<li>开机 -&gt; BIOS(读取第一个扇区的MBR位置) -&gt; MBR(引导加载程序，加载内核文件) -&gt; 内核文件（开始操作系统的功能）</li>
+</ul>
+<p>2、文件可存取访问的三个身份：owner、group、others</p>
+<p>3、权限：read、write、execute</p>
+<p>4、linux用户身份与用户组记录的文件</p>
+<ul>
+<li>/etc/passwd：所有系统上的账号</li>
+<li>/etc/shadow：个人的密码</li>
+<li>/etc/group：所有的组名</li>
+</ul>
+<p>5、ls -al：显示的内容含义：</p>
+<ul>
+<li>(文件类型与权限)(有多少个不同文件连接到相同的i-node)(所有者)(所属用户组)(容量大小)(最近修改日期)(文件名)</li>
+</ul>
+<p>6、文件的类型与权限：(0)(123)(456)(789)，一共十个字符，数字表示位置索引</p>
+<ul>
+<li>重要性：数据安全，数据共享</li>
+<li>0：表示文件类型<ul>
+<li>d：目录</li>
+<li>-：文件</li>
+<li>l：连接文件</li>
+<li>b：可供存储的接口设备</li>
+<li>c：串行端口设备</li>
+</ul>
+</li>
+<li>123：表示文件所有者的权限（rwx），没有权限则为-</li>
+<li>456：表示同用户组权限</li>
+<li>789：表示非本用户组的其他者权限</li>
+</ul>
+<p>7、目录权限中的x表示是否能进入该目录</p>
+<p>8、linux文件种类</p>
+<ul>
+<li>普通文件：纯文本文件，二进制文件，数据文件（cat打开会乱码，用last打开）</li>
+<li>目录</li>
+<li>连接文件</li>
+<li>设备与设备文件：块设备文件，字符设备文件</li>
+<li>套接字</li>
+<li>管道</li>
+</ul>
+<p>9、特殊的目录：</p>
+<ul>
+<li>.：当前目录</li>
+<li>..：上一层目录</li>
+<li>~：当前用户的主文件夹</li>
+<li>-：前一个工作目录</li>
+<li>~user：user用户的主文件夹</li>
+</ul>
+<p>10、文件的三个时间：</p>
+<ul>
+<li>mtime：modification time，文件内容进行更改时，就会更新这个时间</li>
+<li>ctime：status time，文件的状态进行更改时，更新这个时间，例如权限和属性</li>
+<li>atime：access time，当文件内容被取用时，更新这个时间</li>
+</ul>
+<p>11、文件默认权限</p>
+<ul>
+<li>文件的默认权限：666</li>
+<li>目录的默认权限：777</li>
+<li>当前文件、目录的权限=默认权限-umask分数</li>
+</ul>
+<p>12、whereis，locate，find之间的区别</p>
+<ul>
+<li>三个命名都是查找文件</li>
+<li>whereis和locate是利用数据库来查询，linux系统会将系统内的所有文件记录在一个数据库文件中</li>
+<li>find是直接查找硬盘</li>
+<li>locate是从数据库/var/lib/mlocate/里面的数据进行查找，更新数据库的操作为：updatedb</li>
+</ul>
+<p>13、windows文件系统：NTFS，Linux：Ext2/Ext3，U盘：FAT</p>
+<ul>
+<li>Linux文件系统（索引式文件系统）通常分为三部分：superblock、inode、block<ul>
+<li>superblock：记录文件系统的整体信息，包括inode/block的总量，使用量，剩余量以及文件系统格式等信息</li>
+<li>inode：记录文件属性，一个文件占用一个inode，同时记录该文件数据所在的block号码</li>
+<li>block：实际记录文件的内容，文件太大时会占用多个block</li>
+</ul>
+</li>
+<li>U盘没有inode，只有block，每个block号码记录在前一个block中<ul>
+<li>碎片整理：需要碎片整理的原因在于记录文件内容的block过于分散，文件读取的性能比较差，需要将这些block会和在一起，提高性能</li>
+</ul>
+</li>
+<li></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/Linux常用的命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/20/Linux常用的命令/" itemprop="url">Linux常用的命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T15:54:44+08:00">
+                2018-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="有关文件常见的命令"><a href="#有关文件常见的命令" class="headerlink" title="有关文件常见的命令"></a>有关文件常见的命令</h2><ol>
+<li><p>查看文件中的一段，用<strong>sed</strong>命令：如查看文件的[50, 60]区间内的行数</p>
+<ul>
+<li>sed -n ‘50,60p’ filename</li>
+</ul>
+</li>
+<li><p>查看文件的前（后）N行，使用<strong>head（tail）</strong>命令：如查看文件的前（后）10行</p>
+<ul>
+<li><p>head -10 filename</p>
+</li>
+<li><p>tail -10 filename</p>
+</li>
+</ul>
+</li>
+<li><p>新建一个文件，使用<strong>touch或vim</strong>命令</p>
+<ul>
+<li><p>touch filename</p>
+</li>
+<li><p>vim filename</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="有关系统状态的命令"><a href="#有关系统状态的命令" class="headerlink" title="有关系统状态的命令"></a>有关系统状态的命令</h2><ol>
+<li><p>查看系统内存使用状态，使用<strong>free</strong>命令</p>
+<ul>
+<li>free -m（显示的单位为MB）</li>
+</ul>
+</li>
+<li><p>显示管理执行中的程序，使用<strong>top</strong>命令</p>
+<ul>
+<li>top</li>
+</ul>
+</li>
+<li><p>显示磁盘的相关信息，使用<strong>df</strong>命令</p>
+<ul>
+<li>df</li>
+</ul>
+</li>
+<li><p>显示文件或者目录的大小，使用<strong>du</strong>命令</p>
+<ul>
+<li>du -bs filename</li>
+</ul>
+</li>
+<li><p>查看系统网络状态，使用<strong>netstat</strong>命令</p>
+<ul>
+<li>netstat</li>
+</ul>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/游戏中是使用UDP还是TCP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/18/游戏中是使用UDP还是TCP/" itemprop="url">游戏中是使用UDP还是TCP</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-18T16:00:14+08:00">
+                2018-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在游戏中使用的是UDP还是TCP协议呢？"><a href="#在游戏中使用的是UDP还是TCP协议呢？" class="headerlink" title="在游戏中使用的是UDP还是TCP协议呢？"></a>在游戏中使用的是UDP还是TCP协议呢？</h1><p>  游戏使用的是UDP还是TCP？这个问题挺难回答的，不同的游戏关注点不同，使用的协议也会不同，先从TCP-UDP的各自特点讲起，然后再进行进一步的讨论</p>
+<h2 id="TCP-UDP的特点和区别"><a href="#TCP-UDP的特点和区别" class="headerlink" title="TCP-UDP的特点和区别"></a>TCP-UDP的特点和区别</h2><ul>
+<li><p>TCP-UDP的特点  </p>
+<ul>
+<li><p>TCP：提供面向连接的服务。传输数据之前需要建立连接，传输结束需要释放连接。尽管下面的网络是不可靠的，但是使用TCP协议使得这种逻辑信道相当于是一条全双工的可靠信道。TCP不提供广播或多播服务。</p>
+</li>
+<li><p>UDP：无连接的协议。在传送数据之前不需要建立连接，目的主机收到UDP报文后也不需要给出任何确认。使用UDP协议的逻辑信道仍然是一条不可靠信道。UDP支持一对一，一对多，多对一，多对多通信。</p>
+</li>
+</ul>
+</li>
+<li><p>TCP-UDP的区别</p>
+<ul>
+<li><p>TCP是面向连接的传输控制协议；UDP提供的是无连接的数据报服务</p>
+</li>
+<li><p>TCP具有高可靠性，确保传输数据的正确性；UDP在传输数据时不建立连接，不对数据报进行检测修改，不需等待对方的应答，所以会出现分组丢失、重复、乱序，应用程序负责传输可靠性方面的所有工作</p>
+</li>
+<li><p>TCP对系统资源要求较多；UDP对系统资源要求较少</p>
+</li>
+<li><p>UDP有很好的实时性，工作效率比TCP高</p>
+</li>
+<li><p>UDP的段结构比TCP的段结构简单，网络开销小</p>
+</li>
+</ul>
+</li>
+<li><p>有关TCP-UDP详细内容请见：<a href="https://zuyuxia.github.io/2018/03/16/TCP-UDP/" target="_blank" rel="noopener">TCP/UDP</a></p>
+</li>
+</ul>
+<h2 id="游戏中使用的协议是什么"><a href="#游戏中使用的协议是什么" class="headerlink" title="游戏中使用的协议是什么"></a>游戏中使用的协议是什么</h2><p>  首先，讨论使用什么协议的前提是这个游戏的要求是什么：对实时性要求较高，不能忍受延迟？还是需要开发容易，维护方便？很明显，不论是使用TCP还是UDP，我们都需要保证数据正确的到达（客户端–服务器  服务器–客户端）</p>
+<p>  如果对实时性要求比较高，那么采用UDP比较好。因为UDP相较于TCP的开销较小，同时也没有TCP的拥塞控制（丢包时可能激活TCP的拥塞控制，减少数据的发送速率，可能会对游戏造成严重的影响）。但是为了保证数据的正确到达，我们需要对UDP进行改造，不论是实现UDP的可靠传输，还是添加其他的功能，都会增加开发和测试的难度</p>
+<p>  使用TCP的好处在于可靠性已经由协议完成，我们只需要完成其他的开发工作即可，开发较为容易。但是如果是大量连接过来，或者网络中出现拥塞，或者是对实时性要求比较高（lol、moba类的即时游戏），会对游戏产生最大的影响。此外，如果游戏对实时性要求较低，还必须处理好突发的延迟问题，需要对这种情况制定相应的措施：比如可以在动作发生时，即向服务器发送数据时，在数据返回之前本地执行相应的特效</p>
+<p>  事实上，由于TCP和UDP都有各自的特点，因此需要根据游戏的不同需求来决定采用哪一种协议。大多数的情况下，是两种协议混用：要求数据安全，开发简单的部分采用TCP；对实时性要求较高则采用UDP。大型的公司还会根据自己的业务需要在TCP或UDP上进行改进协议，甚至改写协议，构建自己的网络传输协议。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://blog.jobbole.com/64638/" target="_blank" rel="noopener">游戏服务器：到底使用UDP还是TCP</a></li>
+<li><a href="https://blog.csdn.net/tiaraistall/article/details/50117841" target="_blank" rel="noopener">多人游戏用 TCP 还是UDP</a></li>
+<li><a href="https://blog.csdn.net/xiaopengyou2271179/article/details/38238043" target="_blank" rel="noopener">手机游戏服务器使用UDP还是TCP</a></li>
+<li><a href="https://www.zhihu.com/question/48777542/answer/112575371" target="_blank" rel="noopener">https://www.zhihu.com/question/48777542/answer/112575371</a></li>
+<li><a href="https://www.zhihu.com/question/271036995/answer/359638200" target="_blank" rel="noopener">https://www.zhihu.com/question/271036995/answer/359638200</a></li>
+<li><a href="http://gad.qq.com/question/detail/32513" target="_blank" rel="noopener">http://gad.qq.com/question/detail/32513</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/IP代理池/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zuyuxia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/code.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Write Code">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/16/IP代理池/" itemprop="url">IP代理池</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T10:46:57+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="IP代理池"><a href="#IP代理池" class="headerlink" title="IP代理池"></a>IP代理池</h2><ol>
+<li><p>为什么需要IP代理池？<br>在做网络爬虫的时候，现在绝大多数的网站都会有反爬虫策略，可能会对每个IP做一个频次控制。如果同一个IP在短时间内频繁访问网站，那么就有可能会被封掉IP一段时间，因此我们需要很多的代理IP</p>
+</li>
+<li><p>代理IP的获取</p>
+<ul>
+<li><p>免费的代理IP，质量很低</p>
+</li>
+<li><p>付费的代理IP</p>
+</li>
+<li><p>搭建代理服务器</p>
+</li>
+</ul>
+</li>
+<li><p>爬虫使用IP代理池的简单流程</p>
+<ul>
+<li><p>先确认网站是否有反爬虫策略，如果没有则直接发送请求，否则转到下一步</p>
+</li>
+<li><p>从构建好的IP代理池中选取一个可用的IP</p>
+</li>
+<li><p>向代理服务器发送构建好的HTTP请求</p>
+</li>
+<li><p>等待接收代理服务器的数据</p>
+</li>
+</ul>
+</li>
+<li><p>构建IP代理池</p>
+<ul>
+<li><p>找到一些比较有名的免费代理IP网址，类似于爬虫爬取数据一样向这些网址发送请求，注意请求频率</p>
+</li>
+<li><p>获得这些网页数据之后，从中提取IP和port，以及可用时间</p>
+</li>
+<li><p>校验代理IP是否可用（向baidu.com发送一个请求检测）</p>
+</li>
+<li><p>将可用的IP存放在一个数据库中，维护这个数据库，生成一个IP代理池</p>
+</li>
+<li><p>定时更新IP代理池</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.cnblogs.com/tgwang/p/5170480.html" target="_blank" rel="noopener">浅析HTTP代理原理</a></li>
+<li><a href="https://www.cnblogs.com/csguo/p/7250842.html" target="_blank" rel="noopener">代理服务器（Proxy）原理</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25285987" target="_blank" rel="noopener">建立爬虫代理ip池</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/31656752" target="_blank" rel="noopener">构建一个给爬虫使用的代理IP池</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/28926535" target="_blank" rel="noopener">爬虫IP被限制？Python实现轻量级线程安全IP代理池！</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/24165119" target="_blank" rel="noopener">Python爬虫简易代理池</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/哈希表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -546,7 +1655,7 @@
 </ol>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/12/网络模型和网络设备/#espandi" rel="contents">
+            <a class="btn" href="/2018/04/12/网络模型和网络设备/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -651,8 +1760,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -713,7 +1822,7 @@
 </ol>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/11/Linux内存管理：伙伴算法和slab/#espandi" rel="contents">
+            <a class="btn" href="/2018/04/11/Linux内存管理：伙伴算法和slab/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1025,767 +2134,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/11/进程调度算法/#espandi" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/内存池、进程池和线程池/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zuyuxia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/code.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Write Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/11/内存池、进程池和线程池/" itemprop="url">内存池、进程池和线程池</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T16:00:45+08:00">
-                2018-04-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="内存池"><a href="#内存池" class="headerlink" title="内存池"></a>内存池</h2><p>  默认的new/delete、malloc/free在堆上分配和释放内存，由于频繁的调用和每一次申请的内存块大小不定，会造成大量的内存碎片并且降低性能</p>
-<p>  内存池是一种内存的分配方式。在使用真正内存之前，先分配一块大的连续的内存块作为备用（一般是大小相等，数量一定）。当有内存需求时，从内存池中分出一部分内存块给其使用，内存使用完毕后，并不归还给系统，而是归还给内存池。这减少了new/delete、malloc/free的调用次数，提高了内存分配效率</p>
-<p>  内存池可以分为单线程内存池和多线程内存池</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/11/内存池、进程池和线程池/#espandi" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/读者-写者问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zuyuxia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/code.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Write Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/09/读者-写者问题/" itemprop="url">读者-写者问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T15:58:15+08:00">
-                2018-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h1><ul>
-<li>问题的描述<br>有一个数据文件可以被多个进程共享，有两个进程：读者进程和写者进程。多个读者进程能够同时读一个共享文件。读者进程操作时，写者进程阻塞。写者进程操作时，读者进程阻塞</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/09/读者-写者问题/#espandi" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/08/内核态（栈、线程）和用户态（栈、线程）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zuyuxia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/code.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Write Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/08/内核态（栈、线程）和用户态（栈、线程）/" itemprop="url">内核态（栈、线程）和用户态（栈、线程）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T20:39:22+08:00">
-                2018-04-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="内核态和用户态"><a href="#内核态和用户态" class="headerlink" title="内核态和用户态"></a>内核态和用户态</h2><p>  内核态和用户态是操作系统的两种运行级别，区分不同程序的不同权限。如果一个程序运行在内核态，则可以访问计算机的任何资源，访问权限最高。如果一个程序运行在用户态，那么其资源访问权限受到各种限制。</p>
-<ul>
-<li><p>内核态下CPU可执行任何执行；用户态下CPU只能执行非特权指令</p>
-</li>
-<li><p>CPU处于内核态时，可随意进入用户态；CPU处于用户态时，只能通过<strong>系统调用</strong>和<strong>中断</strong>切换到内核态</p>
-</li>
-<li><p>运行在内核态的程序权限高，可访问资源多，可靠性和安全性要求高；用户态的程序权限低，可访问资源少，但是可靠性和安全性的要求低</p>
-</li>
-<li><p>内核态：CPU管理、内存管理、诊断和测试程序、输入输出管理以及文件系统的部分管理；用户态：文件系统的用户数据管理、编辑器用户程序和编译器、网络管理的部分功能</p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/08/内核态（栈、线程）和用户态（栈、线程）/#espandi" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/08/哲学家进餐问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zuyuxia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/code.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Write Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/08/哲学家进餐问题/" itemprop="url">哲学家进餐问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T16:36:56+08:00">
-                2018-04-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="哲学家进餐问题"><a href="#哲学家进餐问题" class="headerlink" title="哲学家进餐问题"></a>哲学家进餐问题</h1><ul>
-<li><p>问题的描述：有五个哲学家围着一张餐桌，分别坐在五张椅子上，在桌子上有五根筷子。他们的活动方式为交替思考和用餐，即哲学家一直思考，饥饿的时候就试图取两边的筷子进行用餐，只有拿到两根筷子时才能用餐。用餐完毕后，放下筷子继续思考。</p>
-</li>
-<li><p>这是一个经典的同步问题，若五个人同时拿起左（右）边的筷子，那么就会形成死锁</p>
-</li>
-<li><p>三种解决办法：</p>
-<ul>
-<li>至多允许有四位哲学家拿左边的筷子</li>
-</ul>
-<ul>
-<li><p>仅当哲学家两边的筷子均可用时，允许用餐</p>
-</li>
-<li><p>规定奇数号的哲学家先拿左边筷子，偶数号哲学家先拿右边筷子</p>
-</li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/08/哲学家进餐问题/#espandi" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/进程同步/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zuyuxia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/code.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Write Code">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/04/进程同步/" itemprop="url">进程同步</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T20:29:49+08:00">
-                2018-04-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h1><p>  为了能够保证多个进程能够有条不紊的进行作业，在多道程序系统中，必须引入进程同步机制。进程同步机制是对多个相关进程在执行次序上进行协调，使并发的进程之间能够按照一定的规则共享系统资源，能够相互合作，程序的执行具有可再现性。单处理机系统中的进程同步机制有：硬件同步机制、信号量机制、管程机制</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/进程同步/#espandi" rel="contents">
+            <a class="btn" href="/2018/04/11/进程调度算法/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1877,7 +2226,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1888,7 +2237,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1899,7 +2248,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1946,7 +2295,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

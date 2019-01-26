@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Write Code">
 <meta property="og:description" content="内核态和用户态  内核态和用户态是操作系统的两种运行级别，区分不同程序的不同权限。如果一个程序运行在内核态，则可以访问计算机的任何资源，访问权限最高。如果一个程序运行在用户态，那么其资源访问权限受到各种限制。  内核态下CPU可执行任何执行；用户态下CPU只能执行非特权指令  CPU处于内核态时，可随意进入用户态；CPU处于用户态时，只能通过系统调用和中断切换到内核态  运行在内核态的程序权限高，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-08T13:49:22.655Z">
+<meta property="og:updated_time" content="2018-04-19T08:00:13.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内核态（栈、线程）和用户态（栈、线程）">
 <meta name="twitter:description" content="内核态和用户态  内核态和用户态是操作系统的两种运行级别，区分不同程序的不同权限。如果一个程序运行在内核态，则可以访问计算机的任何资源，访问权限最高。如果一个程序运行在用户态，那么其资源访问权限受到各种限制。  内核态下CPU可执行任何执行；用户态下CPU只能执行非特权指令  CPU处于内核态时，可随意进入用户态；CPU处于用户态时，只能通过系统调用和中断切换到内核态  运行在内核态的程序权限高，">
@@ -371,16 +371,22 @@
 </li>
 <li><p>用户线程的优势：</p>
 <ul>
-<li>可以在不支持线程的OS中实现</li>
-<li>创建、销毁、切换线程的代价比内核线程小的多</li>
-<li>允许每个进程定制自己的调度算法，管理灵活</li>
-<li>线程能够利用的表空间和堆栈空间比内核级线程多</li>
+<li><p>可以在不支持线程的OS中实现</p>
+</li>
+<li><p>创建、销毁、切换线程的代价比内核线程小的多</p>
+</li>
+<li><p>允许每个进程定制自己的调度算法，管理灵活</p>
+</li>
+<li><p>线程能够利用的表空间和堆栈空间比内核级线程多</p>
+</li>
 </ul>
 </li>
 <li><p>用户线程的缺点：</p>
 <ul>
-<li>同一个进程同一时刻只能有一个线程运行</li>
-<li>页面失效会导致整个进程挂起</li>
+<li><p>同一个进程同一时刻只能有一个线程运行</p>
+</li>
+<li><p>页面失效会导致整个进程挂起</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -507,7 +513,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -518,7 +524,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -529,7 +535,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -592,7 +598,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

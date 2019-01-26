@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="TCP/UDP TCP和UDP的区别  TCP是面向连接的传输控制协议；UDP提供的是无连接的数据报服务  TCP具有高可靠性，确保传输数据的正确性；UDP在传输数据时不建立连接，不对数据报进行检测修改，不需等待对方的应答，所以会出现分组丢失、重复、乱序，应用程序负责传输可靠性方面的所有工作  TCP对系统资源要求较多；UDP对系统资源要求较少  UDP有很好的实时性，工作效率比TCP高  UDP">
+<meta name="description" content="TCP/UDP">
 <meta name="keywords" content="TCP&#x2F;UDP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP&#x2F;UDP">
 <meta property="og:url" content="http://yoursite.com/2018/03/16/TCP-UDP/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="TCP/UDP TCP和UDP的区别  TCP是面向连接的传输控制协议；UDP提供的是无连接的数据报服务  TCP具有高可靠性，确保传输数据的正确性；UDP在传输数据时不建立连接，不对数据报进行检测修改，不需等待对方的应答，所以会出现分组丢失、重复、乱序，应用程序负责传输可靠性方面的所有工作  TCP对系统资源要求较多；UDP对系统资源要求较少  UDP有很好的实时性，工作效率比TCP高  UDP">
+<meta property="og:description" content="TCP/UDP">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T12:28:39.824Z">
+<meta property="og:updated_time" content="2018-04-19T08:07:26.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;UDP">
-<meta name="twitter:description" content="TCP/UDP TCP和UDP的区别  TCP是面向连接的传输控制协议；UDP提供的是无连接的数据报服务  TCP具有高可靠性，确保传输数据的正确性；UDP在传输数据时不建立连接，不对数据报进行检测修改，不需等待对方的应答，所以会出现分组丢失、重复、乱序，应用程序负责传输可靠性方面的所有工作  TCP对系统资源要求较多；UDP对系统资源要求较少  UDP有很好的实时性，工作效率比TCP高  UDP">
+<meta name="twitter:description" content="TCP/UDP">
 
 
 
@@ -342,7 +342,8 @@
       
 
       
-        <h1 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP/UDP"></a>TCP/UDP</h1><ol>
+        <h1 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP/UDP"></a>TCP/UDP</h1><a id="more"></a>
+<ol>
 <li><p>TCP和UDP的区别</p>
 <ul>
 <li><p>TCP是面向连接的传输控制协议；UDP提供的是无连接的数据报服务</p>
@@ -357,9 +358,6 @@
 </li>
 </ul>
 </li>
-</ol>
-<a id="more"></a>
-<ol>
 <li><p>TCP头部的标志位</p>
 <ul>
 <li><p>URG：标志紧急指针是否有效</p>
@@ -418,20 +416,40 @@
 </li>
 <li><p>TIME_WAIT为连接中某些因为网络原因迟迟未到达的数据提供从网络中消失的时间。如果客户端和服务器在断开连接后，再一次重新建立起了连接，并且连接的端口与上一次相同。那么这些迟到的数据就可能到达新的连接，就有可能被看成是新的数据，被重新接收，就会破坏新的连接</p>
 </li>
+<li><p>TIME_WAIT状态的避免：<a href="https://cloud.tencent.com/developer/article/1095131" target="_blank" rel="noopener">如何避免TCP的TIME_WAIT状态（高并发）</a></p>
+<ul>
+<li><p>线程池：线程池作用的socket连接不关闭</p>
+</li>
+<li><p>设置socket选项SO_LINGER</p>
+</li>
+<li><p>修改系统设置        </p>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>TCP的连接状态</p>
 <ul>
-<li>CLOSED</li>
-<li>LISTEN</li>
-<li>SYN_SEND</li>
-<li>SYN_RECV</li>
-<li>ESTABLISH</li>
-<li>FIN_WAIT_1</li>
-<li>CLOSE_WAIT</li>
-<li>FIN_WAIT_2</li>
-<li>LAST_ACK</li>
-<li>TIME_WAIT</li>
+<li><p>CLOSED</p>
+</li>
+<li><p>LISTEN</p>
+</li>
+<li><p>SYN_SEND</p>
+</li>
+<li><p>SYN_RECV</p>
+</li>
+<li><p>ESTABLISH</p>
+</li>
+<li><p>FIN_WAIT_1</p>
+</li>
+<li><p>CLOSE_WAIT</p>
+</li>
+<li><p>FIN_WAIT_2</p>
+</li>
+<li><p>LAST_ACK</p>
+</li>
+<li><p>TIME_WAIT</p>
+</li>
 </ul>
 </li>
 <li><p>超时重传</p>
@@ -674,7 +692,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -685,7 +703,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -696,7 +714,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -759,7 +777,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

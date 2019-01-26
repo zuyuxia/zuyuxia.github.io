@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
+<meta name="description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高  在容器尾部插入元素效率也很高（push_back）  push_front和在vector中的insert、erase效率非常低  当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
 <meta name="keywords" content="vector">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vector">
 <meta property="og:url" content="http://yoursite.com/2018/03/30/vector/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
+<meta property="og:description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高  在容器尾部插入元素效率也很高（push_back）  push_front和在vector中的insert、erase效率非常低  当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-13T08:26:12.451Z">
+<meta property="og:updated_time" content="2018-04-19T07:50:40.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vector">
-<meta name="twitter:description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高 在容器尾部插入元素效率也很高（push_back） push_front和在vector中的insert、erase效率非常低 当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
+<meta name="twitter:description" content="vector概述  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：  随机访问元素效率很高  在容器尾部插入元素效率也很高（push_back）  push_front和在vector中的insert、erase效率非常低  当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低">
 
 
 
@@ -344,27 +344,39 @@
       
         <h1 id="vector概述"><a href="#vector概述" class="headerlink" title="vector概述"></a>vector概述</h1><p>  vector是一种线性容器，和动态数组很相似，vector能够自动存储元素，自动增长或缩小存储空间。vector具有以下特点：</p>
 <ul>
-<li>随机访问元素效率很高</li>
-<li>在容器尾部插入元素效率也很高（push_back）</li>
-<li>push_front和在vector中的insert、erase效率非常低</li>
-<li>当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低</li>
+<li><p>随机访问元素效率很高</p>
+</li>
+<li><p>在容器尾部插入元素效率也很高（push_back）</p>
+</li>
+<li><p>push_front和在vector中的insert、erase效率非常低</p>
+</li>
+<li><p>当内存不够时，需要重新申请内存，把以前的元素复制过来，效率也比较低</p>
+</li>
 </ul>
 <a id="more"></a>
 <ol>
 <li><p>vector的增删查改</p>
 <ul>
-<li>vec.push_back(element); vec.insert(iterator, element);</li>
-<li>vec.pop_back(); vec.erase(iterator);</li>
-<li>vec[position]</li>
-<li>vec[position] = element;</li>
+<li><p>vec.push_back(element); vec.insert(iterator, element);</p>
+</li>
+<li><p>vec.pop_back(); vec.erase(iterator);</p>
+</li>
+<li><p>vec[position]</p>
+</li>
+<li><p>vec[position] = element;</p>
+</li>
 </ul>
 </li>
 <li><p>vector中关于容器大小的四个函数</p>
 <ul>
-<li>size：返回容器中有多少个元素</li>
-<li>capacity：返回容器在分配的内存中可以容纳多少个元素，通常大于等于size</li>
-<li>resize：强制把容器改为容纳n个元素</li>
-<li>reserve：强制容器把它的容量改为不小于n</li>
+<li><p>size：返回容器中有多少个元素</p>
+</li>
+<li><p>capacity：返回容器在分配的内存中可以容纳多少个元素，通常大于等于size</p>
+</li>
+<li><p>resize：强制把容器改为容纳n个元素</p>
+</li>
+<li><p>reserve：强制容器把它的容量改为不小于n</p>
+</li>
 </ul>
 </li>
 <li><p>vector扩容原理  </p>
@@ -513,7 +525,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -524,7 +536,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -535,7 +547,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -598,7 +610,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

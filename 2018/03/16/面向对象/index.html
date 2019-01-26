@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="#面向对象知识  面向对象的三大特性  封装：数据和代码捆绑在一起，避免外界干扰和不确定性的访问  继承：让某种类型对象获得另一种类型对象的属性和方法  多态：同一事物表现出不同事物的能力，即向不同对象发送同一消息，不同的对象在接收时产生不同的行为；重载实现编译时多态，虚函数实现运行时多态    public/private/protected  public：类内，类外  private：类内">
+<meta name="description" content="面向对象知识 面向对象的三大特性  封装：数据和代码捆绑在一起，避免外界干扰和不确定性的访问  继承：让某种类型对象获得另一种类型对象的属性和方法  多态：同一事物表现出不同事物的能力，即向不同对象发送同一消息，不同的对象在接收时产生不同的行为；重载实现编译时多态，虚函数实现运行时多态    public/private/protected  public：类内，类外  private：类内  p">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面向对象">
 <meta property="og:url" content="http://yoursite.com/2018/03/16/面向对象/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="#面向对象知识  面向对象的三大特性  封装：数据和代码捆绑在一起，避免外界干扰和不确定性的访问  继承：让某种类型对象获得另一种类型对象的属性和方法  多态：同一事物表现出不同事物的能力，即向不同对象发送同一消息，不同的对象在接收时产生不同的行为；重载实现编译时多态，虚函数实现运行时多态    public/private/protected  public：类内，类外  private：类内">
+<meta property="og:description" content="面向对象知识 面向对象的三大特性  封装：数据和代码捆绑在一起，避免外界干扰和不确定性的访问  继承：让某种类型对象获得另一种类型对象的属性和方法  多态：同一事物表现出不同事物的能力，即向不同对象发送同一消息，不同的对象在接收时产生不同的行为；重载实现编译时多态，虚函数实现运行时多态    public/private/protected  public：类内，类外  private：类内  p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-11T14:31:43.768Z">
+<meta property="og:updated_time" content="2018-09-17T06:47:40.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面向对象">
-<meta name="twitter:description" content="#面向对象知识  面向对象的三大特性  封装：数据和代码捆绑在一起，避免外界干扰和不确定性的访问  继承：让某种类型对象获得另一种类型对象的属性和方法  多态：同一事物表现出不同事物的能力，即向不同对象发送同一消息，不同的对象在接收时产生不同的行为；重载实现编译时多态，虚函数实现运行时多态    public/private/protected  public：类内，类外  private：类内">
+<meta name="twitter:description" content="面向对象知识 面向对象的三大特性  封装：数据和代码捆绑在一起，避免外界干扰和不确定性的访问  继承：让某种类型对象获得另一种类型对象的属性和方法  多态：同一事物表现出不同事物的能力，即向不同对象发送同一消息，不同的对象在接收时产生不同的行为；重载实现编译时多态，虚函数实现运行时多态    public/private/protected  public：类内，类外  private：类内  p">
 
 
 
@@ -342,8 +342,7 @@
       
 
       
-        <p>#面向对象知识</p>
-<ol>
+        <h1 id="面向对象知识"><a href="#面向对象知识" class="headerlink" title="面向对象知识"></a>面向对象知识</h1><ol>
 <li><p>面向对象的三大特性</p>
 <ul>
 <li><p>封装：数据和代码捆绑在一起，避免外界干扰和不确定性的访问</p>
@@ -493,10 +492,6 @@
 </li>
 </ul>
 </li>
-<li><p><strong>虚函数的实现问题</strong></p>
-</li>
-</ol>
-<ol>
 <li><p>重载与函数模板</p>
 <ul>
 <li><p>重载只需要函数名相同，参数列表、个数等无所谓</p>
@@ -543,9 +538,19 @@
 </li>
 <li><p>动态实现的几个条件：</p>
 <ul>
-<li>虚函数</li>
-<li>一个基类的指针/引用指向派生类的对象</li>
+<li><p>虚函数</p>
+</li>
+<li><p>一个基类的指针/引用指向派生类的对象</p>
+</li>
 </ul>
+</li>
+</ul>
+</li>
+<li><p>空类的sizeof为什么是1</p>
+<ul>
+<li><p>让每个实例在内存中有着不同的地址，区别开类的不同实例</p>
+</li>
+<li><p>空白基类优化：空类作为基类时，计算派生类对象的大小时，会对基类进行优化，不需要考虑空类1字节并且还要对齐的情况</p>
 </li>
 </ul>
 </li>
@@ -679,7 +684,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -690,7 +695,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -701,7 +706,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -744,7 +749,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#面向对象知识"><span class="nav-number">1.</span> <span class="nav-text">面向对象知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -764,7 +769,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

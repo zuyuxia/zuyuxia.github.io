@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Write Code">
 <meta property="og:description" content="select详解 select函数允许进程指示内核等待多个事件中的任何一个发生，并只在一个、多个时间发生或经历一段时间后才唤醒它">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-30T12:15:48.850Z">
+<meta property="og:updated_time" content="2018-04-19T07:56:53.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="select详解">
 <meta name="twitter:description" content="select详解 select函数允许进程指示内核等待多个事件中的任何一个发生，并只在一个、多个时间发生或经历一段时间后才唤醒它">
@@ -400,20 +400,12 @@ struct timeval{
 <blockquote>
 <ul>
 <li>套接字可读<br>（1）该套接字的接收缓冲区中的数据字节数大于等于套接字接收缓冲区低水位标记的当前大小，对这样的套接字执行读操作不会阻塞并返回一个大于0的值（也就是返回准备好读入的数据）<br>（2）该连接的读半部关闭（也就是接收了FIN包的TCP连接）；对这样的套接字的读操作将不阻塞并返回0（即EOF）<br>（3）该套接字是监听套接字且已完成连接数不为0；对这样的套接字，accept通常不会阻塞<br>（4）其上有一个套接字错误待处理；对这样的套接字的读操作将不阻塞，直接返回-1并将errno设置成确切的错误条件  </li>
+<li>套接字可写<br>（1）该套接字的发送缓冲区中的可用空间字节数大于等于套接字发送缓冲区低水位标记的当前大小，并且或者该套接字已连接，或者该套接字不需要连接；如果把这样的套接字设置为非阻塞的，写操作将不阻塞并返回一个正值<br>（2）该连接的写半部关闭；对这样的套接字进行写操作将产生SIGPIPE信号<br>（3）其上有一个套接字错误待处理；对这样的套接字的读操作将不阻塞，直接返回-1并将errno设置成确切的错误条件  </li>
+<li>异常<br>  套接字存在带外数据</li>
 </ul>
 </blockquote>
 </li>
 </ol>
-<blockquote>
-<ul>
-<li>套接字可写<br>   （1）该套接字的发送缓冲区中的可用空间字节数大于等于套接字发送缓冲区低水位标记的当前大小，并且或者该套接字已连接，或者该套接字不需要连接；如果把这样的套接字设置为非阻塞的，写操作将不阻塞并返回一个正值<br>   （2）该连接的写半部关闭；对这样的套接字进行写操作将产生SIGPIPE信号<br>   （3）其上有一个套接字错误待处理；对这样的套接字的读操作将不阻塞，直接返回-1并将errno设置成确切的错误条件  </li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>异常<br>   套接字存在带外数据</li>
-</ul>
-</blockquote>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li>《UNIX网络编程 卷1：套接字联网API》</li>
 </ul>
@@ -540,7 +532,7 @@ struct timeval{
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -551,7 +543,7 @@ struct timeval{
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -562,7 +554,7 @@ struct timeval{
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -625,7 +617,7 @@ struct timeval{
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

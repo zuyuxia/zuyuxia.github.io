@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="#虚函数  虚函数（Virtual Function）是通过一张虚函数表（Virtual Table）和虚表指针来实现的。在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。如果派生类覆写了基类的虚函数，那么对于派生类的虚函数，就会将对应的虚函数替换为派生类的虚函数地址  编译器会为每个有虚函数的类创建一个虚函数表，该虚函数表将被该类的所有对象共享。">
+<meta name="description" content="虚函数 虚函数（Virtual Function）是通过一张虚函数表（Virtual Table）和虚表指针来实现的。在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。如果派生类覆写了基类的虚函数，那么对于派生类的虚函数，就会将对应的虚函数替换为派生类的虚函数地址  编译器会为每个有虚函数的类创建一个虚函数表，该虚函数表将被该类的所有对象共享。类的">
 <meta name="keywords" content="虚函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="虚函数">
 <meta property="og:url" content="http://yoursite.com/2018/03/17/虚函数/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="#虚函数  虚函数（Virtual Function）是通过一张虚函数表（Virtual Table）和虚表指针来实现的。在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。如果派生类覆写了基类的虚函数，那么对于派生类的虚函数，就会将对应的虚函数替换为派生类的虚函数地址  编译器会为每个有虚函数的类创建一个虚函数表，该虚函数表将被该类的所有对象共享。">
+<meta property="og:description" content="虚函数 虚函数（Virtual Function）是通过一张虚函数表（Virtual Table）和虚表指针来实现的。在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。如果派生类覆写了基类的虚函数，那么对于派生类的虚函数，就会将对应的虚函数替换为派生类的虚函数地址  编译器会为每个有虚函数的类创建一个虚函数表，该虚函数表将被该类的所有对象共享。类的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/局部变量.png">
 <meta property="og:image" content="http://yoursite.com/img/Base内存布局.png">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="http://yoursite.com/img/覆写之后的局部变量.png">
 <meta property="og:image" content="http://yoursite.com/img/覆写之后的Base内存布局.png">
 <meta property="og:image" content="http://yoursite.com/img/覆写之后的Derived内存布局.png">
-<meta property="og:updated_time" content="2018-03-27T03:35:32.281Z">
+<meta property="og:updated_time" content="2018-04-19T07:47:06.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚函数">
-<meta name="twitter:description" content="#虚函数  虚函数（Virtual Function）是通过一张虚函数表（Virtual Table）和虚表指针来实现的。在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。如果派生类覆写了基类的虚函数，那么对于派生类的虚函数，就会将对应的虚函数替换为派生类的虚函数地址  编译器会为每个有虚函数的类创建一个虚函数表，该虚函数表将被该类的所有对象共享。">
+<meta name="twitter:description" content="虚函数 虚函数（Virtual Function）是通过一张虚函数表（Virtual Table）和虚表指针来实现的。在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。如果派生类覆写了基类的虚函数，那么对于派生类的虚函数，就会将对应的虚函数替换为派生类的虚函数地址  编译器会为每个有虚函数的类创建一个虚函数表，该虚函数表将被该类的所有对象共享。类的">
 <meta name="twitter:image" content="http://yoursite.com/img/局部变量.png">
 
 
@@ -349,8 +349,7 @@
       
 
       
-        <p>#虚函数</p>
-<ul>
+        <h1 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h1><ul>
 <li><p>虚函数（Virtual Function）是通过一张虚函数表（Virtual Table）和虚表指针来实现的。在这个表中，主要是一个类的虚函数的地址表，这张表解决了继承、覆盖的问题，保证其容真实反应实际的函数。如果派生类覆写了基类的虚函数，那么对于派生类的虚函数，就会将对应的虚函数替换为派生类的虚函数地址</p>
 </li>
 <li><p>编译器会为每个有虚函数的类创建一个虚函数表，该虚函数表将被该类的所有对象共享。类的每个虚函数占据虚函数表中的一块；在有虚函数的类的实例中分配了指向这个表的指针的内存(虚表指针)</p>
@@ -516,7 +515,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -527,7 +526,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -538,7 +537,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -581,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的对象模型"><span class="nav-number">1.</span> <span class="nav-text">C++的对象模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#虚函数"><span class="nav-number">1.</span> <span class="nav-text">虚函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的对象模型"><span class="nav-number">1.1.</span> <span class="nav-text">C++的对象模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -601,7 +600,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

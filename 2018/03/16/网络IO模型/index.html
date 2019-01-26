@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="#网络I/O模型（初稿，待完善） client从server接收数据分为两个过程：数据流先读入内核缓冲区；数据从内核缓冲区复制到用户缓冲区  阻塞式I/O模型  一旦调用I/O函数，必须等待到整个I/O完成才返回  效率低    非阻塞式I/O模型  非阻塞与阻塞的最大区别在于调用I/O函数后，非阻塞会立即返回  非阻塞I/O虽然不会完全阻塞用户进程，但还是需要持续轮询内核，查看数据是否准备好，效">
+<meta name="description" content="网络I/O模型client从server接收数据分为两个过程：数据流先读入内核缓冲区；数据从内核缓冲区复制到用户缓冲区  阻塞式I/O模型  一旦调用I/O函数，必须等待到整个I/O完成才返回  效率低    非阻塞式I/O模型  非阻塞与阻塞的最大区别在于调用I/O函数后，非阻塞会立即返回  非阻塞I/O虽然不会完全阻塞用户进程，但还是需要持续轮询内核，查看数据是否准备好，效率依然很低    I">
 <meta name="keywords" content="select&#x2F;poll&#x2F;epoll">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络I&#x2F;O模型">
 <meta property="og:url" content="http://yoursite.com/2018/03/16/网络IO模型/index.html">
 <meta property="og:site_name" content="Write Code">
-<meta property="og:description" content="#网络I/O模型（初稿，待完善） client从server接收数据分为两个过程：数据流先读入内核缓冲区；数据从内核缓冲区复制到用户缓冲区  阻塞式I/O模型  一旦调用I/O函数，必须等待到整个I/O完成才返回  效率低    非阻塞式I/O模型  非阻塞与阻塞的最大区别在于调用I/O函数后，非阻塞会立即返回  非阻塞I/O虽然不会完全阻塞用户进程，但还是需要持续轮询内核，查看数据是否准备好，效">
+<meta property="og:description" content="网络I/O模型client从server接收数据分为两个过程：数据流先读入内核缓冲区；数据从内核缓冲区复制到用户缓冲区  阻塞式I/O模型  一旦调用I/O函数，必须等待到整个I/O完成才返回  效率低    非阻塞式I/O模型  非阻塞与阻塞的最大区别在于调用I/O函数后，非阻塞会立即返回  非阻塞I/O虽然不会完全阻塞用户进程，但还是需要持续轮询内核，查看数据是否准备好，效率依然很低    I">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-16T14:41:54.607Z">
+<meta property="og:updated_time" content="2018-04-19T08:02:38.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络I&#x2F;O模型">
-<meta name="twitter:description" content="#网络I/O模型（初稿，待完善） client从server接收数据分为两个过程：数据流先读入内核缓冲区；数据从内核缓冲区复制到用户缓冲区  阻塞式I/O模型  一旦调用I/O函数，必须等待到整个I/O完成才返回  效率低    非阻塞式I/O模型  非阻塞与阻塞的最大区别在于调用I/O函数后，非阻塞会立即返回  非阻塞I/O虽然不会完全阻塞用户进程，但还是需要持续轮询内核，查看数据是否准备好，效">
+<meta name="twitter:description" content="网络I/O模型client从server接收数据分为两个过程：数据流先读入内核缓冲区；数据从内核缓冲区复制到用户缓冲区  阻塞式I/O模型  一旦调用I/O函数，必须等待到整个I/O完成才返回  效率低    非阻塞式I/O模型  非阻塞与阻塞的最大区别在于调用I/O函数后，非阻塞会立即返回  非阻塞I/O虽然不会完全阻塞用户进程，但还是需要持续轮询内核，查看数据是否准备好，效率依然很低    I">
 
 
 
@@ -342,8 +342,7 @@
       
 
       
-        <p>#网络I/O模型（初稿，待完善）</p>
-<p>client从server接收数据分为两个过程：数据流先读入内核缓冲区；数据从内核缓冲区复制到用户缓冲区</p>
+        <h1 id="网络I-O模型"><a href="#网络I-O模型" class="headerlink" title="网络I/O模型"></a>网络I/O模型</h1><p>client从server接收数据分为两个过程：数据流先读入内核缓冲区；数据从内核缓冲区复制到用户缓冲区</p>
 <ol>
 <li><p>阻塞式I/O模型</p>
 <ul>
@@ -471,8 +470,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -491,7 +499,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -502,7 +510,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -513,7 +521,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -547,6 +555,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络I-O模型"><span class="nav-number">1.</span> <span class="nav-text">网络I/O模型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -560,7 +584,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
